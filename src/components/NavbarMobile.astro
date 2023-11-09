@@ -11,89 +11,90 @@ import { Icon } from "astro-icon";
       class="menu pointer-events-auto absolute right-2 top-3 cursor-pointer rounded-full border-2 border-solid border-neutral-border bg-neutral px-4 py-2"
     >
       <span class="font-semibold"> menu</span>
+
+      <div
+        class="nav-links absolute right-3 top-16 hidden flex-col rounded-md border-2 border-solid border-neutral-border bg-neutral p-1"
+      >
+        <div
+          class="cursor-pointer px-3 py-1 hover:text-color-red focus:text-color-red"
+        >
+          <a class="block w-full" href="/blogs">
+            <span class="font-semibold">Blogs</span>
+          </a>
+        </div>
+        <div
+          class="cursor-pointer px-3 py-1 hover:text-color-yellow focus:text-color-yellow"
+        >
+          <a class="block w-full" href="/talks">
+            <span class="font-semibold">Talks</span>
+          </a>
+        </div>
+        <div
+          class="cursor-pointer px-3 py-1 hover:text-color-blue focus:text-color-blue"
+        >
+          <a class="block w-full" href="/projects">
+            <span class="font-semibold">Projects</span>
+          </a>
+        </div>
+
+        <div class="flex cursor-pointer px-3 py-2">
+          <a href="https://www.github.com/isVivek99">
+            <Icon
+              name="github-mark-white"
+              alt="gh_logo"
+              class="mr-3 h-4 w-4 transform transition duration-300 hover:text-color-red focus:text-color-red"
+            />
+          </a>
+          <a href="https://twitter.com/VivekLokhande99">
+            <Icon
+              name="twitterx"
+              alt="x_logo"
+              class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-yellow focus:text-color-yellow"
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/vivek-lokhande-737939188/">
+            <Icon
+              name="linkedin"
+              alt="linkedin_logo"
+              class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-blue focus:text-color-blue"
+            />
+          </a>
+        </div>
+      </div>
     </nav>
-
-    <div
-      class="nav-links absolute right-3 top-16 hidden flex-col rounded-md border-2 border-solid border-neutral-border bg-neutral p-1"
-    >
-      <div
-        class="w-40 cursor-pointer px-3 py-1 hover:text-color-red focus:text-color-red"
-      >
-        <a href="/blogs">
-          <span class="font-semibold">Blogs</span>
-        </a>
-      </div>
-      <div
-        class="w-40 cursor-pointer px-3 py-1 hover:text-color-yellow focus:text-color-yellow"
-      >
-        <a href="/talks">
-          <span class="font-semibold">Talks</span>
-        </a>
-      </div>
-      <div
-        class="w-40 cursor-pointer px-3 py-1 hover:text-color-blue focus:text-color-blue"
-      >
-        <a href="/projects">
-          <span class="font-semibold">Projects</span>
-        </a>
-      </div>
-      <div class="flex w-40 cursor-pointer px-3 py-2">
-        <a href="https://www.github.com/isVivek99">
-          <Icon
-            name="github-mark-white"
-            alt="gh_logo"
-            class="mr-3 h-4 w-4 transform transition duration-300 hover:text-color-red focus:text-color-red"
-          />
-        </a>
-        <a href="https://twitter.com/VivekLokhande99">
-          <Icon
-            name="twitterx"
-            alt="x_logo"
-            class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-yellow focus:text-color-yellow"
-          />
-        </a>
-        <a href="https://www.linkedin.com/in/vivek-lokhande-737939188/">
-          <Icon
-            name="linkedin"
-            alt="linkedin_logo"
-            class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-blue focus:text-color-blue"
-          />
-        </a>
-      </div>
-    </div>
   </aside>
+
+  <script>
+    const overlay = document.querySelector(".overlay") as HTMLDivElement;
+    const menu = document.querySelector(".menu") as HTMLDivElement;
+    const navLinks = document.querySelector(".nav-links") as HTMLDivElement;
+    menu.addEventListener("click", (event) => {
+      console.log("click");
+      navLinks.classList.toggle("hidden");
+
+      event.stopPropagation();
+      if (!navLinks.classList.contains("hidden")) {
+        overlay.classList.add("bg-black/60");
+        overlay.classList.add("pointer-events-auto");
+        overlay.classList.add("md:pointer-events-none");
+      } else {
+        overlay.classList.remove("bg-black/60");
+        overlay.classList.remove("pointer-events-auto");
+        overlay.classList.remove("md:pointer-events-none");
+        overlay.classList.add("pointer-events-none");
+      }
+    });
+
+    overlay.addEventListener("click", (event) => {
+      console.log("click2");
+      const relatedTarget = event.relatedTarget as HTMLElement;
+      if (!navLinks.contains(relatedTarget)) {
+        navLinks.classList.add("hidden");
+        overlay.classList.remove("bg-black/60");
+        overlay.classList.remove("pointer-events-auto");
+        overlay.classList.remove("md:pointer-events-none");
+        overlay.classList.add("pointer-events-none");
+      }
+    });
+  </script>
 </div>
-
-<script>
-  const overlay = document.querySelector(".overlay") as HTMLDivElement;
-  const menu = document.querySelector(".menu") as HTMLDivElement;
-  const navLinks = document.querySelector(".nav-links") as HTMLDivElement;
-  menu.addEventListener("click", (event) => {
-    console.log("click");
-    navLinks.classList.toggle("hidden");
-
-    event.stopPropagation();
-    if (!navLinks.classList.contains("hidden")) {
-      overlay.classList.add("bg-black/60");
-      overlay.classList.add("pointer-events-auto");
-      overlay.classList.add("md:pointer-events-none");
-    } else {
-      overlay.classList.remove("bg-black/60");
-      overlay.classList.remove("pointer-events-auto");
-      overlay.classList.remove("md:pointer-events-none");
-      overlay.classList.add("pointer-events-none");
-    }
-  });
-
-  overlay.addEventListener("click", (event) => {
-    console.log("click2");
-    const relatedTarget = event.relatedTarget as HTMLElement;
-    if (!navLinks.contains(relatedTarget)) {
-      navLinks.classList.add("hidden");
-      overlay.classList.remove("bg-black/60");
-      overlay.classList.remove("pointer-events-auto");
-      overlay.classList.remove("md:pointer-events-none");
-      overlay.classList.add("pointer-events-none");
-    }
-  });
-</script>

@@ -1,5 +1,7 @@
 ---
 import { Icon } from "astro-icon";
+const currentPath = Astro.url.pathname;
+console.log({ currentPath });
 ---
 
 <div class="relative mx-auto">
@@ -9,9 +11,12 @@ import { Icon } from "astro-icon";
     <nav
       class="mb-14 mr-4 mt-4 w-fit cursor-pointer rounded-full bg-black px-4 py-2 ring-1 ring-neutral-border"
     >
-      <a href="/blogs" class="px-3 font-semibold">Blogs</a>
-      <a href="/talks" class="px-3 font-semibold">Talks</a>
-      <a href="/projects" class="px-3 font-semibold">Projects</a>
+      <a href="/" class="px-3 font-semibold hover:text-white/60">Home</a>
+      <a href="/blogs" class="px-3 font-semibold hover:text-white/60">Blogs</a>
+      <a href="/talks" class="px-3 font-semibold hover:text-white/60">Talks</a>
+      <a href="/projects" class="px-3 font-semibold hover:text-white/60"
+        >Projects</a
+      >
     </nav>
     <nav
       class="mb-14 mt-4 flex w-fit cursor-pointer rounded-full bg-black px-4 py-2 ring-1 ring-neutral-border"
