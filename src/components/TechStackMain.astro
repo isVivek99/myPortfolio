@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon";
 import Card from "./Card.astro";
+import Tooltip from "./Tooltip.astro";
 ---
 
 <>
@@ -20,22 +21,24 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="react"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="remix"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="astro_logo_figma"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="tailwind"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
+            <Tooltip text="react">
+              <Icon name="react" class="svgRotate sm:my-2 md:my-2 lg:my-2" />
+            </Tooltip>
+            <Tooltip text="remix">
+              <Icon name="remix" class="svgRotate sm:my-2 md:my-2 lg:my-2" />
+            </Tooltip>
+            <Tooltip text="astro">
+              <Icon
+                name="astro_logo_figma"
+                class="svgRotate max-sm:my-1 sm:my-2 md:my-2 lg:my-2"
+              />
+            </Tooltip>
+            <Tooltip text="tailwind">
+              <Icon
+                name="tailwind"
+                class="svgRotate max-sm:my-1 sm:my-2 md:my-2 lg:my-2"
+              />
+            </Tooltip>
           </div>
         </Card>
       </div>
@@ -45,18 +48,15 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="nodejs"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="mongodb"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="mysql"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
+            <Tooltip text="nodejs">
+              <Icon name="nodejs" class="svgRotate my-1 xl:my-0" />
+            </Tooltip>
+            <Tooltip text="mongodb">
+              <Icon name="mongodb" class="svgRotate xl:my-0" />
+            </Tooltip>
+            <Tooltip text="mysql">
+              <Icon name="mysql" class="svgRotate xl:my-0" />
+            </Tooltip>
           </div>
         </Card>
       </div>
@@ -66,23 +66,24 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="gitlab"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="railway"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="github-mark-white"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-
-            <Icon
-              name="vercel"
-              class="svgRotate mx-2 my-1 w-10 sm:mx-4 sm:my-0"
-            />
+            <Tooltip text="gitlab">
+              <Icon name="gitlab" class="svgRotate sm:my-2 md:my-2 lg:my-1" />
+            </Tooltip>
+            <Tooltip text="railway">
+              <Icon name="railway" class="svgRotate sm:my-2 md:my-2 lg:my-1" />
+            </Tooltip>
+            <Tooltip text="github-mark-white">
+              <Icon
+                name="github-mark-white"
+                class="svgRotate max-sm:my-1 sm:my-2 md:my-2 lg:my-1"
+              />
+            </Tooltip>
+            <Tooltip text="vercel">
+              <Icon
+                name="vercel"
+                class="svgRotate max-sm:my-1 sm:my-2 md:my-2 lg:my-1"
+              />
+            </Tooltip>
           </div>
         </Card>
       </div>
@@ -93,14 +94,15 @@ import Card from "./Card.astro";
           ]
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="notion"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="excalidraw"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
+            <Tooltip text="notion">
+              <Icon name="notion" class="svgRotate mx-1 my-1" />
+            </Tooltip>
+            <Tooltip text="excalidraw">
+              <Icon
+                name="excalidraw"
+                class="svgRotate my-1 h-10 w-10 sm:mx-4 sm:my-0"
+              />
+            </Tooltip>
           </div>
         </Card>
       </div>
