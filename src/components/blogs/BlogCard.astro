@@ -1,0 +1,52 @@
+---
+const {
+  cardTitle,
+  cardSubtitle,
+  dateTime,
+  imageUrl,
+  readTimeInMinutes,
+  postUrl,
+} = Astro.props;
+import { Image } from "astro:assets";
+import myGradient from "../../icons/myGradient.jpeg";
+import { formatDate } from "../../utils/UTCDateStringToReadable";
+console.log({ postUrl });
+---
+
+<a href={postUrl} target="_blank">
+  <article
+    class="group relative flex h-[450px] w-auto transform cursor-pointer flex-col rounded-xl bg-neutral ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
+  >
+    <div class="realtive h-48 w-auto">
+      <Image
+        src={myGradient}
+        height={100}
+        width={100}
+        alt="my picture"
+        class="m h-full w-full rounded-t-xl mix-blend-soft-light"
+      />
+
+      <Image
+        src={imageUrl}
+        height={100}
+        width={100}
+        alt="my picture"
+        class="absolute top-0 h-48 w-full transform rounded-t-xl object-cover opacity-80 transition duration-300 group-hover:opacity-100"
+      />
+    </div>
+
+    <div class="flex basis-full flex-col justify-between p-2 text-left xl:p-4">
+      <div>
+        <p class="mt-6 text-lg font-semibold tracking-tight">
+          {cardTitle}
+        </p>
+        <p class="mt-2 h-10 text-sm tracking-tight">
+          {cardSubtitle}
+        </p>
+      </div>
+      <p class="pt-2 text-xs text-neutral-border">
+        {formatDate(dateTime)} — {readTimeInMinutes} min read
+      </p>
+    </div>
+  </article>
+</a>

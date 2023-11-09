@@ -1,12 +1,16 @@
 ---
-import { Image } from "astro:assets";
 import { Icon } from "astro-icon";
 const { imageObject, orgName, position, tenure } = Astro.props;
 ---
 
 <li class="flex list-none justify-between py-3">
   <div class="flex">
-    <Image src={imageObject} alt="org_logo" class="h-10 w-10" />
+    <Icon
+      name={imageObject}
+      alt="gh_logo"
+      class="mx-3 h-10 w-10 transform transition duration-300 hover:text-color-red focus:text-color-red"
+    />
+
     <div class="ml-4">
       <p class="font-sm mb-1 uppercase leading-snug tracking-[2px] text-white">
         {orgName}

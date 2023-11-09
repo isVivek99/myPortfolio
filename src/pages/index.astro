@@ -57,10 +57,7 @@ import BaseLayout from "../layout/BaseLayout.astro";
           </p>
         </div>
         <div class="mt-20 flex flex-col gap-4 px-4 sm:flex-row md:px-0">
-          <ButtonPrimary
-            value="Read my blogs"
-            href="https://hashnode.com/@vivek181"
-          />
+          <ButtonPrimary value="Read my blogs" href="/blogs" />
           <ButtonSecondary
             value="Resume"
             href="https://flowcv.com/resume/sn0nv3i4u3"
@@ -73,6 +70,7 @@ import BaseLayout from "../layout/BaseLayout.astro";
           class="h-[150px] w-[150px] animate-spin-slow group-hover:animate-spin lg:h-[340px] lg:w-[340px]"
         />
         <Image
+          loading={"eager"}
           src={MyImage}
           alt="my picture"
           class="imageCard__image absolute left-2 top-2.5 h-[132px] w-[132px] cursor-pointer opacity-0 ease-in-out lg:left-5 lg:top-5 lg:h-[300px] lg:w-[300px]"
@@ -117,19 +115,19 @@ import BaseLayout from "../layout/BaseLayout.astro";
       >
         <ul>
           <ListItem
-            imageObject={GeekyantsLogo}
+            imageObject="geekyants_logo"
             orgName="GEEKYANTS"
             position="software engineer-II"
             tenure="Aug 2022 ‐ Present"
           />
           <ListItem
-            imageObject={GeekyantsLogo}
+            imageObject="geekyants_logo"
             orgName="GEEKYANTS"
             position="software engineer-I"
             tenure="Aug 2021 ‐ Aug 2022"
           />
           <ListItem
-            imageObject={BiencapsLogo}
+            imageObject="geekyants_logo"
             orgName="Biencaps"
             position="motion graphics designer"
             tenure="June 2020 - Aug 2020"
@@ -174,19 +172,19 @@ import BaseLayout from "../layout/BaseLayout.astro";
     >
       <ul>
         <ListItem
-          imageObject={GeekyantsLogo}
+          imageObject="geekyants_logo"
           orgName="GEEKYANTS"
           position="software engineer-II"
           tenure="Aug 2022 ‐ Present"
         />
         <ListItem
-          imageObject={GeekyantsLogo}
+          imageObject="geekyants_logo"
           orgName="GEEKYANTS"
           position="software engineer-I"
           tenure="Aug 2021 ‐ Aug 2022"
         />
         <ListItem
-          imageObject={BiencapsLogo}
+          imageObject="biencaps_logo"
           orgName="Biencaps"
           position="motion graphics designer"
           tenure="June 2020 - Aug 2020"
