@@ -69,7 +69,6 @@ import { Icon } from "astro-icon";
     const menu = document.querySelector(".menu") as HTMLDivElement;
     const navLinks = document.querySelector(".nav-links") as HTMLDivElement;
     menu.addEventListener("click", (event) => {
-      console.log("click");
       navLinks.classList.toggle("hidden");
 
       event.stopPropagation();
@@ -86,7 +85,6 @@ import { Icon } from "astro-icon";
     });
 
     overlay.addEventListener("click", (event) => {
-      console.log("click2");
       const relatedTarget = event.relatedTarget as HTMLElement;
       if (!navLinks.contains(relatedTarget)) {
         navLinks.classList.add("hidden");
