@@ -39,8 +39,9 @@ module.exports = {
       },
       fontSize: {
         header: "3.5rem",
+        subheader: "1.5rem",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

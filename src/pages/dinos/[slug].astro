@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro";
+
+const { slug } = Astro.params;
+console.log({ slug });
+
+let res = await fetch(`https://norian.studio/wp-json/wp/v2/dinos?slug=${slug}`);
+console.log({ res });
+
+let [post] = await res.json();
+
+// The getStaticPaths() is required for static Astro sites.
+// If using SSR, you will not need this function.
+export async function getStaticPaths() {
+  let data = await fetch("https://norian.studio/wp-json/wp/v2/dinos");
+  let posts = await data.json();
+
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+}
+---
+
+<BaseLayout title={post.title.rendered}>
+  <article>
+    <h1 set:html={post.title.rendered} />
+    <Fragment set:html={post.content.rendered} />
+  </article>
+</BaseLayout>

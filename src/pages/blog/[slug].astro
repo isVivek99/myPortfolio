@@ -1,0 +1,43 @@
+---
+// src/pages/blog/[slug].astro
+import "../../../base.css";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layout/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+
+  // Return an array of paths and props for each post
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug }, // Using the slug field for dynamic routing
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout pageTitle={post.data.title}>
+  <section
+    class="section-1 relative min-h-screen w-full snap-start pt-20 md:min-h-fit md:pt-32"
+  >
+    <div class="container mx-auto max-w-3xl px-4">
+      <h1
+        class="mb-8 cursor-pointer text-center text-header font-bold leading-none tracking-tight xl:mt-0"
+      >
+        {post.data.title}
+      </h1>
+      <h2
+        class="text-subheader mb-8 cursor-pointer text-center font-bold leading-none tracking-tight text-opacity-60 opacity-60 xl:mt-0"
+      >
+        {post.data.subheading}
+      </h2>
+      <article
+        class="prose prose-lg prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-img:rounded-xl prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white dark:prose-invert mx-auto"
+      >
+        <Content />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
