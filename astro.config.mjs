@@ -4,9 +4,12 @@ import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
+  adapter: netlify(),
   markdown: {
     shikiConfig: {
       allowUnsafeSrc: true,
