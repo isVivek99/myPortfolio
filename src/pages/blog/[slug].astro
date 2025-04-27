@@ -3,7 +3,6 @@
 import "../../../base.css";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
-
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog");
 
@@ -34,7 +33,7 @@ const { Content } = await post.render();
         {post.data.subheading}
       </h2>
       <article
-        class="prose prose-lg prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-img:rounded-xl prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white dark:prose-invert mx-auto"
+        class="prose prose-lg prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-img:rounded-xl prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white dark:prose-invert mx-auto mb-32"
       >
         <Content />
       </article>
