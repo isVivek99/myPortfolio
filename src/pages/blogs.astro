@@ -3,7 +3,7 @@ import "../../base.css";
 import { getCollection } from "astro:content";
 import BlogCard from "../components/blogs/BlogCard.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
-const blogPosts = await getCollection("blog");
+const blogPosts = await getCollection("blogs");
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">

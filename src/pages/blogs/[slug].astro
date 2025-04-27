@@ -8,7 +8,7 @@ import myGradient from "../../icons/myGradient.jpeg";
 import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
 export async function getStaticPaths() {
-  const blogPosts = await getCollection("blog");
+  const blogPosts = await getCollection("blogs");
 
   // Return an array of paths and props for each post
   return blogPosts.map((post) => ({
