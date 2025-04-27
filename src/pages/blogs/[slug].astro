@@ -7,6 +7,9 @@ import BaseLayout from "../../layout/BaseLayout.astro";
 import myGradient from "../../icons/myGradient.jpeg";
 import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
+
+export const prerender = true;
+
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blogs");
 
@@ -51,7 +54,7 @@ const { Content } = await post.render();
         {post.data.title}
       </h1>
       <h2
-        class="text-subheader mb-8 cursor-pointer text-center font-bold leading-none tracking-tight text-opacity-60 opacity-60 xl:mt-0"
+        class="mb-8 cursor-pointer text-center text-subheader font-bold leading-none tracking-tight text-opacity-60 opacity-60 xl:mt-0"
       >
         {post.data.subheading}
       </h2>
@@ -74,7 +77,7 @@ const { Content } = await post.render();
         </p>
       </div>
       <article
-        class="prose prose-lg prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-img:rounded-xl prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white dark:prose-invert mx-auto mb-32"
+        class="prose prose-lg mx-auto mb-32 dark:prose-invert prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white prose-img:rounded-xl"
       >
         <Content />
       </article>
