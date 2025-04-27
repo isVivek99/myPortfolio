@@ -1,8 +1,12 @@
 ---
 // src/pages/blog/[slug].astro
 import "../../../base.css";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
+import myGradient from "../../icons/myGradient.jpeg";
+import { formatDate } from "../../utils/UTCDateStringToReadable";
+import myImageTwo from "../../icons/myImage-2.jpg";
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog");
 
@@ -21,6 +25,25 @@ const { Content } = await post.render();
   <section
     class="section-1 relative min-h-screen w-full snap-start pt-20 md:min-h-fit md:pt-32"
   >
+    <div class="mb-4 h-48 w-auto">
+      <Image
+        src={myGradient}
+        height={100}
+        width={100}
+        alt="my picture"
+        class="m h-full w-full rounded-t-xl mix-blend-soft-light"
+      />
+
+      <Image
+        src={post.data.cover}
+        height={100}
+        width={100}
+        alt="my picture"
+        class="absolute top-20 h-48 w-full rounded-t-xl"
+        loading={"lazy"}
+      />
+    </div>
+
     <div class="container mx-auto max-w-3xl px-4">
       <h1
         class="mb-8 cursor-pointer text-center text-header font-bold leading-none tracking-tight xl:mt-0"
@@ -32,6 +55,24 @@ const { Content } = await post.render();
       >
         {post.data.subheading}
       </h2>
+      <div
+        class="mx-auto mb-12 mt-4 flex max-w-md items-center justify-between"
+      >
+        <Image
+          src={myImageTwo}
+          height={100}
+          width={100}
+          alt="my picture"
+          loading={"lazy"}
+          class="h-10 w-10 rounded-3xl"
+        />
+        <p class="font-bold">Vivek Lokhande</p>
+        <p class="font-bold text-neutral-border">
+          {formatDate(post.data.publishedAt.toLocaleDateString())} — {
+            post.data.readingTimeInMins
+          } min read
+        </p>
+      </div>
       <article
         class="prose prose-lg prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-img:rounded-xl prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white dark:prose-invert mx-auto mb-32"
       >

@@ -2,6 +2,9 @@
 title: "Remix Better Forms for Better UX and DX"
 subheading: "Discover how Remix is revolutionizing form development for better user experience (UX) and developer experience (DX)."
 slug: "remix-better-forms-for-better-ux-and-dx"
+publishedAt: 2023-06-15
+readingTimeInMins: 11
+cover: ../../../src/assets/blogs/cover/cover-1.svg
 ---
 
 ## **Introduction**

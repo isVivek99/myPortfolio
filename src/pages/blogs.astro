@@ -1,33 +1,9 @@
 ---
 import "../../base.css";
+import { getCollection } from "astro:content";
 import BlogCard from "../components/blogs/BlogCard.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
-import type { BlogPost } from "../types/blogs/BlogPost.ts";
-import { userPublicationsQuery } from "../api/graphql/queries";
-import { userGetBlogFromSlug } from "../api/graphql/queries";
-import makeGraphQLRequest from "../api/graphql/request";
-
-const { data: myblogPosts } = await makeGraphQLRequest(userPublicationsQuery, {
-  username: "vivek181",
-  first: 3,
-});
-
-const {
-  data: {
-    publication: { post: blogPostOne },
-  },
-} = await makeGraphQLRequest(userGetBlogFromSlug, {
-  id: "5fc7a6afff636d4f4984cb97",
-  slug: "reducing-bundle-size-on-react-part-1",
-});
-const {
-  data: {
-    publication: { post: blogPostTwo },
-  },
-} = await makeGraphQLRequest(userGetBlogFromSlug, {
-  id: "5fc7a6afff636d4f4984cb97",
-  slug: "remix-better-forms-for-better-ux-and-dx",
-});
+const blogPosts = await getCollection("blog");
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">
@@ -40,36 +16,17 @@ const {
     </p>
   </section>
   <section class="relative mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-    <BlogCard
-      cardTitle={blogPostTwo.title}
-      cardSubtitle={blogPostTwo.subtitle}
-      dateTime={blogPostTwo.publishedAt}
-      imageUrl={blogPostTwo.coverImage?.url}
-      readTimeInMinutes={blogPostTwo.readTimeInMinutes}
-      postUrl={blogPostTwo.url}
-    />
-    <BlogCard
-      cardTitle={blogPostOne.title}
-      cardSubtitle={blogPostOne.subtitle}
-      dateTime={blogPostOne.publishedAt}
-      imageUrl={blogPostOne.coverImage?.url}
-      readTimeInMinutes={blogPostOne.readTimeInMinutes}
-      postUrl={blogPostOne.url}
-    />
-
     {
-      myblogPosts.user.publications.edges[1].node.posts.edges.map(
-        (blog: BlogPost) => (
-          <BlogCard
-            cardTitle={blog.node.title}
-            cardSubtitle={blog.node.subtitle}
-            dateTime={blog.node.publishedAt}
-            imageUrl={blog.node.coverImage?.url}
-            readTimeInMinutes={blog.node.readTimeInMinutes}
-            postUrl={blog.node.url}
-          />
-        ),
-      )
+      blogPosts.map((blog) => (
+        <BlogCard
+          cardTitle={blog.data.title}
+          cardSubtitle={blog.data.subheading}
+          dateTime={blog.data.publishedAt}
+          imageUrl={blog.data.cover}
+          readTimeInMinutes={blog.data.readingTimeInMins}
+          postUrl={blog.slug}
+        />
+      ))
     }
   </section>
   <section class="h-32" aria-hidden="true"></section>
