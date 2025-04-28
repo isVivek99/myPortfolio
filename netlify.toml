@@ -1,4 +1,4 @@
 [build]
   command = "pnpm run build"
   publish = "dist"
-  included_files = ["node_modules/sharp/**/*"]
+
