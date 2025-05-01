@@ -4,7 +4,7 @@ subheading: "Discover how Remix is revolutionizing form development for better u
 slug: "remix-better-forms-for-better-ux-and-dx"
 publishedAt: 2023-06-15
 readingTimeInMins: 11
-cover: ../../../src/assets/blogs/cover/cover-1.svg
+cover: ./cover-1.svg
 ---
 
 ## **Introduction**
@@ -61,19 +61,31 @@ If you see at the inception of the web when everything just happened on the serv
 
 ```html
 <form action="http://localhost:4130/posts" method="POST">
-          <div class="flex flex-col">
-          <input type="hidden" name="intent" value="createPost" />
-            <label for="input-1"><h3>title</h3></label>
-            <input type="text" id="input-1" name="title" placeholder="title" class="w-100" />
-            <label for="input-2"><h3>description</h3></label>
-            <input type="text" id="input-2" name="description" class="w-100" />
-            <label for="input-3"><h3>content</h3></label>
-            <textarea name="content" id="input-3" cols="30" rows="10" name="content"></textarea>
-          </div>
-          <div class="flex justify-end">
-          <input type="submit" value="Submit">
-          </div>
-        </form>
+  <div class="flex flex-col">
+    <input type="hidden" name="intent" value="createPost" />
+    <label for="input-1"><h3>title</h3></label>
+    <input
+      type="text"
+      id="input-1"
+      name="title"
+      placeholder="title"
+      class="w-100"
+    />
+    <label for="input-2"><h3>description</h3></label>
+    <input type="text" id="input-2" name="description" class="w-100" />
+    <label for="input-3"><h3>content</h3></label>
+    <textarea
+      name="content"
+      id="input-3"
+      cols="30"
+      rows="10"
+      name="content"
+    ></textarea>
+  </div>
+  <div class="flex justify-end">
+    <input type="submit" value="Submit" />
+  </div>
+</form>
 ```
 
 This is a very simple implementation of a form, no JavaScript. I could just link this HTML page with some CSS if I want to correspond to the class names, but that is it, I would not require much configuration. Once I make the `POST` request, I can expect the server to get the data from the database and return the data with a redirect response to the client. We can expect the responses to be in this order:

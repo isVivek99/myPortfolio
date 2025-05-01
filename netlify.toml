@@ -1,4 +1,9 @@
 [build]
-  command = "pnpm run build"
-  publish = "dist"
+command = "pnpm run build"
+publish = "dist"
+included_files = [
+  "node_modules/sharp/**/*"
+]
 
+[build.environment]
+SHARP_IGNORE_GLOBAL_LIBVIPS = "1"
