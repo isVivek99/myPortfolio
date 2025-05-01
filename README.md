@@ -17,28 +17,14 @@ When deploying to Netlify, you may encounter issues with blog images not display
 
 **Solution:** Add the following configuration to your project:
 
-1. In `netlify.toml`:
+1. In `wrangler.toml`:
 
 ```toml
 [build]
 command = "pnpm run build"
-publish = "dist"
-included_files = [
-  "node_modules/sharp/**/*"
-]
-
 [build.environment]
-SHARP_IGNORE_GLOBAL_LIBVIPS = "1"
+NODE_VERSION = "20.3.0"
 ```
-
-2. In `package.json`:
-
-```json
-"pnpm": {
-  "onlyBuiltDependencies": [
-    "sharp" // Required because Sharp contains native code that needs compilation for the current platform
-  ]
-}
 ```
 
 ## Local Development
