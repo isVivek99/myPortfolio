@@ -4,7 +4,7 @@ subheading: "Discover how Remix is revolutionizing form development for better u
 slug: "remix-better-forms-for-better-ux-and-dx"
 publishedAt: 2023-06-15
 readingTimeInMins: 11
-cover: ../../../public/assets/covers/cover-1.svg
+cover: ../../icons/cover-1.svg
 ---
 
 ## **Introduction**

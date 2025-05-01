@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.5.2",
     "@astrojs/mdx": "^4.2.5",
-    "@astrojs/netlify": "^6.3.1",
     "@astrojs/tailwind": "^5.0.1",
     "@fontsource/inter": "^5.0.13",
     "astro": "5.7.4",
@@ -20,17 +20,27 @@
     "prettier-plugin-tailwindcss": "^0.5.5",
     "rehype-pretty-code": "^0.14.1",
     "rehype-slug": "^6.0.0",
+    "sharp": "^0.34.1",
     "shiki": "^3.3.0",
     "tailwindcss": "^3.0.24",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@eslint/js": "8.56.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@typescript-eslint/parser": "^8.31.0",
-    "eslint": "^9.25.1",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0"
+    "prettier-plugin-astro": "^0.12.0",
+    "typescript-eslint": "^8.31.1",
+    "wrangler": "^4.13.2"
   },
   "engines": {
     "node": ">=20.3.0"

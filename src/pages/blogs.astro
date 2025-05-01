@@ -17,7 +17,7 @@ const blogPosts = await getCollection("blogs");
   </section>
   <section class="relative mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
     {
-      blogPosts.map((blog) => (
+      blogPosts.map((blog: any) => (
         <BlogCard
           cardTitle={blog.data.title}
           cardSubtitle={blog.data.subheading}
