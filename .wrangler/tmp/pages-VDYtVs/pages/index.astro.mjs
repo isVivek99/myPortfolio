@@ -2,7 +2,7 @@ globalThis.process ??= {}; globalThis.process.env ??= {};
 import { c as createComponent, d as createAstro, m as maybeRenderHead, e as addAttribute, b as renderTemplate, j as renderSlot, r as renderComponent, F as Fragment, a as renderScript } from '../chunks/astro/server_QlrBW5xk.mjs';
 /* empty css                                 */
 import { $ as $$Image } from '../chunks/_astro_assets_B0-JMAFI.mjs';
-import { a as $$Icon, $ as $$BaseLayout } from '../chunks/BaseLayout_A4ggbcpe.mjs';
+import { a as $$Icon, $ as $$BaseLayout } from '../chunks/BaseLayout_B1xBAUFV.mjs';
 export { renderers } from '../renderers.mjs';
 
 const MyImage = new Proxy({"src":"/_astro/myImage.CA8fuqj9.png","width":300,"height":300,"format":"png"}, {

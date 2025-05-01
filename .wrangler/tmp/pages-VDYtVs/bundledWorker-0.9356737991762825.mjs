@@ -4,7 +4,7 @@ var __name = (target, value) => __defProp(target, "name", { value, configurable:
 // _worker.js/index.js
 import { renderers } from "./renderers.mjs";
 import { c as createExports, s as serverEntrypointModule } from "./chunks/_@astrojs-ssr-adapter_Du6eajJj.mjs";
-import { manifest } from "./manifest_BaSm6N2u.mjs";
+import { manifest } from "./manifest_DLhqOebB.mjs";
 globalThis.process ??= {};
 globalThis.process.env ??= {};
 var serverIslandMap = /* @__PURE__ */ new Map();
@@ -38,4 +38,4 @@ export {
   __astrojsSsrVirtualEntry as default,
   pageMap
 };
-//# sourceMappingURL=bundledWorker-0.47445462357112755.mjs.map
+//# sourceMappingURL=bundledWorker-0.9356737991762825.mjs.map
