@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
@@ -14,6 +14,9 @@ export default defineConfig({
     shikiConfig: {
       allowUnsafeSrc: true,
     },
+  },
+  image: {
+    service: passthroughImageService(),
   },
   integrations: [
     tailwind({
