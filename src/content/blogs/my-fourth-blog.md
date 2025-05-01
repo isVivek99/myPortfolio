@@ -4,7 +4,7 @@ subheading: "In this blog we discuss how instance of a class and a function in J
 slug: "classes-in-js"
 publishedAt: 2021-05-22 # Added date
 readingTimeInMins: 4
-cover: ../../../src/assets/blogs/cover/cover-4.svg
+cover: ../../icons/cover-4.svg
 ---
 
 **TL;DR** ECMAScript6 introduced _classes_ as a syntactical sugar for creating prototype constructors. It is said to improve code readability. This blog focuses on how everything worked before classes .
@@ -28,21 +28,20 @@ cover: ../../../src/assets/blogs/cover/cover-4.svg
 
 ```javascript
 class Dev {
-    constructor(x,y){
-        this.x=x;
-         this.y=y;
-    }
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
-    code(){
-        console.log("this:",this);
-        return(this.x+this.y);
-    }
-
+  code() {
+    console.log("this:", this);
+    return this.x + this.y;
+  }
 }
-var vivek = new Dev(1,2);/*create instance of class Dev*/
-var sum  = vivek.code();/*call method sum on the object vivek*/
-console.log(sum);/*prints 3*/
-console.log(vivek instanceof Dev)/*returns true*/
+var vivek = new Dev(1, 2); /*create instance of class Dev*/
+var sum = vivek.code(); /*call method sum on the object vivek*/
+console.log(sum); /*prints 3*/
+console.log(vivek instanceof Dev); /*returns true*/
 ```
 
 \*Let me also show the **console** \*
@@ -85,20 +84,21 @@ This reveals something interesting: the `code()` method we defined in our class 
 ---
 
 ```javascript
-function Dev(x,y){
-    this.x=x;
-    this.y=y;
+function Dev(x, y) {
+  this.x = x;
+  this.y = y;
 }
 
-Dev.prototype.code = function(){ /*code is a function which is added to prototype of Dev function*/
-    console.log("this:",this);
-    return(this.x+this.y);
-}
+Dev.prototype.code = function () {
+  /*code is a function which is added to prototype of Dev function*/
+  console.log("this:", this);
+  return this.x + this.y;
+};
 
-var vivek = new Dev(1,2) /*instantiate a new object*/
-var sum = vivek.code();/*call the method on the instance*/
-console.log(sum);/*prints the return value*/
-console.log(vivek);/*prints the vivek object*/
+var vivek = new Dev(1, 2); /*instantiate a new object*/
+var sum = vivek.code(); /*call the method on the instance*/
+console.log(sum); /*prints the return value*/
+console.log(vivek); /*prints the vivek object*/
 ```
 
 \*lets look at the \*\*console \*_as well_
@@ -137,6 +137,7 @@ This structure confirms that function constructors and ES6 classes create identi
 > Doesn't it totally resemble the class? The answer is quite clear and a huge **YES!!**
 
 The function constructor pattern in pre-ES6 JavaScript is equivalent to class declarations in ES6. We can see that:
+
 - Instance variables are declared on `this` in the Function object
 - Methods are defined on the Function.prototype object
 - A reference is created automatically between Function and Function.prototype objects through the prototype chain during instantiation with the `new` keyword
@@ -151,9 +152,7 @@ here's how the prototypical chain for syntax's would look like
 
 <img src="../../../src/assets/blogs/classes-in-js/img-6.png" alt="img-6.gif" class="mx-auto" />
 
-
 Essentially, we get the same prototype chain on class and Function Constructor declarations.
-
 
 <img src="../../../src/assets/blogs/classes-in-js/img-7.gif" alt="gif-7.gif" class="mx-auto" />
 
@@ -164,7 +163,5 @@ Essentially, we get the same prototype chain on class and Function Constructor d
 3. class in ES6 can be thought of as an instruction to JavaScript compiler to automatically populate the prototype object
 
 <img src="../../../src/assets/blogs/classes-in-js/img-8.webp" alt="gif-7.gif" class="mx-auto" />
-
-
 
 With this written we officially come to the end of the b**log.** Hope you enjoyed reading it as much as i enjoyed writing it.I hope i have made these concepts clear to you . If you have any doubt's or want to criticise any point you can comment below.

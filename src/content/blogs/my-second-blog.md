@@ -4,14 +4,12 @@ subheading: "This blog details out, how you can run react without Create React A
 slug: "reducing-bundle-size-in-react"
 publishedAt: 2022-06-20
 readingTimeInMins: 7
-cover: ../../../src/assets/blogs/cover/cover-2.svg
+cover: ../../icons/cover-2.svg
 ---
 
 Recently while working on a client project, we faced the problem of having to analyze and reduce the bundle size, improve SEO metrics like FCP and LCP, and improve the loading time for the build. The project used Webpacks for configuring `npm` packages, Babel for `jsx` and converting es6 javascript to browser-compatible JavaScript. During the run of the project, I was very surprised when I saw the control a developer can have while building a website as it was my first encounter with Webpack and I was blown away by the efficiency with which it happens.
 
-
   <img src="../../../src/assets/blogs/reducing-bundle-size-in-react/img-1.gif" alt="wwe-john-cena-surprised.gif" class="mx-auto" />
-
 
 # About Webpack
 
@@ -50,7 +48,7 @@ Enter the following code snippet into your console:
 
 ```javascript
 //eg.
-React.createElement("h1", {}, "Hello World")
+React.createElement("h1", {}, "Hello World");
 ```
 
 Logging the above code on the console would give us the following result:
@@ -144,11 +142,11 @@ class HomePage extends React.Component {
       e(
         "p",
         { className: "text-center" },
-        " Hello Worlds of React and Webpack!"
+        " Hello Worlds of React and Webpack!",
       ),
       e("a", { href: "dynamic.html" }, "dynamic"),
       e("hr", null),
-      e("p", { className: "text-right" }, " made with ❤️ by Vivek Lokhande")
+      e("p", { className: "text-right" }, " made with ❤️ by Vivek Lokhande"),
     );
   }
 }
@@ -173,7 +171,7 @@ function HomePage() {
     e("p", { className: "text-center" }, " Hello Worlds of React and Webpack!"),
     e("a", { href: "dynamic.html" }, "dynamic"),
     e("hr", null),
-    e("p", { className: "text-right" }, " made with ❤️ by Vivek Lokhande")
+    e("p", { className: "text-right" }, " made with ❤️ by Vivek Lokhande"),
   );
 }
 
@@ -210,7 +208,7 @@ class LikeButton extends React.Component {
     return e(
       "button",
       { onClick: () => this.setState({ liked: true }) },
-      "Like"
+      "Like",
     );
   }
 }
@@ -267,11 +265,20 @@ Now let's look at how everything will function when put together. While working,
 Use the following code to pass multiple children to `React.createElement`:
 
 ```javascript
-React.createElement( "div",
-      { className: "parent__div" },
-      React.createElement("h1", { className: "text" }, "react without CRA, babel and webpack"),
-      React.createElement("p", { className: "text" },"Hello Worlds of React and Webpack!")
-      )
+React.createElement(
+  "div",
+  { className: "parent__div" },
+  React.createElement(
+    "h1",
+    { className: "text" },
+    "react without CRA, babel and webpack",
+  ),
+  React.createElement(
+    "p",
+    { className: "text" },
+    "Hello Worlds of React and Webpack!",
+  ),
+);
 ```
 
 You can pass as many elements as you want. Using this syntax, you can nest elements to your liking.
