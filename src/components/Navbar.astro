@@ -1,7 +1,5 @@
 ---
-import { Icon } from "astro-icon";
-const currentPath = Astro.url.pathname;
-console.log({ currentPath });
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="relative mx-auto">
@@ -24,7 +22,6 @@ console.log({ currentPath });
       <a href="https://www.github.com/isVivek99" aria-label="github redirect">
         <Icon
           name="github-mark-white"
-          alt="gh_logo"
           class="mx-3 h-6 w-6 transform transition duration-300 hover:text-color-red focus:text-color-red"
         />
       </a>
@@ -34,7 +31,6 @@ console.log({ currentPath });
       >
         <Icon
           name="twitterx"
-          alt="x_logo"
           class="mx-3 h-6 w-6 transform transition duration-300 hover:text-color-yellow focus:text-color-yellow"
         /></a
       >
@@ -44,7 +40,6 @@ console.log({ currentPath });
       >
         <Icon
           name="linkedin"
-          alt="linkedin_logo"
           class="mx-3 h-6 w-6 transform transition duration-300 hover:text-color-blue focus:text-color-blue"
         /></a
       >

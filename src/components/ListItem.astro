@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 const { imageObject, orgName, position, tenure } = Astro.props;
 ---
 
@@ -7,7 +7,6 @@ const { imageObject, orgName, position, tenure } = Astro.props;
   <div class="flex">
     <Icon
       name={imageObject}
-      alt="gh_logo"
       class="mx-3 h-10 w-10 transform transition duration-300 hover:text-color-red focus:text-color-red"
     />
 
