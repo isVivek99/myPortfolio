@@ -17,9 +17,9 @@ export default defineConfig({
     },
   },
 
-  image: {
-    service: passthroughImageService(),
-  },
+  // image: {
+  //   service: passthroughImageService(),
+  // },
 
   integrations: [
     tailwind({
@@ -48,5 +48,5 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "cloudflare" }),
 });
