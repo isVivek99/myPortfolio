@@ -5,6 +5,7 @@ slug: "prototypical-inheritance-js"
 publishedAt: 2023-06-15
 readingTimeInMins: 5
 cover: ./cover-5.svg
+tags: ["javaScript"]
 ---
 
 Hello guys, this is the first time I'm writing a blog. I decided to write this blog a day ago but couldn't find any topic. It's just so difficult to choose just one topic when all of them are interconnected to each other. It really becomes difficult to draw a line. Anyway, I've decided to write on prototypes and prototypical Inheritance in JavaScript. Hope I do justice to this topic. Let's start!! But, first time for a meme.

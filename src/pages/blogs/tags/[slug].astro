@@ -1,11 +1,41 @@
 ---
-import "../../base.css";
+import "../../../../base.css";
 import { getCollection, type CollectionEntry } from "astro:content";
-import BaseLayout from "../layout/BaseLayout.astro";
-import BlogCard from "../components/blogs/BlogCard.astro";
-import Tags from "../components/Tags.astro";
+import BaseLayout from "../../../layout/BaseLayout.astro";
+import BlogCard from "../../../components/blogs/BlogCard.astro";
+import Tags from "../../../components/Tags.astro";
 
-const blogPosts = (await getCollection("blogs")) as CollectionEntry<"blogs">[];
+export const prerender = true;
+
+// Type declaration for filteredPosts:
+interface Props {
+  filteredPosts: CollectionEntry<"blogs">[];
+}
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blogs");
+  const tags = [
+    ...new Set(
+      posts.flatMap((post: CollectionEntry<"blogs">) => post.data.tags),
+    ),
+  ];
+
+  return tags.map((tag) => {
+    // Filter posts that have the current tag
+    const filteredPosts = posts.filter(
+      (post: CollectionEntry<"blogs">) =>
+        post.data.tags && post.data.tags.includes(tag),
+    );
+
+    return {
+      params: { slug: tag },
+      props: { filteredPosts }, // Pass the filtered posts as props
+    };
+  });
+}
+
+const { slug } = Astro.params;
+const { filteredPosts } = Astro.props as Props;
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">
@@ -20,11 +50,11 @@ const blogPosts = (await getCollection("blogs")) as CollectionEntry<"blogs">[];
   <aside
     class="mb-4 flex w-full justify-start pt-16 sm:px-8 md:px-4 md:pt-0 lg:px-4"
   >
-    <Tags selectedTag="All" />
+    <Tags selectedTag={slug} />
   </aside>
   <section class="relative mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
     {
-      blogPosts.map((blog) => (
+      filteredPosts.map((blog) => (
         <BlogCard
           cardTitle={blog.data.title}
           cardSubtitle={blog.data.subheading}

@@ -5,6 +5,7 @@ slug: "classes-in-js"
 publishedAt: 2021-05-22 # Added date
 readingTimeInMins: 4
 cover: ../../icons/cover-4.svg
+tags: ["javaScript"]
 ---
 
 **TL;DR** ECMAScript6 introduced _classes_ as a syntactical sugar for creating prototype constructors. It is said to improve code readability. This blog focuses on how everything worked before classes .

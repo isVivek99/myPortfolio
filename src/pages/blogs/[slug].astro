@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   const blogPosts = await getCollection("blogs");
 
   // Return an array of paths and props for each post
-  return blogPosts.map((post) => ({
+  return blogPosts.map((post: any) => ({
     params: { slug: post.slug }, // Using the slug field for dynamic routing
     props: { post },
   }));

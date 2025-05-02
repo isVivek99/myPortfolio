@@ -1,0 +1,38 @@
+---
+const tags = ["javaScript", "react", "remix"];
+const { selectedTag } = Astro.props;
+---
+
+<div class="my-4 flex flex-wrap gap-3">
+  <a
+    href={"/blogs/"}
+    class={`
+        mr-6 transform cursor-pointer rounded-xl 
+        bg-neutral px-4 py-2 ring-1 
+        ring-neutral-border ring-offset-black transition duration-300 
+        hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4
+        ${selectedTag === "All" ? "ring-2 ring-color-yellow ring-offset-4" : ""}
+      `}
+  >
+    All
+  </a>
+  {
+    tags.map((tag) => {
+      const isSelected = selectedTag === tag;
+      return (
+        <a
+          href={`/blogs/tags/${tag}`}
+          class={`
+              mr-6 transform cursor-pointer rounded-xl 
+              bg-neutral px-4 py-2 ring-1 
+              ring-neutral-border ring-offset-black transition duration-300 
+              hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4
+              ${isSelected ? "ring-2 ring-color-yellow ring-offset-4" : ""}
+            `}
+        >
+          {tag}
+        </a>
+      );
+    })
+  }
+</div>

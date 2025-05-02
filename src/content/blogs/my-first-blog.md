@@ -5,6 +5,7 @@ slug: "remix-better-forms-for-better-ux-and-dx"
 publishedAt: 2023-06-15
 readingTimeInMins: 11
 cover: ../../icons/cover-1.svg
+tags: ["remix"]
 ---
 
 ## **Introduction**
