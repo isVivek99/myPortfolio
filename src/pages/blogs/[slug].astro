@@ -2,7 +2,7 @@
 // src/pages/blog/[slug].astro
 import "../../../base.css";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
 import myGradient from "../../icons/myGradient.jpeg";
 import { formatDate } from "../../utils/UTCDateStringToReadable";
@@ -14,13 +14,13 @@ export async function getStaticPaths() {
   const blogPosts = await getCollection("blogs");
 
   // Return an array of paths and props for each post
-  return blogPosts.map((post: any) => ({
+  return blogPosts.map((post: CollectionEntry<"blogs">) => ({
     params: { slug: post.slug }, // Using the slug field for dynamic routing
     props: { post },
   }));
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
 const { Content } = await post.render();
 ---
 
