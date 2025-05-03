@@ -5,7 +5,7 @@ import BaseLayout from "../layout/BaseLayout.astro";
 import BlogCard from "../components/blogs/BlogCard.astro";
 import Tags from "../components/Tags.astro";
 
-const blogPosts = (await getCollection("blogs")) as CollectionEntry<"blogs">[];
+const blogPosts: CollectionEntry<"blogs">[] = await getCollection("blogs");
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">

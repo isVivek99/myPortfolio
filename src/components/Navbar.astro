@@ -1,5 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+const currentPath = Astro.url.pathname;
+const currentPathArray = currentPath.split("/")[1];
+console.log(currentPathArray);
+const routeArray = ["/", "/blogs", "/talks", "/projects"];
 ---
 
 <div class="relative mx-auto">
@@ -9,12 +13,21 @@ import { Icon } from "astro-icon/components";
     <nav
       class="mb-14 mr-4 mt-4 w-fit cursor-pointer rounded-full bg-black px-4 py-2 ring-1 ring-neutral-border"
     >
-      <a href="/" class="px-3 font-semibold hover:text-white/60">Home</a>
-      <a href="/blogs" class="px-3 font-semibold hover:text-white/60">Blogs</a>
-      <a href="/talks" class="px-3 font-semibold hover:text-white/60">Talks</a>
-      <a href="/projects" class="px-3 font-semibold hover:text-white/60"
-        >Projects</a
-      >
+      {
+        routeArray.map((route) => {
+          const isActive = currentPath === route;
+          return (
+            <a
+              href={route}
+              class={`px-3 font-semibold hover:text-white/60 ${
+                isActive ? "text-color-yellow" : ""
+              }`}
+            >
+              {route === "/" ? "Home" : route.replace("/", "")}
+            </a>
+          );
+        })
+      }
     </nav>
     <nav
       class="mb-14 mt-4 flex w-fit cursor-pointer rounded-full bg-black px-4 py-2 ring-1 ring-neutral-border"
