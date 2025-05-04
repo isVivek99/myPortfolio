@@ -1,11 +1,11 @@
 ---
 import "../../base.css";
-import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 import BlogCard from "../components/blogs/BlogCard.astro";
 import Tags from "../components/Tags.astro";
+import { getSortedBlogs } from "../utils/contentCollecion";
 
-const blogPosts = (await getCollection("blogs")) as CollectionEntry<"blogs">[];
+const blogPosts = await getSortedBlogs();
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">

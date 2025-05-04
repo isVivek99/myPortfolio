@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import NavbarMobile from "../components/NavbarMobile.astro";
+import { ClientRouter } from "astro:transitions";
 // Supports weights 100-900
 
 const { pageTitle } = Astro.props;
@@ -10,11 +11,11 @@ const { pageTitle } = Astro.props;
 <html lang="en" id="index" class="bg-black [color-scheme:dark]">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/myImage.webp" />
+    <link rel="icon" type="image/svg+xml" href="/myImage.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="vivek lokhandes portfolio" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <title>{pageTitle}</title><ClientRouter />
   </head>
   <body class="flex min-h-screen flex-col font-sans">
     <main class="container mx-auto px-4 pt-16 sm:px-8 md:px-4 md:pt-0 lg:px-2">
@@ -26,7 +27,6 @@ const { pageTitle } = Astro.props;
       </div>
       <slot />
     </main>
+    <Footer />
   </body>
-
-  <Footer />
 </html>

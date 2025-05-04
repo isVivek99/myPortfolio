@@ -4,7 +4,7 @@ subheading: "This blog details out, how you can run react without Create React A
 slug: "reducing-bundle-size-in-react"
 publishedAt: 2022-06-20
 readingTimeInMins: 7
-cover: ../../icons/cover-2.svg
+cover: ./cover-2.svg
 tags: ["react"]
 ---
 

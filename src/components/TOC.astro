@@ -1,0 +1,22 @@
+---
+export type Props = {
+  pageHeadings: Array<{ depth: number; text: string; slug: string }>;
+};
+
+const { pageHeadings } = Astro.props;
+---
+
+<aside id="#toc">
+  <ul>
+    {
+      pageHeadings.map((h) => {
+        return (
+          <li>
+            {" "}
+            <a href={`#${h.slug}`}>{h.text}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</aside>

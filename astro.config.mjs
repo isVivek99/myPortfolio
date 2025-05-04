@@ -2,7 +2,7 @@ import { defineConfig, passthroughImageService } from "astro/config";
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import rehypePrettyCode from "rehype-pretty-code";
+import { rehypePrettyCode } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
 import cloudflare from "@astrojs/cloudflare";

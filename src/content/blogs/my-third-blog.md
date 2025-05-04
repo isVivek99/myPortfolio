@@ -4,7 +4,7 @@ subheading: "This blog explains the most common problem react developer's face w
 slug: "this-bind-arrow-fns-js"
 publishedAt: 2021-05-25 # Added date
 readingTimeInMins: 4
-cover: ../../icons/cover-3.svg
+cover: ./cover-3.svg
 tags: ["javaScript"]
 ---
 

@@ -4,7 +4,7 @@ subheading: "In this blog we discuss how instance of a class and a function in J
 slug: "classes-in-js"
 publishedAt: 2021-05-22 # Added date
 readingTimeInMins: 4
-cover: ../../icons/cover-4.svg
+cover: ./cover-4.svg
 tags: ["javaScript"]
 ---
 
