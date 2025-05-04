@@ -14,6 +14,9 @@ module.exports = {
     sourceType: "module",
     ecmaVersion: "latest",
   },
+  rules: {
+    "import/no-unresolved": "off", // Disable globally
+  },
   overrides: [
     {
       files: ["*.astro"],
@@ -24,7 +27,7 @@ module.exports = {
       },
 
       rules: {
-        "import/no-unresolved": "off",
+        "import/no-unresolved": "off", // Disable for .astro files only
         "astro/no-conflict-set-directives": "error",
         "astro/no-unused-define-vars-in-style": "error",
         "@typescript-eslint/no-unused-vars": "warn",

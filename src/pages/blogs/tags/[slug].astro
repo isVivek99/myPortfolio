@@ -1,31 +1,37 @@
 ---
 import "../../../../base.css";
-import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../../layout/BaseLayout.astro";
 import BlogCard from "../../../components/blogs/BlogCard.astro";
 import Tags from "../../../components/Tags.astro";
-
+import { getSortedBlogs } from "../../../utils/contentCollecion";
+import type {
+  BlogCollection,
+  FilteredPostsProps,
+} from "../../../types/postsData";
 export const prerender = true;
 
-// Type declaration for filteredPosts:
-interface Props {
-  filteredPosts: CollectionEntry<"blogs">[];
-}
-
+/// This function is called at build time
+///runs on the server
+/// and generates the static paths for the dynamic route
+/// for each tag
+/// and returns the paths to be pre-rendered
+/// for each tag
+/// and passes the filtered posts as props
 export async function getStaticPaths() {
-  const posts = await getCollection("blogs");
-  const tags = [
-    ...new Set(
-      posts.flatMap((post: CollectionEntry<"blogs">) => post.data.tags),
-    ),
-  ];
+  const extractTags = (posts: BlogCollection): string[] => {
+    return [...new Set(posts.flatMap((post) => post.data.tags))];
+  };
+
+  const filterPostsByTag = (posts: BlogCollection, tag: string) => {
+    return posts.filter((post) => post.data.tags.includes(tag));
+  };
+
+  const posts = await getSortedBlogs();
+  const tags = extractTags(posts);
 
   return tags.map((tag) => {
     // Filter posts that have the current tag
-    const filteredPosts = posts.filter(
-      (post: CollectionEntry<"blogs">) =>
-        post.data.tags && post.data.tags.includes(tag),
-    );
+    const filteredPosts = filterPostsByTag(posts, tag);
 
     return {
       params: { slug: tag },
@@ -34,8 +40,9 @@ export async function getStaticPaths() {
   });
 }
 
+// this runs on the client
 const { slug } = Astro.params;
-const { filteredPosts } = Astro.props as Props;
+const { filteredPosts } = Astro.props as FilteredPostsProps;
 ---
 
 <BaseLayout pageTitle="viveks portfolio blog">
