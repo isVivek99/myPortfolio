@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 <div
   class="overlay fixed inset-0 z-40 transition-colors duration-300 md:bg-transparent"
 >
-  <aside class="h-full w-full">
+  <aside class="">
     <nav
       class="menu pointer-events-auto absolute right-2 top-3 cursor-pointer rounded-full border-2 border-solid border-neutral-border bg-neutral px-4 py-2"
     >
@@ -64,31 +64,38 @@ import { Icon } from "astro-icon/components";
     const overlay = document.querySelector(".overlay") as HTMLDivElement;
     const menu = document.querySelector(".menu") as HTMLDivElement;
     const navLinks = document.querySelector(".nav-links") as HTMLDivElement;
-    menu.addEventListener("click", (event) => {
-      navLinks.classList.toggle("hidden");
+    const setupMobileNav = () => {
+      menu.addEventListener("click", (event) => {
+        navLinks.classList.toggle("hidden");
 
-      event.stopPropagation();
-      if (!navLinks.classList.contains("hidden")) {
-        overlay.classList.add("bg-black/60");
-        overlay.classList.add("pointer-events-auto");
-        overlay.classList.add("md:pointer-events-none");
-      } else {
-        overlay.classList.remove("bg-black/60");
-        overlay.classList.remove("pointer-events-auto");
-        overlay.classList.remove("md:pointer-events-none");
-        overlay.classList.add("pointer-events-none");
-      }
-    });
+        event.stopPropagation();
+        if (!navLinks.classList.contains("hidden")) {
+          overlay.classList.add("bg-black/60");
+          overlay.classList.add("pointer-events-auto");
+          overlay.classList.add("md:pointer-events-none");
+        } else {
+          overlay.classList.remove("bg-black/60");
+          overlay.classList.remove("pointer-events-auto");
+          overlay.classList.remove("md:pointer-events-none");
+          overlay.classList.add("pointer-events-none");
+        }
+      });
 
-    overlay.addEventListener("click", (event) => {
-      const relatedTarget = event.relatedTarget as HTMLElement;
-      if (!navLinks.contains(relatedTarget)) {
-        navLinks.classList.add("hidden");
-        overlay.classList.remove("bg-black/60");
-        overlay.classList.remove("pointer-events-auto");
-        overlay.classList.remove("md:pointer-events-none");
-        overlay.classList.add("pointer-events-none");
-      }
-    });
+      overlay.addEventListener("click", (event) => {
+        const relatedTarget = event.relatedTarget as HTMLElement;
+
+        if (
+          !navLinks.contains(relatedTarget) ||
+          relatedTarget.classList.contains("overlay")
+        ) {
+          navLinks.classList.add("hidden");
+          overlay.classList.remove("bg-black/60");
+          overlay.classList.remove("pointer-events-auto");
+          overlay.classList.remove("md:pointer-events-none");
+          overlay.classList.add("pointer-events-none");
+        }
+      });
+    };
+    setupMobileNav();
   </script>
 </div>
