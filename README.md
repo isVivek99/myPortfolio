@@ -1,3 +1,12 @@
+# Portfolio Project - Source Code Instructions
+
+This document provides comprehensive instructions for working with the `src/` directory of this Astro-based portfolio website.
+
+## Project Overview
+
+This is an Astro-powered portfolio website with an integrated blog system, built with TypeScript and featuring a modern component-based architecture.
+
+
 1. __Project Structure__: This is an Astro project with TypeScript
 
 2. __Key folders__:
@@ -41,14 +50,6 @@ __Create the content file__:
    ```bash
    touch src/content/blogs/my-new-post.md
    ```
-
-# Portfolio Project - Source Code Instructions
-
-This document provides comprehensive instructions for working with the `src/` directory of this Astro-based portfolio website.
-
-## Project Overview
-
-This is an Astro-powered portfolio website with an integrated blog system, built with TypeScript and featuring a modern component-based architecture.
 
 ## Folder Structure
 
