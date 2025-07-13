@@ -1,18 +1,16 @@
 ---
 interface Heading {
-  depth: number; // The heading level (h1 = 1, h2 = 2, etc)
-  slug: string; // The ID of the heading for linking
-  text: string; // The text content of the heading
+  depth: number;
+  slug: string;
+  text: string;
 }
 
 interface Props {
-  headings: Heading[]; // Array of headings from your markdown content
-  levels?: 1 | 2 | 3; // How many levels of headers to show in TOC (default: 2)
+  headings: Heading[];
+  levels?: 1 | 2 | 3;
 }
 
 const { headings, levels = 2 } = Astro.props as Props;
-
-// Filter headings to only show up to the specified level
 const filteredHeadings = headings.filter((heading) => heading.depth <= levels);
 ---
 
@@ -44,83 +42,4 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels);
   </ul>
 </div>
 
-<style>
-  .toc-current {
-    @apply font-medium text-blue-600 dark:text-blue-400;
-  }
-</style>
-
-<script>
-  // Wrapper for Blog post content
-  let wrappingElement: Element | null;
-  let observeHeaderTags: IntersectionObserver;
-  let allHeaderTags: NodeListOf<Element>;
-
-  // Function that runs when the Intersection Observer fires
-  function setCurrent(entries: IntersectionObserverEntry[]) {
-    const allSectionLinks = document.querySelectorAll(".toc-link");
-
-    // Find the most visible heading
-    let mostVisible: IntersectionObserverEntry | null = null;
-    let maxVisibility = 0;
-
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && entry.intersectionRatio > maxVisibility) {
-        mostVisible = entry;
-        maxVisibility = entry.intersectionRatio;
-      }
-    });
-
-    // Remove highlighting from all links first
-    allSectionLinks.forEach((link) => link.classList.remove("toc-current"));
-
-    // If we have a visible heading, highlight its corresponding link
-    if (mostVisible) {
-      //@ts-ignore
-      const target = mostVisible.target as HTMLHeadingElement;
-      if (target && target.id) {
-        const targetLink = document.querySelector(
-          `a[href="#${target.id}"].toc-link`,
-        );
-        if (targetLink) {
-          targetLink.classList.add("toc-current");
-          console.log("Highlighting:", target.id);
-        }
-      }
-    }
-  }
-
-  function initTOC() {
-    // Update this with whatever class wraps your blog post content
-    wrappingElement = document.querySelector(".prose");
-
-    if (wrappingElement !== null) {
-      // Get all H1/H2/H3 tags from the post
-      allHeaderTags = wrappingElement.querySelectorAll("h1, h2, h3");
-    }
-
-    // Intersection Observer Options
-    const options = {
-      root: null,
-      rootMargin: "0px 0px -80% 0px", // Trigger when heading reaches top 20% of viewport
-      threshold: [0, 0.1],
-    };
-
-    // Each Intersection Observer runs setCurrent
-    observeHeaderTags = new IntersectionObserver(setCurrent, options);
-    if (wrappingElement === null) {
-      return;
-    }
-    allHeaderTags.forEach((tag) => {
-      // add scroll margin top to account for fixed navbar
-      tag.classList.add("scroll-mt-24");
-      observeHeaderTags.observe(tag);
-    });
-  }
-
-  // runs on initial page load
-  initTOC();
-
-  // Re-initialize on page navigation (for Astro view transitions)
-  document.addEventListener("astro:after-swap", initTOC);
-</script>
+<script src="../../scripts/toc"></script>
