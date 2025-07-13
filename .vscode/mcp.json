@@ -1,0 +1,20 @@
+{
+  // 💡 Inputs are prompted on first server start, then stored securely by VS Code.
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "perplexity-key",
+      "description": "Perplexity API Key",
+      "password": true
+    }
+  ],
+  "servers": {
+    // https://github.com/github/github-mcp-server/
+
+ "browsermcp": {
+      "command": "npx",
+      "args": ["@browsermcp/mcp@latest"]
+    }
+   
+  }
+}

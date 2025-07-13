@@ -4,6 +4,7 @@ import "../../../base.css";
 import { Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
+import TOC from "../../components/blogs/TOC.astro";
 import myGradient from "../../icons/myGradient.jpeg";
 import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <BaseLayout pageTitle={post.data.title}>
@@ -47,40 +48,54 @@ const { Content } = await post.render();
       />
     </div>
 
-    <div class="container mx-auto max-w-3xl px-4">
-      <h1
-        class="mb-8 cursor-pointer text-center text-header font-bold leading-none tracking-tight xl:mt-0"
-      >
-        {post.data.title}
-      </h1>
-      <h2
-        class="mb-8 cursor-pointer text-center text-subheader font-bold leading-none tracking-tight text-opacity-60 opacity-60 xl:mt-0"
-      >
-        {post.data.subheading}
-      </h2>
-      <div
-        class="mx-auto mb-12 mt-4 flex max-w-md items-center justify-between"
-      >
-        <Image
-          src={myImageTwo}
-          height={100}
-          width={100}
-          alt="my picture"
-          loading={"lazy"}
-          class="h-10 w-10 rounded-3xl"
-        />
-        <p class="font-bold">Vivek Lokhande</p>
-        <p class="font-bold text-neutral-border">
-          {formatDate(post.data.publishedAt.toLocaleDateString())} — {
-            post.data.readingTimeInMins
-          } min read
-        </p>
+    <div class="container mx-auto max-w-6xl px-4">
+      <!-- Main content area with grid layout -->
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+        <!-- Main content -->
+        <div class="lg:col-span-3">
+          <h1
+            class="mb-8 cursor-pointer text-center text-header font-bold leading-none tracking-tight xl:mt-0"
+          >
+            {post.data.title}
+          </h1>
+          <h2
+            class="mb-8 cursor-pointer text-center text-subheader font-bold leading-none tracking-tight text-opacity-60 opacity-60 xl:mt-0"
+          >
+            {post.data.subheading}
+          </h2>
+          <div
+            class="mx-auto mb-12 mt-4 flex max-w-md items-center justify-between"
+          >
+            <Image
+              src={myImageTwo}
+              height={100}
+              width={100}
+              alt="my picture"
+              loading={"lazy"}
+              class="h-10 w-10 rounded-3xl"
+            />
+            <p class="font-bold">Vivek Lokhande</p>
+            <p class="font-bold text-neutral-border">
+              {formatDate(post.data.publishedAt.toLocaleDateString())} — {
+                post.data.readingTimeInMins
+              } min read
+            </p>
+          </div>
+
+          <article
+            class="prose prose-lg mx-auto mb-32 dark:prose-invert prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white prose-img:rounded-xl"
+          >
+            <Content />
+          </article>
+        </div>
+
+        <!-- Table of Contents Sidebar -->
+        <div class="hidden lg:col-span-1 lg:block">
+          <div class="sticky top-24">
+            <TOC headings={headings} levels={3} />
+          </div>
+        </div>
       </div>
-      <article
-        class="prose prose-lg mx-auto mb-32 dark:prose-invert prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-600 prose-a:underline hover:prose-a:text-blue-800 prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white prose-img:rounded-xl"
-      >
-        <Content />
-      </article>
     </div>
   </section>
 </BaseLayout>
