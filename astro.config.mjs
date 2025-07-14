@@ -4,13 +4,14 @@ import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import { rehypePrettyCode } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-
+import sitemap from '@astrojs/sitemap';
 import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
+//sitemap:https://docs.astro.build/en/guides/integrations-guide/sitemap/
 export default defineConfig({
+    site: 'https://viveklokhande.com',
   output: "server",
-
   markdown: {
     shikiConfig: {
       allowUnsafeSrc: true,
@@ -46,6 +47,7 @@ export default defineConfig({
         ],
       ],
     }),
+    sitemap()
   ],
 
   adapter: cloudflare(),
