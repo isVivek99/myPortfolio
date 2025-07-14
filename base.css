@@ -86,3 +86,24 @@
 .has-tooltip:hover .tooltip {
   @apply visible z-50;
 }
+
+/* Safari-specific fixes for dark mode text rendering */
+@supports (-webkit-appearance: none) {
+  /* Force proper color inheritance in Safari */
+  .toc-link {
+    -webkit-text-fill-color: currentColor;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Ensure prose content renders properly in Safari */
+  .prose {
+    -webkit-text-fill-color: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Fix for Safari dark mode color inheritance */
+  html.dark body {
+    color-scheme: dark;
+    -webkit-color-scheme: dark;
+  }
+}

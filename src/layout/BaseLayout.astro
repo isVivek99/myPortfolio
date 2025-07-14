@@ -8,16 +8,17 @@ import NavbarMobile from "../components/NavbarMobile.astro";
 const { pageTitle } = Astro.props;
 ---
 
-<html lang="en" id="index" class="bg-black [color-scheme:dark]">
+<html lang="en" id="index" class="dark bg-black">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/myImage.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="vivek lokhandes portfolio" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark" />
     <title>{pageTitle}</title>
   </head>
-  <body class="flex min-h-screen flex-col font-sans">
+  <body class="flex min-h-screen flex-col bg-black font-sans text-white">
     <main class="container mx-auto px-4 pt-16 sm:px-8 md:px-4 md:pt-0 lg:px-2">
       <div class="hidden md:block">
         <Navbar />
