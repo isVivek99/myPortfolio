@@ -4,11 +4,12 @@ import BaseLayout from "../layout/BaseLayout.astro";
 import BlogCard from "../components/blogs/BlogCard.astro";
 import Tags from "../components/Tags.astro";
 import { getSortedBlogs } from "../utils/contentCollecion";
+import { blogListSEO } from "../utils/seoConfigs";
 
 const blogPosts = await getSortedBlogs();
 ---
 
-<BaseLayout pageTitle="viveks portfolio blog">
+<BaseLayout seo={blogListSEO}>
   <section
     class="section-1 flex flex-col items-center justify-center px-8 pb-20 pt-40 text-center md:h-1/2 md:pb-0 md:pt-20 2xl:px-32"
   >

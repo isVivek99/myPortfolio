@@ -2,21 +2,33 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import NavbarMobile from "../components/NavbarMobile.astro";
+import SEOComponent from "../components/SEOComponent.astro";
+import type { SEOConfig } from "../utils/seoConfigs";
 
-// Supports weights 100-900
+export interface Props {
+  pageTitle?: string;
+  seo?: SEOConfig;
+}
 
-const { pageTitle } = Astro.props;
+const { pageTitle, seo } = Astro.props;
 ---
 
 <html lang="en" id="index" class="dark bg-black">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/myImage.png" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="vivek lokhandes portfolio" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark" />
-    <title>{pageTitle}</title>
+
+    <!-- SEO Component -->
+    <SEOComponent {...seo} />
+
+    <!-- Fallback title if no SEO config provided -->
+    {
+      !seo && (
+        <title>{pageTitle || "Vivek Lokhande - Full Stack Developer"}</title>
+      )
+    }
   </head>
   <body class="flex min-h-screen flex-col bg-black font-sans text-white">
     <main class="container mx-auto px-4 pt-16 sm:px-8 md:px-4 md:pt-0 lg:px-2">

@@ -9,9 +9,10 @@ import Card from "../components/Card.astro";
 import ListItem from "../components/ListItem.astro";
 import TechStackMain from "../components/TechStackMain.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
+import { homeSEO } from "../utils/seoConfigs";
 ---
 
-<BaseLayout pageTitle="viveks portfolio homepage">
+<BaseLayout seo={homeSEO}>
   <section
     class="section-1 relative min-h-screen w-full snap-start pt-20 md:min-h-fit md:pt-32"
   >

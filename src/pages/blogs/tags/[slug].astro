@@ -4,6 +4,7 @@ import BaseLayout from "../../../layout/BaseLayout.astro";
 import BlogCard from "../../../components/blogs/BlogCard.astro";
 import Tags from "../../../components/Tags.astro";
 import { getSortedBlogs } from "../../../utils/contentCollecion";
+import { generateTagSEO } from "../../../utils/seoConfigs";
 import type {
   BlogCollection,
   FilteredPostsProps,
@@ -43,9 +44,12 @@ export async function getStaticPaths() {
 // this runs on the client
 const { slug } = Astro.params;
 const { filteredPosts } = Astro.props as FilteredPostsProps;
+
+// Generate SEO configuration for this tag page
+const tagSEO = generateTagSEO(slug as string, filteredPosts.length);
 ---
 
-<BaseLayout pageTitle="viveks portfolio blog">
+<BaseLayout seo={tagSEO}>
   <section
     class="section-1 flex flex-col items-center justify-center px-8 pb-20 pt-40 text-center md:h-1/2 md:pb-0 md:pt-20 2xl:px-32"
   >

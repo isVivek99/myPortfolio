@@ -1,0 +1,59 @@
+---
+// Social media image generator for better Open Graph images
+export interface SocialImageProps {
+  title: string;
+  subtitle?: string;
+  author?: string;
+  tags?: string[];
+  type?: "blog" | "page";
+}
+
+const {
+  title,
+  subtitle,
+  author = "Vivek Lokhande",
+  tags = [],
+  type = "page",
+} = Astro.props as SocialImageProps;
+
+// You can use this component to generate dynamic social images
+// For now, we'll use static images but this can be extended with canvas/svg generation
+---
+
+<!-- This component can be used to generate dynamic social media images --><!-- For production, consider using services like Vercel OG or Cloudinary -->
+<div class="social-image-template hidden">
+  <div
+    class="flex h-[630px] w-[1200px] flex-col items-center justify-center bg-gradient-to-br from-blue-600 to-purple-700 p-16 text-white"
+  >
+    <h1 class="mb-4 max-w-4xl text-center text-6xl font-bold leading-tight">
+      {title}
+    </h1>
+    {
+      subtitle && (
+        <p class="mb-8 max-w-3xl text-center text-2xl opacity-90">{subtitle}</p>
+      )
+    }
+    <div class="mt-auto flex items-center gap-4">
+      <div
+        class="flex h-16 w-16 items-center justify-center rounded-full bg-white"
+      >
+        <span class="text-2xl font-bold text-gray-800">VL</span>
+      </div>
+      <div>
+        <p class="text-xl font-semibold">{author}</p>
+        <p class="text-lg opacity-75">Full Stack Developer</p>
+      </div>
+    </div>
+    {
+      tags.length > 0 && (
+        <div class="mt-4 flex gap-2">
+          {tags.slice(0, 3).map((tag) => (
+            <span class="rounded-full bg-white/20 px-3 py-1 text-sm">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>

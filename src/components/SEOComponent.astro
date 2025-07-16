@@ -1,0 +1,171 @@
+---
+import { SEO } from "astro-seo";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  author?: string;
+  siteName?: string;
+}
+
+const {
+  title = "Vivek Lokhande - Full Stack Developer & Software Engineer",
+  description = "Portfolio of Vivek Lokhande - Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore my projects, blog posts, and technical expertise.",
+  image = "/myImage.png",
+  imageAlt = "Vivek Lokhande - Full Stack Developer",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  canonical,
+  noindex = false,
+  nofollow = false,
+  author = "Vivek Lokhande",
+  siteName = "Vivek Lokhande Portfolio",
+} = Astro.props;
+
+// Construct absolute image URL
+const imageUrl = new URL(image, Astro.site).toString();
+const canonicalUrl = canonical || Astro.url.href;
+
+// Generate structured data based on type
+const getStructuredData = () => {
+  if (type === "article") {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title,
+      description: description,
+      image: imageUrl,
+      url: canonicalUrl,
+      datePublished: publishedTime,
+      dateModified: modifiedTime || publishedTime,
+      author: {
+        "@type": "Person",
+        name: author,
+        url: "https://viveklokhande.com",
+      },
+      publisher: {
+        "@type": "Person",
+        name: author,
+        url: "https://viveklokhande.com",
+      },
+      keywords: tags.join(", "),
+      articleSection: "Technology",
+      inLanguage: "en-US",
+    };
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Vivek Lokhande",
+    jobTitle: "Full Stack Developer",
+    description: description,
+    image: imageUrl,
+    url: "https://viveklokhande.com",
+    sameAs: [
+      "https://github.com/isVivek99",
+      "https://www.linkedin.com/in/vivek-lokhande-737939188",
+      "https://x.com/VivekLokhande99",
+    ],
+    knowsAbout: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Full Stack Development",
+      "Web Development",
+    ],
+  };
+};
+
+const structuredData = getStructuredData();
+---
+
+<SEO
+  title={title}
+  description={description}
+  canonical={canonicalUrl}
+  noindex={noindex}
+  nofollow={nofollow}
+  openGraph={{
+    basic: {
+      title: title,
+      type: type,
+      image: imageUrl,
+      url: canonicalUrl,
+    },
+    optional: {
+      description: description,
+      siteName: siteName,
+      locale: "en_US",
+    },
+    ...(type === "article" &&
+      publishedTime && {
+        article: {
+          publishedTime: publishedTime,
+          modifiedTime: modifiedTime || publishedTime,
+          authors: [author],
+          tags: tags,
+          section: "Technology",
+        },
+      }),
+    image: {
+      alt: imageAlt,
+      type: "image/png",
+      width: 1200,
+      height: 630,
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    site: "@VivekLokhande99",
+    creator: "@VivekLokhande99",
+    title: title,
+    description: description,
+    image: imageUrl,
+    imageAlt: imageAlt,
+  }}
+  extend={{
+    link: [
+      { rel: "icon", type: "image/png", href: "/myImage.png" },
+      { rel: "sitemap", href: "/sitemap-index.xml" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        href: "/rss.xml",
+        title: "Vivek Lokhande Blog RSS Feed",
+      },
+    ],
+    meta: [
+      { name: "author", content: author },
+      {
+        name: "robots",
+        content: noindex ? "noindex,nofollow" : "index,follow",
+      },
+      {
+        name: "googlebot",
+        content: noindex ? "noindex,nofollow" : "index,follow",
+      },
+      { name: "theme-color", content: "#000000" },
+      { name: "color-scheme", content: "dark" },
+      { property: "article:author", content: author },
+      ...(tags.length > 0
+        ? [{ name: "keywords", content: tags.join(", ") }]
+        : []),
+    ],
+  }}
+/>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
