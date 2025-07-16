@@ -1,4 +1,6 @@
 // SEO configurations for different page types
+import { generateCoverImageUrl } from "./seoUtils";
+
 export interface SEOConfig {
   title?: string;
   description?: string;
@@ -53,7 +55,7 @@ export function generateBlogSEO(data: {
   return {
     title: `${data.title} | Vivek Lokhande Blog`,
     description: data.subheading,
-    image: data.cover,
+    image: generateCoverImageUrl(data.cover),
     imageAlt: data.title,
     type: "article",
     publishedTime: data.publishedAt.toISOString(),

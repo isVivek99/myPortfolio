@@ -91,3 +91,23 @@ export function estimateReadingTime(content: string, wordsPerMinute: number = 20
   const readingTime = Math.ceil(words / wordsPerMinute);
   return Math.max(1, readingTime); // Minimum 1 minute
 }
+
+/**
+ * Converts local cover image path to public URL for social media sharing
+ * @param coverPath - The local cover image filename (e.g., "cover-1.svg")
+ * @param baseUrl - Base URL (default: "https://viveklokhande.com")
+ * @returns Public URL for the cover image
+ */
+export function generateCoverImageUrl(
+  coverPath: string, 
+  baseUrl: string = "https://viveklokhande.com"
+): string {
+  // If coverPath is already just a filename, use it directly
+  // Otherwise extract filename from path
+  const filename = coverPath.includes('/') 
+    ? coverPath.split('/').pop() || 'cover-1.svg'
+    : coverPath;
+  
+  // Return public URL
+  return `${baseUrl}/covers/${filename}`;
+}

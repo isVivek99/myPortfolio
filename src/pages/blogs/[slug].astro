@@ -26,14 +26,20 @@ const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
 const { Content, headings } = await post.render();
 
 // Generate SEO configuration for this blog post
+// Extract cover filename from the original cover path for social media
+const coverFilename = post.data.cover.src.includes("cover-")
+  ? post.data.cover.src.split("/").pop()?.split("?")[0] || "cover-1.svg"
+  : "cover-1.svg";
+
 const blogSEO = generateBlogSEO({
   title: post.data.title,
   subheading: post.data.subheading,
-  cover: post.data.cover.src,
+  cover: coverFilename,
   publishedAt: post.data.publishedAt,
   tags: post.data.tags,
   slug: post.slug,
 });
+console.log(blogSEO);
 ---
 
 <BaseLayout seo={blogSEO}>
