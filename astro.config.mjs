@@ -6,6 +6,7 @@ import { rehypePrettyCode } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import sitemap from '@astrojs/sitemap';
 import cloudflare from "@astrojs/cloudflare";
+import fs from 'fs';
 
 // https://astro.build/config
 //sitemap:https://docs.astro.build/en/guides/integrations-guide/sitemap/
@@ -49,6 +50,26 @@ export default defineConfig({
     }),
     sitemap()
   ],
-
+ vite: {
+    plugins: [rawFonts(['.ttf'])],
+    optimizeDeps: {
+      exclude: ['@resvg/resvg-js']
+    }
+  },
   adapter: cloudflare(),
 });
+
+function rawFonts(ext) {
+  return {
+    name: 'vite-plugin-raw-fonts',
+    transform(_, id) {
+      if (ext.some(e => id.endsWith(e))) {
+        const buffer = fs.readFileSync(id);
+        return {
+          code: `export default ${JSON.stringify(buffer)}`,
+          map: null
+        };
+      }
+    }
+  };
+}

@@ -1,5 +1,5 @@
 // SEO configurations for different page types
-import { generateCoverImageUrl } from "./seoUtils";
+
 
 export interface SEOConfig {
   title?: string;
@@ -47,7 +47,6 @@ export const notFoundSEO: SEOConfig = {
 export function generateBlogSEO(data: {
   title: string;
   subheading: string;
-  cover: string;
   publishedAt: Date;
   tags: string[];
   slug: string;
@@ -55,7 +54,7 @@ export function generateBlogSEO(data: {
   return {
     title: `${data.title} | Vivek Lokhande Blog`,
     description: data.subheading,
-    image: generateCoverImageUrl(data.cover),
+    image: `https://viveklokhande.com/api/image/${data.slug}`, // Dynamic OG image
     imageAlt: data.title,
     type: "article",
     publishedTime: data.publishedAt.toISOString(),

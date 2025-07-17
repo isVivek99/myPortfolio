@@ -126,7 +126,7 @@ export class TableOfContents {
         this.observer!.observe(heading);
       });
 
-      console.log(`TOC: Observing ${this.headings.length} headings`);
+
       return true;
     } catch (error) {
       console.error("TOC: Failed to initialize", error);

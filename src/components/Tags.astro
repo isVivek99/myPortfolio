@@ -19,7 +19,7 @@ const { selectedTag } = Astro.props;
   {
     tags.map((tag) => {
       const isSelected = selectedTag === tag;
-      console.log({ selectedTag, tag, isSelected });
+
       return (
         <a
           href={`/blogs/tags/${tag}`}
