@@ -1,6 +1,5 @@
 import satori from "satori";
 import { html } from "satori-html";
-import { Resvg } from "@resvg/resvg-wasm";
 import type { APIRoute } from "astro";
 import { getSortedBlogs } from "../../../utils/contentCollecion";
 import { routes } from "../../../utils/const";
@@ -12,6 +11,10 @@ export const GET: APIRoute = async ({ params }) => {
   const blogPosts = await getSortedBlogs();
   const post = blogPosts.find((blog) => blog.slug === id);
 
+  if (!post) {
+    return new Response("Blog post not found", { status: 404 });
+  }
+
   // Default values or post-specific data
   const title = post.data.title || "Blog Post";
   const subheading =
@@ -19,7 +22,6 @@ export const GET: APIRoute = async ({ params }) => {
   const tags: Array<string> = post.data.tags || ["development"];
 
   // Load fonts via fetch from your public folder
-  // This works in both local dev and Cloudflare
   const baseUrl = import.meta.env.DEV ? routes.local : routes.production;
   const interRegularFontUrl = new URL("/fonts/Inter-Regular.ttf", baseUrl).href;
   const interBoldFontUrl = new URL("/fonts/Inter-Bold.ttf", baseUrl).href;
@@ -69,7 +71,8 @@ export const GET: APIRoute = async ({ params }) => {
   </div>
 `);
 
-  let svg = await satori(out, {
+  // Generate SVG with satori
+  const svg = await satori(out, {
     fonts: [
       {
         name: "Inter",
@@ -88,19 +91,10 @@ export const GET: APIRoute = async ({ params }) => {
     width: 1200,
   });
 
-  const resvg = new Resvg(svg, {
-    fitTo: {
-      mode: "width",
-      value: 1200,
-    },
-  });
-
-  const image = resvg.render();
-
-  return new Response(image.asPng(), {
+  // Return the SVG directly
+  return new Response(svg, {
     headers: {
-      "Content-Type": "image/png",
-      // optional
+      "Content-Type": "image/svg+xml",
       "Cache-Control": "public, max-age=31536000, immutable",
     },
   });
