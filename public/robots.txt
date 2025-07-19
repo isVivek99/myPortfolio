@@ -21,10 +21,9 @@ Sitemap: https://viveklokhande.com/sitemap-index.xml
 # RSS Feed
 Sitemap: https://viveklokhande.com/rss.xml
 
-# Block other API routes (except images)
-Disallow: /api/
-# But allow image API specifically for all bots
+# Allow image API for all bots
 Allow: /api/image/
+Disallow: /api/        # Blocks other /api/ endpoints
 
 Disallow: /_astro/
 Disallow: /admin/
