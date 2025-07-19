@@ -2,7 +2,7 @@
 // src/pages/blog/[slug].astro
 import "../../../base.css";
 import { Image } from "astro:assets";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
 import TOC from "../../components/blogs/TOC.astro";
 import myGradient from "../../icons/myGradient.jpeg";
@@ -12,17 +12,26 @@ import { generateBlogSEO } from "../../utils/seoConfigs";
 
 // export const prerender = true;
 
-export async function getStaticPaths() {
-  const blogPosts = await getCollection("blogs");
+// export async function getStaticPaths() {
+//   const blogPosts = await getCollection("blogs");
 
-  // Return an array of paths and props for each post
-  return blogPosts.map((post: CollectionEntry<"blogs">) => ({
-    params: { slug: post.slug }, // Using the slug field for dynamic routing
-    props: { post },
-  }));
+//   // Return an array of paths and props for each post
+//   return blogPosts.map((post: CollectionEntry<"blogs">) => ({
+//     params: { slug: post.slug }, // Using the slug field for dynamic routing
+//     props: { post },
+//   }));
+// }
+
+// const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
+// const { Content, headings } = await post.render();
+
+const { slug } = Astro.params;
+const post = await getEntry("blogs", slug);
+
+if (!post) {
+  throw new Error("Blog post not found for this slug.");
 }
 
-const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
 const { Content, headings } = await post.render();
 
 const blogSEO = generateBlogSEO({
