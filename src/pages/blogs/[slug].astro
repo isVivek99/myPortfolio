@@ -10,7 +10,7 @@ import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
 import { generateBlogSEO } from "../../utils/seoConfigs";
 
-export const prerender = true;
+// export const prerender = true;
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blogs");
