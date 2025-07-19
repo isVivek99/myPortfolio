@@ -1,9 +1,9 @@
 import satori from 'satori';
 import { html } from 'satori-html';
-import { Resvg } from '@resvg/resvg-js';
-import interRegularFont from '/public/fonts/Inter-Regular.ttf';
+import { Resvg } from '@resvg/resvg-wasm';
 import type { APIRoute } from 'astro';
 import { getSortedBlogs } from '../../../utils/contentCollecion';
+import { routes } from '../../../utils/const';
 
 export const GET: APIRoute = async ({ params }) => {
 
@@ -18,7 +18,19 @@ export const GET: APIRoute = async ({ params }) => {
     const subheading = post.data.subheading || 'Vivek Lokhande - Full Stack Developer';
     const tags:Array<string> = post.data.tags || ['development'];
 
-
+    // Load fonts via fetch from your public folder
+    // This works in both local dev and Cloudflare
+    const baseUrl = import.meta.env.DEV 
+  ? routes.local
+  : routes.production;
+    const interRegularFontUrl = new URL('/fonts/Inter-Regular.ttf', baseUrl).href;
+    const interBoldFontUrl = new URL('/fonts/Inter-Bold.ttf', baseUrl).href;
+    
+    // Fetch the fonts
+    const [interRegular, interBold] = await Promise.all([
+      fetch(interRegularFontUrl).then(res => res.arrayBuffer()),
+      fetch(interBoldFontUrl).then(res => res.arrayBuffer())
+    ]);
     
  const out = html(`
   <div style="height: 100%; width: 100%; display: flex; flex-direction: column; background: linear-gradient(135deg, rgb(30,30,30) 0%, rgb(10,10,10) 100%); padding: 60px;">
@@ -57,11 +69,18 @@ export const GET: APIRoute = async ({ params }) => {
 
   let svg = await satori(out, {
     fonts: [
-      {
-        name: 'Inter',
-        data: Buffer.from(interRegularFont),
-        style: 'normal'
-      }
+       {
+          name: 'Inter',
+          data: interRegular,
+          weight: 400,
+          style: 'normal'
+        },
+        {
+          name: 'Inter',
+          data: interBold,
+          weight: 700,
+          style: 'normal'
+        }
     ],
     height: 630,
     width: 1200

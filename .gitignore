@@ -1,5 +1,7 @@
 # build output
 dist/
+# wrangler output
+.wrangler/
 # generated types
 .astro/
 .netlify/
