@@ -1,6 +1,14 @@
+name = "myportfolio"
+main = "dist/_worker.js"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = "dist"
+
 [build]
 command = "pnpm run build"
+
 [build.environment]
 NODE_VERSION = "20.3.0"
-compatibility_flags = ["nodejs_compat"]
-compatibility_date = "2024-09-23"
+
