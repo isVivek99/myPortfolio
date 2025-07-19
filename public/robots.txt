@@ -1,14 +1,31 @@
 User-agent: *
 Allow: /
 
+# Allow social media crawlers to access OG images
+User-agent: Twitterbot
+Allow: /api/image/
+User-agent: facebookexternalhit
+Allow: /api/image/
+User-agent: LinkedInBot
+Allow: /api/image/
+User-agent: WhatsApp
+Allow: /api/image/
+User-agent: Discordbot
+Allow: /api/image/
+User-agent: Slackbot-LinkExpanding
+Allow: /api/image/
+
 # Sitemaps
 Sitemap: https://viveklokhande.com/sitemap-index.xml
 
 # RSS Feed
 Sitemap: https://viveklokhande.com/rss.xml
 
-# Block common bot areas (optional)
+# Block other API routes (except images)
 Disallow: /api/
+# But allow image API specifically for all bots
+Allow: /api/image/
+
 Disallow: /_astro/
 Disallow: /admin/
 
