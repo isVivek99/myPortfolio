@@ -6,24 +6,27 @@
  * @param maxLength - Maximum length for description (default: 160)
  * @returns Truncated and cleaned description
  */
-export function generateMetaDescription(content: string, maxLength: number = 160): string {
+export function generateMetaDescription(
+  content: string,
+  maxLength: number = 160,
+): string {
   // Remove HTML tags and clean up content
   const cleanContent = content
-    .replace(/<[^>]*>/g, '') // Remove HTML tags
-    .replace(/\s+/g, ' ') // Normalize whitespace
+    .replace(/<[^>]*>/g, "") // Remove HTML tags
+    .replace(/\s+/g, " ") // Normalize whitespace
     .trim();
-  
+
   if (cleanContent.length <= maxLength) {
     return cleanContent;
   }
-  
+
   // Truncate at word boundary
   const truncated = cleanContent.substr(0, maxLength);
-  const lastSpace = truncated.lastIndexOf(' ');
-  
-  return lastSpace > 0 
-    ? truncated.substr(0, lastSpace) + '...'
-    : truncated + '...';
+  const lastSpace = truncated.lastIndexOf(" ");
+
+  return lastSpace > 0
+    ? truncated.substr(0, lastSpace) + "..."
+    : truncated + "...";
 }
 
 /**
@@ -34,9 +37,9 @@ export function generateMetaDescription(content: string, maxLength: number = 160
  * @returns Formatted title
  */
 export function generatePageTitle(
-  title: string, 
-  siteName: string = "Vivek Lokhande", 
-  separator: string = " | "
+  title: string,
+  siteName: string = "Vivek Lokhande",
+  separator: string = " | ",
 ): string {
   return title === siteName ? title : `${title}${separator}${siteName}`;
 }
@@ -48,20 +51,22 @@ export function generatePageTitle(
  * @returns Comma-separated keywords string
  */
 export function generateKeywords(
-  tags: string[] = [], 
-  additionalKeywords: string[] = []
+  tags: string[] = [],
+  additionalKeywords: string[] = [],
 ): string {
   const baseKeywords = [
     "Vivek Lokhande",
-    "Full Stack Developer", 
+    "Full Stack Developer",
     "Web Development",
     "JavaScript",
     "TypeScript",
     "React",
-    "Node.js"
+    "Node.js",
   ];
-  
-  const allKeywords = [...new Set([...baseKeywords, ...tags, ...additionalKeywords])];
+
+  const allKeywords = [
+    ...new Set([...baseKeywords, ...tags, ...additionalKeywords]),
+  ];
   return allKeywords.join(", ");
 }
 
@@ -72,10 +77,10 @@ export function generateKeywords(
  * @returns Canonical URL
  */
 export function generateCanonicalUrl(
-  path: string, 
-  baseUrl: string = "https://viveklokhande.com"
+  path: string,
+  baseUrl: string = "https://viveklokhande.com",
 ): string {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return `${baseUrl}${cleanPath}`;
 }
 
@@ -85,8 +90,11 @@ export function generateCanonicalUrl(
  * @param wordsPerMinute - Average reading speed (default: 200)
  * @returns Reading time in minutes
  */
-export function estimateReadingTime(content: string, wordsPerMinute: number = 200): number {
-  const cleanContent = content.replace(/<[^>]*>/g, '');
+export function estimateReadingTime(
+  content: string,
+  wordsPerMinute: number = 200,
+): number {
+  const cleanContent = content.replace(/<[^>]*>/g, "");
   const words = cleanContent.trim().split(/\s+/).length;
   const readingTime = Math.ceil(words / wordsPerMinute);
   return Math.max(1, readingTime); // Minimum 1 minute

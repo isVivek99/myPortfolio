@@ -29,6 +29,7 @@
     "satori": "^0.15.2",
     "satori-html": "^0.3.2",
     "shiki": "^3.3.0",
+    "svg2png-wasm": "^1.4.1",
     "tailwindcss": "^3.0.24",
     "typescript": "^5.8.3"
   },
