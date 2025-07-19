@@ -49,12 +49,12 @@ export class TableOfContents {
 
   private findTargetLink(headingId: string): Element | null {
     return document.querySelector(
-      `a[href="#${headingId}"]${this.config.linkSelector}`
+      `a[href="#${headingId}"]${this.config.linkSelector}`,
     );
   }
 
   private findMostVisibleHeading(
-    entries: IntersectionObserverEntry[]
+    entries: IntersectionObserverEntry[],
   ): IntersectionObserverEntry | null {
     let mostVisible: IntersectionObserverEntry | null = null;
     let maxVisibility = 0;
@@ -95,7 +95,9 @@ export class TableOfContents {
 
   public init(): boolean {
     try {
-      this.wrappingElement = document.querySelector(this.config.contentSelector);
+      this.wrappingElement = document.querySelector(
+        this.config.contentSelector,
+      );
 
       if (!this.wrappingElement) {
         console.warn(`TOC: ${this.config.contentSelector} element not found`);
@@ -103,12 +105,12 @@ export class TableOfContents {
       }
 
       this.headings = this.wrappingElement.querySelectorAll(
-        this.config.headingSelector
+        this.config.headingSelector,
       );
 
       if (this.headings.length === 0) {
         console.warn(
-          `TOC: No headings found in ${this.config.contentSelector}`
+          `TOC: No headings found in ${this.config.contentSelector}`,
         );
         return false;
       }
@@ -119,13 +121,15 @@ export class TableOfContents {
         threshold: this.config.threshold,
       };
 
-      this.observer = new IntersectionObserver(this.handleIntersection, options);
+      this.observer = new IntersectionObserver(
+        this.handleIntersection,
+        options,
+      );
 
       this.headings.forEach((heading) => {
         heading.classList.add(this.config.scrollOffset);
         this.observer!.observe(heading);
       });
-
 
       return true;
     } catch (error) {
@@ -163,8 +167,6 @@ function initTOC(): void {
 
 // Initialize on page load
 initTOC();
-
-
 
 // Cleanup on page unload
 window.addEventListener("beforeunload", () => {

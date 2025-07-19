@@ -1,38 +1,36 @@
-import satori from 'satori';
-import { html } from 'satori-html';
-import { Resvg } from '@resvg/resvg-wasm';
-import type { APIRoute } from 'astro';
-import { getSortedBlogs } from '../../../utils/contentCollecion';
-import { routes } from '../../../utils/const';
+import satori from "satori";
+import { html } from "satori-html";
+import { Resvg } from "@resvg/resvg-wasm";
+import type { APIRoute } from "astro";
+import { getSortedBlogs } from "../../../utils/contentCollecion";
+import { routes } from "../../../utils/const";
 
 export const GET: APIRoute = async ({ params }) => {
+  const { id } = params;
 
-    const { id } = params;
-    
-    // Fetch blog posts and find the specific post
-    const blogPosts = await getSortedBlogs();
-    const post = blogPosts.find(blog => blog.slug === id);
-    
-    // Default values or post-specific data
-    const title = post.data.title || 'Blog Post';
-    const subheading = post.data.subheading || 'Vivek Lokhande - Full Stack Developer';
-    const tags:Array<string> = post.data.tags || ['development'];
+  // Fetch blog posts and find the specific post
+  const blogPosts = await getSortedBlogs();
+  const post = blogPosts.find((blog) => blog.slug === id);
 
-    // Load fonts via fetch from your public folder
-    // This works in both local dev and Cloudflare
-    const baseUrl = import.meta.env.DEV 
-  ? routes.local
-  : routes.production;
-    const interRegularFontUrl = new URL('/fonts/Inter-Regular.ttf', baseUrl).href;
-    const interBoldFontUrl = new URL('/fonts/Inter-Bold.ttf', baseUrl).href;
-    
-    // Fetch the fonts
-    const [interRegular, interBold] = await Promise.all([
-      fetch(interRegularFontUrl).then(res => res.arrayBuffer()),
-      fetch(interBoldFontUrl).then(res => res.arrayBuffer())
-    ]);
-    
- const out = html(`
+  // Default values or post-specific data
+  const title = post.data.title || "Blog Post";
+  const subheading =
+    post.data.subheading || "Vivek Lokhande - Full Stack Developer";
+  const tags: Array<string> = post.data.tags || ["development"];
+
+  // Load fonts via fetch from your public folder
+  // This works in both local dev and Cloudflare
+  const baseUrl = import.meta.env.DEV ? routes.local : routes.production;
+  const interRegularFontUrl = new URL("/fonts/Inter-Regular.ttf", baseUrl).href;
+  const interBoldFontUrl = new URL("/fonts/Inter-Bold.ttf", baseUrl).href;
+
+  // Fetch the fonts
+  const [interRegular, interBold] = await Promise.all([
+    fetch(interRegularFontUrl).then((res) => res.arrayBuffer()),
+    fetch(interBoldFontUrl).then((res) => res.arrayBuffer()),
+  ]);
+
+  const out = html(`
   <div style="height: 100%; width: 100%; display: flex; flex-direction: column; background: linear-gradient(135deg, rgb(30,30,30) 0%, rgb(10,10,10) 100%); padding: 60px;">
     <!-- Header -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
@@ -54,11 +52,15 @@ export const GET: APIRoute = async ({ params }) => {
       
       <!-- Tags -->
       <div style="display: flex; gap: 12px;">
-        ${tags.map(tag => `
+        ${tags
+          .map(
+            (tag) => `
           <span style="background: rgb(59,130,246); color: white; padding: 6px 18px; border-radius: 999px; font-size: 18px; font-weight: 500; display: flex; align-items: center;">
             #${tag}
           </span>
-        `).join('')}
+        `,
+          )
+          .join("")}
       </div>
     </div>
     
@@ -69,37 +71,37 @@ export const GET: APIRoute = async ({ params }) => {
 
   let svg = await satori(out, {
     fonts: [
-       {
-          name: 'Inter',
-          data: interRegular,
-          weight: 400,
-          style: 'normal'
-        },
-        {
-          name: 'Inter',
-          data: interBold,
-          weight: 700,
-          style: 'normal'
-        }
+      {
+        name: "Inter",
+        data: interRegular,
+        weight: 400,
+        style: "normal",
+      },
+      {
+        name: "Inter",
+        data: interBold,
+        weight: 700,
+        style: "normal",
+      },
     ],
     height: 630,
-    width: 1200
+    width: 1200,
   });
 
   const resvg = new Resvg(svg, {
     fitTo: {
-      mode: 'width',
-      value: 1200
-    }
+      mode: "width",
+      value: 1200,
+    },
   });
 
   const image = resvg.render();
 
   return new Response(image.asPng(), {
     headers: {
-      'Content-Type': 'image/png',
+      "Content-Type": "image/png",
       // optional
-      'Cache-Control': 'public, max-age=31536000, immutable'
-    }
-  })
-}
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
+  });
+};

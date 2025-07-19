@@ -1,6 +1,5 @@
 // SEO configurations for different page types
 
-
 export interface SEOConfig {
   title?: string;
   description?: string;
@@ -18,29 +17,32 @@ export interface SEOConfig {
 // Homepage SEO
 export const homeSEO: SEOConfig = {
   title: "Vivek Lokhande - Full Stack Developer & Software Engineer",
-  description: "Portfolio of Vivek Lokhande - Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore my projects, blog posts, and technical expertise.",
+  description:
+    "Portfolio of Vivek Lokhande - Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore my projects, blog posts, and technical expertise.",
   image: "/myImage.png",
   imageAlt: "Vivek Lokhande - Full Stack Developer Portfolio",
-  type: "website"
+  type: "website",
 };
 
 // Blog listing page SEO
 export const blogListSEO: SEOConfig = {
   title: "Blog - Vivek Lokhande | Web Development & Programming Insights",
-  description: "Read my latest blog posts about web development, JavaScript, React, Node.js, and software engineering best practices. Learn from real-world experiences and technical insights.",
+  description:
+    "Read my latest blog posts about web development, JavaScript, React, Node.js, and software engineering best practices. Learn from real-world experiences and technical insights.",
   image: "/myImage.png",
   imageAlt: "Vivek Lokhande Blog - Web Development Articles",
-  type: "website"
+  type: "website",
 };
 
 // 404 page SEO
 export const notFoundSEO: SEOConfig = {
   title: "Page Not Found - Vivek Lokhande",
-  description: "The page you're looking for doesn't exist. Navigate back to explore my portfolio, blog posts, and projects.",
+  description:
+    "The page you're looking for doesn't exist. Navigate back to explore my portfolio, blog posts, and projects.",
   image: "/myImage.png",
   imageAlt: "404 Page Not Found",
   type: "website",
-  noindex: true
+  noindex: true,
 };
 
 // Generate blog post SEO configuration
@@ -59,7 +61,7 @@ export function generateBlogSEO(data: {
     type: "article",
     publishedTime: data.publishedAt.toISOString(),
     tags: data.tags,
-    canonical: `https://viveklokhande.com/blogs/${data.slug}`
+    canonical: `https://viveklokhande.com/blogs/${data.slug}`,
   };
 }
 
@@ -70,6 +72,6 @@ export function generateTagSEO(tag: string, postCount: number): SEOConfig {
     description: `Explore ${postCount} blog posts about ${tag}. Learn about web development, programming concepts, and technical insights related to ${tag}.`,
     image: "/myImage.png",
     imageAlt: `${tag} related articles by Vivek Lokhande`,
-    type: "website"
+    type: "website",
   };
 }
