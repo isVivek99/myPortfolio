@@ -56,12 +56,12 @@ export function generateBlogSEO(data: {
   return {
     title: `${data.title} | Vivek Lokhande Blog`,
     description: data.subheading,
-    image: `https://viveklokhande.com/api/image/${data.slug}`, // Dynamic OG image
+    image: `https://viveklokhande.com/${data.slug}/og.png`, // Dynamic OG image
     imageAlt: data.title,
     type: "article",
     publishedTime: data.publishedAt.toISOString(),
     tags: data.tags,
-    canonical: `https://viveklokhande.com/blogs/${data.slug}`,
+    canonical: `https://viveklokhande.com/blogs/${data.slug}/og.png`,
   };
 }
 

@@ -7,22 +7,76 @@ import rehypeSlug from "rehype-slug";
 import sitemap from '@astrojs/sitemap';
 import cloudflare from "@astrojs/cloudflare";
 
+/**
+ * HTMLRewriter polyfill for Node.js environments
+ * 
+ * This polyfill allows the workers-og package to function in local development
+ * by providing a compatible HTMLRewriter API that matches Cloudflare Workers
+ */
+if (typeof process !== 'undefined' && process.versions?.node && 
+    typeof globalThis !== 'undefined' && !globalThis.HTMLRewriter) {
+  try {
+    // Try to load the htmlrewriter package for Node.js
+    const { HTMLRewriter } = require('htmlrewriter');
+    globalThis.HTMLRewriter = HTMLRewriter;
+    console.log('✅ HTMLRewriter polyfill loaded for Node.js environment');
+  } catch (error) {
+    console.warn('⚠️ htmlrewriter package not found. Install with: pnpm add htmlrewriter');
+    
+    // Provide a basic mock to prevent crashes
+    globalThis.HTMLRewriter = class MockHTMLRewriter {
+      constructor() {
+        console.warn('⚠️ Using mock HTMLRewriter - OG image generation may not work properly');
+      }
+      
+      on(selector, handlers) {
+        return this;
+      }
+      
+      transform(response) {
+        return response;
+      }
+    };
+  }
+}
 
-// https://astro.build/config
-//sitemap:https://docs.astro.build/en/guides/integrations-guide/sitemap/
+/**
+ * Vite plugin for handling raw font files without using fs
+ * Uses Vite's built-in features to handle file imports
+ */
+function rawFonts(extensions) {
+  return {
+    name: 'vite-plugin-raw-fonts',
+    transform(code, id) {
+      if (extensions.some(ext => id.endsWith(ext))) {
+        // Instead of reading the file with fs, use the content provided by Vite
+        // This approach works both locally and in Cloudflare
+        return {
+          code: `export default ${JSON.stringify(Buffer.from(code))}`,
+          map: null
+        };
+      }
+    }
+  };
+}
+
 export default defineConfig({
-    site: 'https://viveklokhande.com',
+  site: 'https://viveklokhande.com',
   output: "server",
+  
+  // Markdown configuration
   markdown: {
     shikiConfig: {
       allowUnsafeSrc: true,
     },
   },
 
+  // Image handling
   image: {
     service: passthroughImageService("passthrough"),
   },
 
+  // Integrations
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -31,16 +85,10 @@ export default defineConfig({
     mdx({
       syntaxHighlight: false,
       rehypePlugins: [
-        /**
-         * Adds ids to headings
-         */
+        // Adds ids to headings
         rehypeSlug,
         [
-          /**
-           * Enhances code blocks with syntax highlighting, line numbers,
-           * titles, and allows highlighting specific lines and words
-           */
-
+          // Code block enhancement with syntax highlighting, line numbers, etc.
           rehypePrettyCode,
           {
             theme: "github-dark",
@@ -50,24 +98,16 @@ export default defineConfig({
     }),
     sitemap()
   ],
- vite: {
+  
+  // Vite configuration
+  vite: {
+    plugins: [rawFonts(['.ttf'])],
     optimizeDeps: {
-      exclude: ['@resvg/resvg-js']
+      exclude: ['@resvg/resvg-js', 'htmlrewriter'],
     },
-    build: {
-        // Improve compatibility with native modules
-        //The -darwin-arm64 suffix indicates this is specifically for:
-        //darwin: macOS operating system         
-        //arm64: Apple Silicon processors (M1, M2, etc.)
-      rollupOptions: {
-        external: ['@resvg/resvg-js-darwin-arm64']
-      }
-    }
+    assetsInclude: ['**/*.wasm'], // Treat WASM files as assets
   },
-  adapter: cloudflare({
-    imageService: 'passthrough'
-  }),
+  
+  // Deployment adapter
+  adapter: cloudflare(),
 });
-
-
-
