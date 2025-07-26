@@ -56,7 +56,7 @@ export function generateBlogSEO(data: {
   return {
     title: `${data.title} | Vivek Lokhande Blog`,
     description: data.subheading,
-    image: `https://viveklokhande.com/${data.slug}/og.png`, // Dynamic OG image
+    image: `https://viveklokhande.com/blogs/${data.slug}/og.png`, // Dynamic OG image
     imageAlt: data.title,
     type: "article",
     publishedTime: data.publishedAt.toISOString(),
