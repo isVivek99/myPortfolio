@@ -72,7 +72,7 @@ export default defineConfig({
   vite: {
     plugins: [rawFonts(['.ttf'])],
     optimizeDeps: {
-      exclude: ['@resvg/resvg-js', 'htmlrewriter'],
+      exclude: ['@resvg/resvg-js'],
     },
     assetsInclude: ['**/*.wasm'], // Treat WASM files as assets
   },
