@@ -7,7 +7,8 @@ import { rehypePrettyCode } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import sitemap from '@astrojs/sitemap';
 import cloudflare from "@astrojs/cloudflare";
-
+import fs from 'node:fs'
+import path from 'node:path'
 
 
 /**
@@ -17,14 +18,29 @@ import cloudflare from "@astrojs/cloudflare";
 function rawFonts(extensions) {
   return {
     name: 'vite-plugin-raw-fonts',
-    transform(code, id) {
-      if (extensions.some(ext => id.endsWith(ext))) {
-        // Instead of reading the file with fs, use the content provided by Vite
-        // This approach works both locally and in Cloudflare
-        return {
-          code: `export default ${JSON.stringify(Buffer.from(code))}`,
-          map: null
-        };
+    enforce: 'pre', // Run before other plugins
+    resolveId(id, importer) {
+      if (extensions.some(ext => id.includes(ext))) {
+        // Resolve relative paths properly
+        if (id.startsWith('.')) {
+          const resolvedPath = path.resolve(path.dirname(importer), id);
+          return resolvedPath;
+        }
+        return id;
+      }
+    },
+    load(id) {
+      if (extensions.some(ext => id.includes(ext))) {
+        console.log('Loading font:', id);
+        try {
+          const buffer = fs.readFileSync(id);
+          console.log('Font buffer size:', buffer.length);
+          // Return as a simple Uint8Array that can be used directly
+          return `export default new Uint8Array([${Array.from(buffer).join(',')}]);`;
+        } catch (error) {
+          console.error('Error loading font:', error.message);
+          throw error;
+        }
       }
     }
   };
@@ -73,10 +89,12 @@ export default defineConfig({
   // Vite configuration
   vite: {
     plugins: [rawFonts(['.ttf'])],
-    assetsInclude: ['**/*.wasm'], // Treat WASM files as assets
+    assetsInclude: ['**/*.wasm'], // Treat WASM files as assets (but not TTF files)
     ssr: {
       external: ["buffer", "path", "fs", "os", "crypto", "async_hooks"].map((i) => `node:${i}`),
     },
+    // Ensure TTF files are not treated as assets
+    assetsExclude: ['**/*.ttf'],
   },
   
   // Deployment adapter
