@@ -1,7 +1,6 @@
 1. **Project Structure**: This is an Astro project with TypeScript
 
 2. **Key folders**:
-
    - `assets/` - Contains blog images and covers
    - `components/` - Astro components for UI
    - `content/` - Blog content and configuration
@@ -13,7 +12,6 @@
    - `utils/` - Utility functions
 
 3. **Key files**:
-
    - `const.ts` - Contains a classMap array
    - `content.config.ts` - Defines blog collection schema using Zod
    - `env.d.ts` - Astro environment types
@@ -378,7 +376,6 @@ Astro environment type definitions - provides TypeScript support for Astro-speci
    ***
 
 3. **Add images** (if needed):
-
    - Create folder: `src/assets/blogs/my-new-post/`
    - Add images: `img-1.png`, `img-2.jpg`, etc.
 

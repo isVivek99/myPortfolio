@@ -1,8 +1,8 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getEntry, type CollectionEntry } from "astro:content";
 import { ImageResponse } from "workers-og";
-// Import fonts directly using the rawFonts plugin
-import InterBoldData from "../../../lib/fonts/Inter-Bold.ttf";
-import InterRegularData from "../../../lib/fonts/Inter-Regular.ttf";
+// Import fonts using the rawFonts plugin - these will be converted to buffers
+import InterBoldData from "../../../../public/fonts/Inter-Bold.ttf";
+import InterRegularData from "../../../../public/fonts/Inter-Regular.ttf";
 
 interface Props {
   params: { slug: string };
@@ -12,20 +12,32 @@ interface Props {
 
 
 export async function GET({ params }: Props) {
-  const blogPosts = await getCollection("blogs");
-  const post = blogPosts.find((p: any) => p.slug === params.slug);
+  // Get the slug from the incoming server request
+  const { slug } = params;
+  
+  if (!slug) {
+    return new Response("Slug parameter is required", { status: 400 });
+  }
 
-  // using custom font files
-  // Convert the imported font data to Buffer format
-  const InterBold = Buffer.from(InterBoldData);
-  const InterRegular = Buffer.from(InterRegularData);
+  // Query for the entry directly using the request slug
+  const post = await getEntry("blogs", slug);
+  
+  // Return 404 if the post doesn't exist
+  if (!post) {
+    return new Response("Blog post not found", { status: 404 });
+  }
 
-  const { title } = post;
+  // Font data is already processed as buffers by the rawFonts plugin
+  // No need to convert to Buffer again
+  const InterBold = InterBoldData;
+  const InterRegular = InterRegularData;
+
+  const { title } = post.data;
   // Astro doesn't support tsx endpoints so usign React-element objects
   const html = `
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; font-family: sans-serif; background: #160f29">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; font-family: 'Inter', sans-serif; background: #160f29">
       <div style="display: flex; width: 100vw; padding: 40px; color: white;">
-        <h1 style="font-size: 60px; font-weight: 600; margin: 0; font-family: 'Bitter'; font-weight: 500">${title}</h1>
+        <h1 style="font-size: 60px; font-weight: 700; margin: 0; font-family: 'Inter', sans-serif;">${title}</h1>
       </div>
     </div>
    `;
@@ -35,24 +47,17 @@ export async function GET({ params }: Props) {
     height: 600,
     fonts: [
       {
-        name: "Inter Bold",
+        name: "Inter",
         data: InterBold,
         style: "normal",
+        weight: 700,
       },
       {
-        name: "Inter Regular",
+        name: "Inter",
         data: InterRegular,
         style: "normal",
+        weight: 400,
       },
     ],
   });
-}
-
-export async function getStaticPaths() {
-  const blogPosts = await getCollection("blogs");
-
-  // Return an array of paths and props for each post
-  return blogPosts.map((post: CollectionEntry<"blogs">) => ({
-    params: { slug: post.slug }, // Using the slug field for dynamic routing
-  }));
 }

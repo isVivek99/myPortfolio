@@ -1,4 +1,5 @@
 import { defineConfig, passthroughImageService } from "astro/config";
+import { astroFont } from 'astro-font/integration'
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
@@ -65,16 +66,17 @@ export default defineConfig({
         ],
       ],
     }),
-    sitemap()
+    sitemap(),
+    astroFont()
   ],
   
   // Vite configuration
   vite: {
     plugins: [rawFonts(['.ttf'])],
-    optimizeDeps: {
-      exclude: ['@resvg/resvg-js'],
-    },
     assetsInclude: ['**/*.wasm'], // Treat WASM files as assets
+    ssr: {
+      external: ["buffer", "path", "fs", "os", "crypto", "async_hooks"].map((i) => `node:${i}`),
+    },
   },
   
   // Deployment adapter
