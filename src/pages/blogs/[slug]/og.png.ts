@@ -9,7 +9,7 @@ interface Props {
   props: { post: CollectionEntry<"blogs"> };
 }
 
-export const prerender = true;
+
 
 export async function GET({ params }: Props) {
   const blogPosts = await getCollection("blogs");
