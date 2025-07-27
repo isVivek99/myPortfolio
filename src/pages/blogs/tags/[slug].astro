@@ -24,6 +24,8 @@ export async function getStaticPaths() {
   };
 
   const filterPostsByTag = (posts: BlogCollection, tag: string) => {
+    const returnedPosts = posts.filter((post) => post.data.tags.includes(tag));
+    console.log({ returnedPosts });
     return posts.filter((post) => post.data.tags.includes(tag));
   };
 

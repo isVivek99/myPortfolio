@@ -12,5 +12,11 @@
   "eslint.debug": true,
   "eslint.format.enable": true,
   "eslint.workingDirectories": [{ "mode": "auto" }],
+  "github.copilot.enable": {
+    "*": true,
+   "markdown": false,
+    "mdx": false,
+    "md": false
+  },    
   "eslint.alwaysShowStatus": true
 }

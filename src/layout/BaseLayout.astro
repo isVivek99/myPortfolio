@@ -5,13 +5,12 @@ import NavbarMobile from "../components/NavbarMobile.astro";
 import SEOComponent from "../components/SEOComponent.astro";
 import type { SEOConfig } from "../utils/seoConfigs";
 
-
 export interface Props {
   pageTitle?: string;
   seo?: SEOConfig;
 }
 
-const { pageTitle, seo,  } = Astro.props;
+const { pageTitle, seo } = Astro.props;
 ---
 
 <html lang="en" id="index" class="dark bg-black">

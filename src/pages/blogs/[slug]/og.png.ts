@@ -1,27 +1,25 @@
 import { getEntry, type CollectionEntry } from "astro:content";
 import { ImageResponse } from "workers-og";
 // Import fonts using the rawFonts plugin - these will be converted to buffers
-import InterBoldData from '../../../assets/fonts/Inter-Bold.ttf'
-import InterRegularData from '../../../assets/fonts/Inter-Regular.ttf'
+import InterBoldData from "../../../assets/fonts/Inter-Bold.ttf";
+import InterRegularData from "../../../assets/fonts/Inter-Regular.ttf";
 
 interface Props {
   params: { slug: string };
   props: { post: CollectionEntry<"blogs"> };
 }
 
-
-
 export async function GET({ params }: Props) {
   // Get the slug from the incoming server request
   const { slug } = params;
-  
+
   if (!slug) {
     return new Response("Slug parameter is required", { status: 400 });
   }
 
   // Query for the entry directly using the request slug
   const post = await getEntry("blogs", slug);
-  
+
   // Return 404 if the post doesn't exist
   if (!post) {
     return new Response("Blog post not found", { status: 404 });
@@ -32,8 +30,7 @@ export async function GET({ params }: Props) {
   const InterRegular = (InterRegularData as any).buffer || InterRegularData;
 
   const { title } = post.data;
-  
-  // Create a more robust HTML structure for OG image
+
   const html = `
     <div style="
       display: flex;

@@ -31,10 +31,8 @@ function rawFonts(extensions) {
     },
     load(id) {
       if (extensions.some(ext => id.includes(ext))) {
-        console.log('Loading font:', id);
         try {
           const buffer = fs.readFileSync(id);
-          console.log('Font buffer size:', buffer.length);
           // Return as a simple Uint8Array that can be used directly
           return `export default new Uint8Array([${Array.from(buffer).join(',')}]);`;
         } catch (error) {
