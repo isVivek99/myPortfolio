@@ -10,20 +10,6 @@ import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
 import { generateBlogSEO } from "../../utils/seoConfigs";
 
-// export const prerender = true;
-
-// export async function getStaticPaths() {
-//   const blogPosts = await getCollection("blogs");
-
-//   // Return an array of paths and props for each post
-//   return blogPosts.map((post: CollectionEntry<"blogs">) => ({
-//     params: { slug: post.slug }, // Using the slug field for dynamic routing
-//     props: { post },
-//   }));
-// }
-
-// const { post } = Astro.props as { post: CollectionEntry<"blogs"> };
-// const { Content, headings } = await post.render();
 
 const { slug } = Astro.params;
 const post = await getEntry("blogs", slug);
