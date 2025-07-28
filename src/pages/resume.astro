@@ -1,0 +1,25 @@
+---
+import "../../base.css";
+import BaseLayout from "../layout/BaseLayout.astro";
+---
+
+<BaseLayout pageTitle="Resume - Vivek Lokhande">
+  <section class="section-1 relative min-h-screen w-full snap-start pt-20 md:min-h-fit md:pt-32">
+    <div class="container mx-auto max-w-6xl px-4"> 
+      <div class="mx-auto max-w-5xl">
+        <!-- Larger PDF Embed -->
+        <div class="relative w-full h-[1000px] mb-8">
+          <iframe
+            src="/resume.pdf#toolbar=1&navpanes=0&scrollbar=1"
+            class="h-full w-full rounded-lg border border-gray-700 shadow-lg"
+            title="Vivek Lokhande Resume"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Extra spacing at the bottom -->
+    <div class="h-32"></div>
+  </section>
+</BaseLayout>
+

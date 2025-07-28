@@ -1,32 +1,29 @@
 User-agent: *
 Allow: /
 
+# Allow access to blog covers and assets
+Allow: /covers/
+Allow: /_astro/
+
 # Allow social media crawlers to access OG images
 User-agent: Twitterbot
-Allow: /api/image/
+Allow: /blogs/*/og.png
 User-agent: facebookexternalhit
-Allow: /api/image/
+Allow: /blogs/*/og.png
 User-agent: LinkedInBot
-Allow: /api/image/
+Allow: /blogs/*/og.png
 User-agent: WhatsApp
-Allow: /api/image/
+Allow: /blogs/*/og.png
 User-agent: Discordbot
-Allow: /api/image/
+Allow: /blogs/*/og.png
 User-agent: Slackbot-LinkExpanding
-Allow: /api/image/
+Allow: /blogs/*/og.png
 
 # Sitemaps
-Sitemap: https://viveklokhande.com/sitemap-index.xml
+Sitemap: https://viveklokhande.com/sitemap.xml
 
-# RSS Feed
-Sitemap: https://viveklokhande.com/rss.xml
-
-# Allow image API for all bots
-Allow: /api/image/
-Disallow: /api/        # Blocks other /api/ endpoints
-
-Disallow: /_astro/
+# Block admin or development paths
 Disallow: /admin/
+Disallow: /.vscode/
+Disallow: /node_modules/
 
-# Crawl delay (optional - helps with server load)
-Crawl-delay: 1
