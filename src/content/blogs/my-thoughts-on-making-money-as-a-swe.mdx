@@ -7,7 +7,12 @@ readingTimeInMins: 5
 cover: ./astro-og-image-generation.svg
 tags : ["personal"]
 ---
+import { Image } from "astro:assets";
 import Note from '../../components/Note.astro'
+import typeOfCompanies from '../../assets/blogs/my-thoughts-on-making-money-as-a-swe/type-of-companies.png';
+import payGraph from '../../assets/blogs/my-thoughts-on-making-money-as-a-swe/pay-graph.png';
+import goals from '../../assets/blogs/my-thoughts-on-making-money-as-a-swe/goals.png';
+
 
 ## Introduction
 
@@ -58,20 +63,20 @@ is writing javascript tooling in zig, [more about him](https://injuly.in/about/)
 
 ### some explorations on current companies and their types
 
-
-
-  <img src="../../../src/assets/blogs/my-thoughts-on-making-money-as-a-swe/type-of-companies.png" alt="type-of-companies" />
+<figure>
+  <Image src={typeOfCompanies} alt="type-of-companies" />
   <figcaption style="text-align: center;">type of companies we can apply at.</figcaption>
+</figure>
 
-
-
-  <img src="../../../src/assets/blogs/my-thoughts-on-making-money-as-a-swe/pay-graph.png" alt="payscales" />
+<figure>
+  <Image src={payGraph} alt="payscales" />
   <figcaption style="text-align: center;">usual payscales I got from some youtube videos/ linkedin posts, ambitionbox.</figcaption>
+</figure>
 
-
-
-  <img src="../../../src/assets/blogs/my-thoughts-on-making-money-as-a-swe/goals.png" alt="payscales" />
+<figure>
+  <Image src={goals} alt="goals" />
   <figcaption style="text-align: center;">laid out some basic goals for me and my friend.</figcaption>
+</figure>
 
 
 
