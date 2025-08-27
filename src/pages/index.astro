@@ -8,8 +8,12 @@ import ButtonSecondary from "../components/ButtonSecondary.astro";
 import Card from "../components/Card.astro";
 import ListItem from "../components/ListItem.astro";
 import TechStackMain from "../components/TechStackMain.astro";
+import BlogCard from "../components/blogs/BlogCard.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
 import { homeSEO } from "../utils/seoConfigs";
+import { getSortedBlogs } from "../utils/contentCollecion";
+
+const recentPosts = (await getSortedBlogs()).slice(0, 3);
 ---
 
 <BaseLayout seo={homeSEO}>
@@ -71,8 +75,8 @@ import { homeSEO } from "../utils/seoConfigs";
             <span class="block md:hidden">Vivek Lokhande.</span>
           </h1>
           <p class="mt-10">
-            I like tinkering with open source. Experimenting with new
-            frameworks.
+            Normie dev, grinding javascript.I like tinkering with open source
+            software. Experimenting with new frameworks.
 
             <br class="hidden lg:block" /> Lately getting interested in creating
             useful products which
@@ -274,4 +278,66 @@ import { homeSEO } from "../utils/seoConfigs";
   // Add event listeners
   cardElement.addEventListener("mouseover", animateOnHover);
   cardElement.addEventListener("mouseout", resetAnimations);
+
+  // Carousel functionality
+  document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector(".carousel-track") as HTMLElement;
+    const slides = document.querySelectorAll(".carousel-slide");
+    const prevButton = document.querySelector(
+      ".carousel-prev",
+    ) as HTMLButtonElement;
+    const nextButton = document.querySelector(
+      ".carousel-next",
+    ) as HTMLButtonElement;
+    const dots = document.querySelectorAll(
+      ".carousel-dot",
+    ) as NodeListOf<HTMLButtonElement>;
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    // Function to update carousel position
+    function updateCarousel(slideIndex: number) {
+      const slideWidth = slides[0].clientWidth + 32; // width + gap
+      track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+
+      // Update dots
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("bg-blue-600", index === slideIndex);
+        dot.classList.toggle("bg-gray-300", index !== slideIndex);
+      });
+
+      currentSlide = slideIndex;
+    }
+
+    // Next button
+    nextButton?.addEventListener("click", () => {
+      const nextSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel(nextSlide);
+    });
+
+    // Previous button
+    prevButton?.addEventListener("click", () => {
+      const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel(prevSlide);
+    });
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        updateCarousel(index);
+      });
+    });
+
+    // Auto-play carousel (optional)
+    setInterval(() => {
+      const nextSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel(nextSlide);
+    }, 5000); // Change slide every 5 seconds
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      updateCarousel(currentSlide);
+    });
+  });
 </script>
