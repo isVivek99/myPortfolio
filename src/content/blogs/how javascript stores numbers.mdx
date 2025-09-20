@@ -1,0 +1,185 @@
+---
+title: "How JavaScript stores numbers"
+subheading: "Ever wondered why JavaScript has so many quirks, why it's always surrounded by controversies, and why the language seems full of issues?"
+slug: "how-javascript-stores-numbers"
+publishedAt: 2025-09-20
+readingTimeInMins: 5
+cover: ./dollar-glowing.svg
+tags : ["javaScript"]
+---
+
+import Note from '../../components/Note.astro'
+
+## Introduction
+
+Hello folks! I'm back with another blog. This time we're going to talk about how javaScript stores numbers in memory.
+
+JavaScript is a very quirky language, a lot of things javascript has or does have been borrowed from existing languages or 
+practices, recently I have been reading the book `How **JS** works?` by `Douglas Crockford`, and he is very opinionated about **JS**.
+
+According to him **JS** has its quirks but there are good parts to it, for example he loves the fact that **JS** has only one number type
+ and not multiple number types like **JAVA** which leads to a lot of bugs in **JAVA**, because we get lost in type conversion.
+
+
+## Have you ever thought why ? 
+```js
+
+const add = 0.1 + 0.2
+console.log(add) // 0.30000000000000004
+
+console.log(03 === 0.1 + 0.2) // returns false
+
+console.log(100/3) // returns 33.333333333333336 and not 33.33333333333333
+
+```
+
+
+## Here are few facts about how **JS** stores numbers
+- **JS** uses **64 bit double precision floating point numbers**. (*if this feels verbose, i will explain it to you exactly what it means*)
+- **JS** number is a subset of **JAVA's** double which is a subset of **IEEE 754**, a standard for storing floating point numbers.
+
+### Understanding decimal and binary number system
+
+Humans always have represented numbers in the decimal system, and we are also very comfortable with it. 
+Let us see how we store decimal values in power of **10**.
+
+### decimal in power of 10
+```js
+// Using scientific notation (same thing, shorter syntax)
+1e3   // 1000  (10 ** 3)
+1e-3  // 0.001 (10 ** -3)
+
+// As power of 10
+1.56e2   // means 1.56 × 10^2 = 156
+```
+
+
+similar to how in our decimal system we represent number in power of **10**.
+
+For computers we first convert these numbers to binary 
+and then store them in power of **2**, because in binary we only have two numbers **0 and 1**. 
+
+### decimal to binary in power of 2 
+
+```js
+// decimal to binary representation
+
+10011110 // 156
+10011110.01 // 156.25 
+// scientific notation (power of 2)
+1.001111001 × 2^7 // 156.25
+
+```
+
+
+## Understanding 64 bit double precision floating point numbers
+
+### 64-bit layout of a JavaScript number (IEEE-754 double precision)
+
+```mathemathica
+| Sign (1) | Exponent (11) | Mantissa (52) |
+
+```
+
+- **1 bit → Sign**  
+  - `0` → positive  
+  - `1` → negative  
+
+- **11 bits → Exponent**  
+  - Stored with a **bias of 1023**  
+  - Raw range: `0 … 2047`  
+  - Effective range (after removing bias): `−1022 … +1023`
+
+- **52 bits → Fraction (Mantissa)**  
+  - Stores the fractional part  
+  - For *normalized numbers*, an **implicit leading `1`** is added in front  
+  - Together, this makes the **Significand = 1.mantissa** (53 bits of precision)  
+
+
+<Note type="tip" title="Important Information">
+It’s called double precision because the number uses 64 bits instead of 32.
+Single precision (32 bits) has 23 mantissa bits, while double precision has 52 mantissa bits, giving 29 extra bits.
+The extra bits allow for a more accurate representation of decimal numbers.
+</Note>
+
+
+```js
+// forumala for Bias calculation
+bias = 2^(k - 1) - 1 // 2^(11 -1)-1 = 1023 
+// k = number of exponent bits
+
+// Storing an exponent
+storedExponent = actualExponent + bias
+
+// Retrieving the actual exponent
+actualExponent = storedExponent - bias
+
+// Examples:
+// Smallest normal exponent
+storedExponent = 1
+actualExponent = 1 - 1023 = -1022
+
+// Largest normal exponent
+storedExponent = 2046
+actualExponent = 2046 - 1023 = +1023
+```
+
+
+## Taking an example for 156.25, how is it stored in memory?
+
+```js
+// Example: 156.25 as 64-bit double precision (IEEE-754)
+
+// 1. Sign bit
+// Positive number → 0
+const sign = 0;
+
+// 2. Binary representation (integer + fraction)
+const binaryRepresentation = "10011100.01"; // 156 = 10011100, 0.25 = 0.01
+
+// 3. Normalized binary form (scientific notation base 2)
+const normalizedBinary = "1.001110001 × 2^7"; 
+// Move binary point 7 places left
+
+// 4. Normalized mantissa (fractional part stored in the 52-bit mantissa)
+const normalizedMantissa = "0011100010000000000000000000000000000000000000000000";
+// Padded with zeros to 52 bits
+
+// 5. Exponent (actual exponent from normalization)
+const exponent = 7;
+
+// 6. Stored exponent (add bias = 1023)
+const storedExponent = exponent + 1023; // 7 + 1023 = 1030
+const storedExponentBinary = storedExponent.toString(2).padStart(11, '0'); // 11 bits
+
+// 7. Final 64-bit representation
+// | sign (1 bit) | exponent (11 bits) | mantissa (52 bits) |
+const finalRepresentation = `${sign} | ${storedExponentBinary} | ${normalizedMantissa}`;
+
+console.log(finalRepresentation);
+// Output:
+// 0 | 10000000110 | 0011100010000000000000000000000000000000000000000000
+```
+
+## Now our final question, why `0.1 + 0.2` is not equal to `0.3` ?
+
+### first we have to look at the binary versions of **0.1** and **0.2**. and calculate their sum.
+
+```js
+0.1  = 0.0001100110011001100110011001100… (binary, repeating)
+0.2  = 0.0011001100110011001100110011001… (binary, repeating)
+Sum  = 0.010011001100110011001100110011… (binary)
+```
+when we convert it back to decimal we get the value as 
+
+```js
+0.30000000000000004
+```
+
+
+
+
+
+
+
+
