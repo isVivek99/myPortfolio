@@ -4,7 +4,7 @@ subheading: "Ever wondered why JavaScript has so many quirks, why it's always su
 slug: "how-javascript-stores-numbers"
 publishedAt: 2025-09-20
 readingTimeInMins: 5
-cover: ./dollar-glowing.svg
+cover: ./how-js-stores-numbers-in-memory.svg
 tags : ["javaScript"]
 ---
 
@@ -12,9 +12,9 @@ import Note from '../../components/Note.astro'
 
 ## Introduction
 
-Hello folks! I'm back with another blog. This time we're going to talk about how **JS** stores numbers in memory.
+Hello folks! I'm back with another blog. This time we're going to talk about how **JS stores numbers in memory** .
 
-JS is a very quirky language, a lot of things JS has or does have been borrowed from existing languages or 
+**JS** is a very quirky language, a lot of things **JS** has or does have been borrowed from existing languages or 
 practices, recently I have been reading the book `How JS works?` by `Douglas Crockford`, and he is very opinionated about **JS**.
 
 According to him **JS** has its quirks but there are good parts to it, for example he loves the fact that **JS** has only one number type
@@ -29,9 +29,8 @@ console.log(add) // 0.30000000000000004
 
 console.log(0.3 === 0.1 + 0.2) // returns false
 
-console.log(100/3) // returns 33.333333333333336 and not 33.33333333333333
-
 ```
+we will address both of these operations in the end..
 
 
 ## Here are few facts about how **JS** stores numbers
@@ -166,15 +165,33 @@ console.log(finalRepresentation);
 ### first we have to look at the binary versions of **0.1** and **0.2**. and calculate their sum.
 
 ```js
-0.1  = 0.0001100110011001100110011001100… (binary, repeating)
-0.2  = 0.0011001100110011001100110011001… (binary, repeating)
-Sum  = 0.010011001100110011001100110011… (binary)
+0.3 (literal)
+Decimal value: 0.3
+Approx. binary fraction: 0.0100110011001100110011001100110011001100110011001100…
+
+Binary (64-bit IEEE-754):
+Sign     : 0
+Exponent : 10000011101   (1021)
+Mantissa : 0011001100110011001100110011001100110011001100110011
+Full 64-bit:
+0 10000011101 0011001100110011001100110011001100110011001100110011
+
 ```
-when we convert it back to decimal we get the value as 
 
 ```js
-0.30000000000000004
+0.1 + 0.2
+Decimal value: 0.30000000000000004
+Approx. binary fraction: 0.0100110011001100110011001100110011001100110011001101…
+
+Binary (64-bit IEEE-754):
+Sign     : 0
+Exponent : 10000011101   (1021)
+Mantissa : 0011001100110011001100110011001100110011001100110100
+Full 64-bit:
+0 10000011101 0011001100110011001100110011001100110011001100110100
 ```
+
+This is the reason why `0.3` and the sum of `0.1 + 0.2` is not the same, and we get `false` as return value. 
 
 
 
