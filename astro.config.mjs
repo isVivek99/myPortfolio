@@ -1,5 +1,4 @@
 import { defineConfig, passthroughImageService } from "astro/config";
-import { astroFont } from 'astro-font/integration'
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
@@ -81,7 +80,7 @@ export default defineConfig({
       ],
     }),
     sitemap(),
-    astroFont()
+
   ],
   
   // Vite configuration
