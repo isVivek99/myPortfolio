@@ -1,0 +1,119 @@
+---
+title: "Naming Convention in JS"
+subheading: "how to name variables and functions properly in JS"
+slug: "naming-conventions-in-js"
+publishedAt: 2025-10-20
+readingTimeInMins: 3
+cover: ../featured_svgs/naming-conventions-in-js.svg
+tags: ["javaScript"]
+---
+
+import Note from "../../components/Note.astro";
+
+## Foreword
+
+Hello folks! I'm back with another blog. This time we're going to talk about how
+**How to name your variables properly in JS** .
+
+**JS** is a very quirky language, a lot of things **JS** has or does have been borrowed from existing languages or practices, recently I have been reading the book **How JS works?** by **Douglas Crockford**, and he is very opinionated about **JS**. The following is a blog based on one of the chapters from the book.
+
+<Note type="tip" title="Important Information">
+  About Douglas Crockford: Douglas Crockford is a software engineer best known
+  for discovering and standardizing JSON, authoring “JavaScript: The Good
+  Parts”, and shaping modern JavaScript practices. He has worked at Yahoo!,
+  PayPal, and was a key voice in the ECMA TC39 standards committee.
+</Note>
+
+## Never use cryptic names or numbers
+
+**JavaScript** wants you to give names (or identifiers) to your variables, properties, and sometimes, functions. It puts **no limit on the length** of variable names — so be generous as much as possible, let your programs tell their own stories.
+
+**Do not use cryptic names.**
+
+Early languages like **BASIC** used variable names such as `A1`. That habit of using one-letter variable names should _not_ exist in modern programs meant to be readable and maintainable.
+
+Mathematicians like terse notations — programmers shouldn’t. Programming should strive to be **literate and self-explanatory**. It’s not mathematics; it’s a different art.
+
+```javascript
+let A1 = 10; // ❌ wrong
+let initial_number = 10; // ✅ right
+```
+
+---
+
+## Start and end your variable names with a letter
+
+Always start your names with a **letter**, and end them with a **letter**.  
+Yes, **JavaScript** allows names to start or end with `_` (underscore), `$` (dollar sign), or even digits — but you _shouldn’t_ use those.
+
+<Note type="tip" title="Important Information">
+  These tricks were meant for **code generators and macro processors**. Humans
+  should do better.
+</Note>
+
+An underscore (`_`) at the beginning or end of a variable often signals a poorly designed global or a property that should have been private. A dangling underscore is basically a red flag for bad coding practices.
+The `$` symbol was introduced so that **automated tools** could generate variable names without clashing with yours. If you’re not a program, leave `$` alone.
+
+```javascript
+const _variable_one_ = 100; // ❌ wrong
+const $variable = 100; // ❌ wrong
+const variable_one = 100; // ✅ right
+```
+
+---
+
+## Use snake_case over all other cases
+
+**Ideally, we should use spaces to separate words in a variable**
+
+```javascript
+let variableName = 10; // ❌ wrong
+let variable_name = 10; // ✅ right
+let variable name = 10; // ✅ right
+```
+
+Of course, programming languages don’t allow spaces in names today.
+That’s because compilers in the 1950s had to run in a few kilowords of memory — and spaces were considered an unaffordable luxury.
+
+Interestingly, **FORTRAN** once allowed spaces in names, but later languages didn’t follow that example, even though later languages (including
+**JavaScript**) followed **FORTRAN’s** very bad examples of using **=** equal sign as the
+**assignment operator**.
+
+## Do not use reserved words
+
+Reserved words are part of **JavaScript** — you cannot use them as variable or function names.
+
+**Here’s the list of reserved words**
+
+```text
+arguments, await, break, case, catch, class, const, continue, debugger, default, delete,
+do, else, enum, eval, export, extends, false, finally, for, function, if, implements,
+import, in, Infinity, instanceof, interface, let, NaN, new, null, package, private,
+protected, public, return, static, super, switch, this, throw, true, try, typeof,
+undefined, var, void, while, with, yield
+
+
+```
+
+The existence of reserved words is another misfeature — a relic from the memory shortages of the **1950s** and **1960s**.
+They made compiler design slightly easier and saved a few bytes.
+
+But today, with memory being abundant, they’re simply a legacy constraint that programmers have to live with.
+And no, you probably haven’t memorized this list — nor should you have to.
+
+There might be a word that perfectly describes your variable, but it has already been allocated to a lousy JS feature that you never use.
+Developers should be able to use reserve words for their naming convention and the compiler should not have a problem with it.
+
+```javascript
+let class = "A"; // should be allowed
+```
+
+## Closing notes
+
+With this we come to the end of this blog, I know the ideas discussed here are not much used in practice. In the author's words
+
+**I am just a programmer who is trying to figure out the best way to write programs.**
+
+if you enjoyed this post, consider sharing it on [X](https://x.com/intent/post?text=%22Naming%20conventions%20in%20JS%22%20by%20%40VivekLokhande99&url=https%3A%2F%2Fviveklokhande.com%2Fblogs%2Fnaming-conventions-in-js)
+
+See you in the next one...

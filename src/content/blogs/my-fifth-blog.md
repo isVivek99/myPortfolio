@@ -4,7 +4,7 @@ subheading: "Understand how inheritance works in JS with very simple examples."
 slug: "prototypical-inheritance-js"
 publishedAt: 2021-06-15
 readingTimeInMins: 5
-cover: ./cover-5.svg
+cover: ../featured_svgs/cover-5.svg
 tags: ["javaScript"]
 ---
 
