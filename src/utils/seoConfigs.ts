@@ -61,7 +61,7 @@ export function generateBlogSEO(data: {
     type: "article",
     publishedTime: data.publishedAt.toISOString(),
     tags: data.tags,
-    canonical: `https://viveklokhande.com/blogs/${data.slug}/og.png`,
+    canonical: `https://viveklokhande.com/blogs/${data.slug}`,
   };
 }
 
