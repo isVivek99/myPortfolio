@@ -1,19 +1,30 @@
 ---
-const { cardTitle, cardWidth, cardHeight, cardFooter } = Astro.props;
+const {
+  cardTitle,
+  cardWidth,
+  cardHeight,
+  cardFooter,
+  hover = false,
+} = Astro.props;
+
+const baseClasses = `h-full ${cardWidth} ${cardHeight} cursor-pointer ring-1 ring-neutral-border bg-neutral rounded-xl p-2 xl:p-4`;
+const hoverClasses = hover
+  ? "relative before:absolute before:inset-0 before:rounded-xl before:bg-neutral before:transition before:duration-300 hover:before:scale-[1.02] hover:before:ring-2 hover:before:ring-white active:duration-75 active:before:scale-100"
+  : "";
 ---
 
-<article class=`${cardWidth} ${cardHeight}`>
-  <div
-    class=`h-full ${cardWidth} ${cardHeight} cursor-pointer ring-1 ring-neutral-border bg-neutral rounded-xl p-2 xl:p-4`
-  >
+<article class={`${cardWidth} ${cardHeight}`}>
+  <div class={`${baseClasses} ${hoverClasses}`}>
     {
       !!cardTitle?.length && (
-        <h1 class="mb-4 text-center text-2xl font-semibold tracking-tight">
+        <h1 class="relative mb-4 text-center text-2xl font-semibold tracking-tight">
           {cardTitle}
         </h1>
       )
     }
-    <slot />
+    <div class="relative">
+      <slot />
+    </div>
   </div>
   {
     !!cardFooter?.length && (

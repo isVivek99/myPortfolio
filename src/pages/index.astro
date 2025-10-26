@@ -242,6 +242,68 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
     </Card>
   </section>
   <section class="section-2 relative mb-32 mt-20 w-full snap-start">
+    <h1
+      class="mb-10 text-center text-4xl font-bold leading-none tracking-tight"
+    >
+      OSS Contributions
+    </h1>
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4">
+      <Card hover cardWidth="w-full mx-auto sm:w-[480px]">
+        <a
+          href="https://github.com/withastro/astro/pull/13872"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:bg-neutral-800 block rounded-lg p-4 transition-colors"
+        >
+          <div class="mb-4 flex items-center gap-3">
+            <Icon name="astro_logo_figma" class="svgRotate h-8 w-8" />
+            <span class="text-neutral-400 text-sm">PR #13872</span>
+          </div>
+          <h3 class="mb-2 text-lg font-medium">
+            Fixes rendering of the download attribute
+          </h3>
+          <p class="text-neutral-400 text-sm">Merged on June 2, 2025</p>
+        </a>
+      </Card>
+
+      <Card hover cardWidth="w-full mx-auto sm:w-[480px]">
+        <a
+          href="https://github.com/withastro/astro/pull/13909"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:bg-neutral-800 block rounded-lg p-4 transition-colors"
+        >
+          <div class="mb-4 flex items-center gap-3">
+            <Icon name="astro_logo_figma" class="svgRotate h-8 w-8" />
+            <span class="text-neutral-400 text-sm">PR #13909</span>
+          </div>
+          <h3 class="mb-2 text-lg font-medium">
+            Added support for HTML boolean attributes
+          </h3>
+          <p class="text-neutral-400 text-sm">Merged on June 20, 2025</p>
+        </a>
+      </Card>
+
+      <Card hover cardWidth="w-full mx-auto sm:w-[480px]">
+        <a
+          href="https://github.com/withastro/astro/pull/13990"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:bg-neutral-800 block rounded-lg p-4 transition-colors"
+        >
+          <div class="mb-4 flex items-center gap-3">
+            <Icon name="astro_logo_figma" class="svgRotate h-8 w-8" />
+            <span class="text-neutral-400 text-sm">PR #13990</span>
+          </div>
+          <h3 class="mb-2 text-lg font-medium">
+            Fixed client/server config changes
+          </h3>
+          <p class="text-neutral-400 text-sm">Merged on June 25, 2025</p>
+        </a>
+      </Card>
+    </div>
+  </section>
+  <section class="section-3 relative mb-32 mt-20 w-full snap-start">
     <TechStackMain />
   </section>
 </BaseLayout>
@@ -252,7 +314,7 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
 
   const cardElement = document.querySelector(".imageCard") as HTMLDivElement;
 
-  inView(".section-2", () => {
+  inView(".section-3", () => {
     animate(
       ".svgRotate",
       { rotate: 360 },
