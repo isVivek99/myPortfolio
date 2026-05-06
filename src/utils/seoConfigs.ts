@@ -45,6 +45,26 @@ export const notFoundSEO: SEOConfig = {
   noindex: true,
 };
 
+// Projects page SEO
+export const projectsSEO: SEOConfig = {
+  title: "Projects - Vivek Lokhande | Software Engineering Work & OSS",
+  description:
+    "Personal projects and open-source contributions by Vivek Lokhande, including PRs to Astro and other web technologies.",
+  image: "/myImage.png",
+  imageAlt: "Vivek Lokhande - Projects & Open Source Contributions",
+  type: "website",
+};
+
+// Recommendations page SEO
+export const recommendationsSEO: SEOConfig = {
+  title: "Recommendations - Vivek Lokhande | Books & Reading List",
+  description:
+    "Books I'm currently reading, recommendations, and a log of books I've finished.",
+  image: "/myImage.png",
+  imageAlt: "Vivek Lokhande - Recommendations",
+  type: "website",
+};
+
 // Generate blog post SEO configuration
 export function generateBlogSEO(data: {
   title: string;

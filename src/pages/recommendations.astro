@@ -1,0 +1,186 @@
+---
+import "../../base.css";
+import BaseLayout from "../layout/BaseLayout.astro";
+import ArrowIcon from "../components/ArrowIcon.astro";
+import { recommendationsSEO } from "../utils/seoConfigs";
+import {
+  currentlyReading,
+  recommendations,
+  videoRecommendations,
+  currentStatus,
+} from "../utils/recommendationsData";
+---
+
+<BaseLayout seo={recommendationsSEO}>
+  <div class="mx-auto w-full max-w-[860px] px-6 pb-20 pt-32">
+    <div class="mb-6">
+      <h1 class="text-5xl font-semibold leading-tight tracking-tight">
+        Recommendations
+      </h1>
+      <p class="text-neutral-500 mt-3 text-sm">
+        Books I'm working through, ones worth recommending, and ones I've
+        finished.
+      </p>
+    </div>
+
+    <div
+      class="border-neutral-800 mb-9 inline-flex items-center gap-2.5 rounded-full border bg-neutral px-3.5 py-1.5"
+    >
+      <span class="relative flex h-2 w-2">
+        <span
+          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
+        ></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-green-400"
+        ></span>
+      </span>
+      <span class="text-neutral-400 text-xs">
+        Currently working on:
+        {
+          currentStatus.href ? (
+            <a
+              href={currentStatus.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-color-yellow underline-offset-4 hover:underline"
+            >
+              {currentStatus.text}
+            </a>
+          ) : (
+            <span class="font-semibold text-color-yellow">
+              {currentStatus.text}
+            </span>
+          )
+        }
+      </span>
+    </div>
+
+    <section>
+      <p
+        class="text-neutral-500 mb-3 text-xs font-bold uppercase tracking-[0.08em]"
+      >
+        Currently Reading
+      </p>
+      <div class="flex flex-col gap-4">
+        {
+          currentlyReading.map((b) => {
+            const Wrapper = b.url ? "a" : "div";
+            const wrapperProps = b.url
+              ? {
+                  href: b.url,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  class:
+                    "ring-neutral-border ring-offset-black hover:ring-color-yellow hover:shadow-glow-accent group flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1 transition duration-300 hover:outline-none hover:ring-2 hover:ring-offset-4",
+                }
+              : {
+                  class:
+                    "ring-neutral-border flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1",
+                };
+
+            return (
+              <Wrapper {...wrapperProps}>
+                <div class="min-w-0 flex-1">
+                  <p class="mb-0.5 text-sm font-semibold text-white">
+                    {b.title}
+                  </p>
+                  <p class="text-neutral-500 text-xs">{b.author}</p>
+                </div>
+                {b.url && <ArrowIcon class="mt-1 shrink-0 text-color-yellow" />}
+              </Wrapper>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <div class="bg-neutral-800 my-8 h-px"></div>
+
+    <section>
+      <p
+        class="text-neutral-500 mb-3 text-xs font-bold uppercase tracking-[0.08em]"
+      >
+        Recommendations
+      </p>
+      <div class="flex flex-col gap-4">
+        {
+          recommendations.map((b) => {
+            const Wrapper = b.url ? "a" : "div";
+            const wrapperProps = b.url
+              ? {
+                  href: b.url,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  class:
+                    "ring-neutral-border ring-offset-black hover:ring-color-yellow hover:shadow-glow-accent group flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1 transition duration-300 hover:outline-none hover:ring-2 hover:ring-offset-4",
+                }
+              : {
+                  class:
+                    "ring-neutral-border flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1",
+                };
+            return (
+              <Wrapper {...wrapperProps}>
+                <div class="min-w-0 flex-1">
+                  <p class="mb-0.5 text-sm font-semibold text-white">
+                    {b.title}
+                  </p>
+                  <p class="text-neutral-500 text-xs">{b.author}</p>
+                  {b.why && (
+                    <p class="text-neutral-500 mt-1.5 text-xs leading-relaxed">
+                      {b.why}
+                    </p>
+                  )}
+                </div>
+                {b.url && <ArrowIcon class="mt-1 shrink-0 text-color-yellow" />}
+              </Wrapper>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <div class="bg-neutral-800 my-8 h-px"></div>
+
+    <section>
+      <p
+        class="text-neutral-500 mb-3 text-xs font-bold uppercase tracking-[0.08em]"
+      >
+        Video Recommendations
+      </p>
+      <div class="flex flex-col gap-4">
+        {
+          videoRecommendations.map((v) => {
+            const Wrapper = v.url ? "a" : "div";
+            const wrapperProps = v.url
+              ? {
+                  href: v.url,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  class:
+                    "ring-neutral-border ring-offset-black hover:ring-color-yellow hover:shadow-glow-accent group flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1 transition duration-300 hover:outline-none hover:ring-2 hover:ring-offset-4",
+                }
+              : {
+                  class:
+                    "ring-neutral-border flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1",
+                };
+            return (
+              <Wrapper {...wrapperProps}>
+                <div class="min-w-0 flex-1">
+                  <p class="mb-0.5 text-sm font-semibold text-white">
+                    {v.title}
+                  </p>
+                  <p class="text-neutral-500 text-xs">{v.creator}</p>
+                  {v.why && (
+                    <p class="text-neutral-500 mt-1.5 text-xs leading-relaxed">
+                      {v.why}
+                    </p>
+                  )}
+                </div>
+                {v.url && <ArrowIcon class="mt-1 shrink-0 text-color-yellow" />}
+              </Wrapper>
+            );
+          })
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

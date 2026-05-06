@@ -1,0 +1,32 @@
+---
+type Variant = "default" | "accent" | "success";
+
+interface Props {
+  variant?: Variant;
+  bold?: boolean;
+  class?: string;
+}
+
+const {
+  variant = "default",
+  bold = false,
+  class: className = "",
+} = Astro.props;
+
+const variantClasses: Record<Variant, string> = {
+  default: "border border-neutral-800 bg-neutral-800 text-neutral-400",
+  accent: "bg-accent-bg text-accent-blue",
+  success: "bg-success-bg text-green-400",
+};
+---
+
+<span
+  class:list={[
+    "inline-block whitespace-nowrap rounded-md px-2 py-0.5 text-xs",
+    variantClasses[variant],
+    bold && "font-semibold",
+    className,
+  ]}
+>
+  <slot />
+</span>

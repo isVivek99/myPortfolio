@@ -15,6 +15,10 @@ module.exports = {
         "color-blue": "#1EA2F1",
         "color-red": "#D03E3F",
         "color-yellow": "#FBCC13",
+        "accent-blue": "#5D6BD1",
+        "accent-bg": "#1E1E3A",
+        "hover-bg": "#1E1E2E",
+        "success-bg": "#1A2E1A",
         footer: "#171717",
       },
       height: {
@@ -23,8 +27,21 @@ module.exports = {
       variants: {
         fill: ["hover", "focus"],
       },
+      keyframes: {
+        nudge: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(6px, -6px)" },
+        },
+      },
       animation: {
         "spin-slow": "spin 9s linear infinite",
+        nudge: "nudge 0.9s ease-in-out infinite",
+      },
+      boxShadow: {
+        "glow-accent":
+          "0 0 18px rgba(93, 107, 209, 0.55), 0 0 36px rgba(41, 48, 169, 0.35)",
+        "glow-yellow":
+          "0 0 20px rgba(251, 204, 19, 0.45), 0 0 40px rgba(251, 204, 19, 0.25)",
       },
 
       backgroundImage: {

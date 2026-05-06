@@ -1,0 +1,92 @@
+---
+import "../../base.css";
+import BaseLayout from "../layout/BaseLayout.astro";
+import Pill from "../components/Pill.astro";
+import ArrowIcon from "../components/ArrowIcon.astro";
+import { projectsSEO } from "../utils/seoConfigs";
+import { projects, ossPRs } from "../utils/projectsData";
+---
+
+<BaseLayout seo={projectsSEO}>
+  <div class="mx-auto w-full max-w-[860px] px-6 pb-20 pt-32">
+    <div class="mb-9">
+      <h1 class="text-5xl font-semibold leading-tight tracking-tight">Work</h1>
+      <p class="text-neutral-500 mt-3 text-sm">
+        Projects I've built and open source contributions
+      </p>
+    </div>
+
+    <section>
+      <p
+        class="text-neutral-500 mb-3 text-xs font-bold uppercase tracking-[0.08em]"
+      >
+        Projects
+      </p>
+      <div class="flex flex-col gap-4">
+        {
+          projects.map((p) => (
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
+            >
+              <div class="min-w-0 flex-1">
+                <p class="mb-1 text-sm font-semibold text-white">{p.name}</p>
+                <p class="text-neutral-500 mb-2 text-xs leading-relaxed">
+                  {p.description}
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                  {p.tech.map((item) => (
+                    <Pill>{item}</Pill>
+                  ))}
+                </div>
+              </div>
+              <div class="flex shrink-0 items-center gap-2.5">
+                <span class="text-neutral-500 text-xs">{p.year}</span>
+                <ArrowIcon class="mt-0.5 text-color-yellow" />
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <div class="bg-neutral-800 my-8 h-px"></div>
+
+    <section>
+      <p
+        class="text-neutral-500 mb-3 text-xs font-bold uppercase tracking-[0.08em]"
+      >
+        OSS Contributions
+      </p>
+      <div class="flex flex-col gap-4">
+        {
+          ossPRs.map((pr) => (
+            <a
+              href={pr.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-start gap-3.5 rounded-xl bg-neutral px-4 py-3.5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
+            >
+              <Pill variant="accent" bold class="mt-0.5 shrink-0">
+                PR #{pr.number}
+              </Pill>
+              <div class="min-w-0 flex-1">
+                <p class="mb-1 text-sm font-semibold text-white">{pr.title}</p>
+                <div class="text-neutral-500 flex flex-wrap items-center gap-2.5 text-xs">
+                  <Pill variant="success" bold>
+                    merged
+                  </Pill>
+                  <span class="text-neutral-500 text-xs">{pr.repo}</span>
+                  <span class="text-neutral-500 text-xs">{pr.date}</span>
+                </div>
+              </div>
+              <ArrowIcon class="mt-1 shrink-0 text-color-yellow" />
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

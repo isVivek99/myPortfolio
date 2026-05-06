@@ -1,6 +1,8 @@
 ---
-import { Icon } from "astro-icon/components";
 import Card from "./Card.astro";
+import IconTooltip from "./IconTooltip.astro";
+
+const iconClass = "svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0";
 ---
 
 <>
@@ -20,21 +22,17 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="react"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="remix"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
+            <IconTooltip name="react" label="React" class={iconClass} />
+            <IconTooltip name="remix" label="Remix" class={iconClass} />
+            <IconTooltip
               name="astro_logo_figma"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
+              label="Astro"
+              class={iconClass}
             />
-            <Icon
+            <IconTooltip
               name="tailwind"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
+              label="Tailwind CSS"
+              class={iconClass}
             />
           </div>
         </Card>
@@ -45,18 +43,9 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="nodejs"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="mongodb"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="mysql"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
+            <IconTooltip name="nodejs" label="Node.js" class={iconClass} />
+            <IconTooltip name="mongodb" label="MongoDB" class={iconClass} />
+            <IconTooltip name="mysql" label="MySQL" class={iconClass} />
           </div>
         </Card>
       </div>
@@ -66,41 +55,40 @@ import Card from "./Card.astro";
           cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
         >
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="gitlab"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
-              name="railway"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
+            <IconTooltip name="gitlab" label="GitLab" class={iconClass} />
+            <IconTooltip name="railway" label="Railway" class={iconClass} />
+            <IconTooltip
               name="github-mark-white"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
+              label="GitHub"
+              class={iconClass}
             />
-
-            <Icon
-              name="vercel"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
+            <IconTooltip name="vercel" label="Vercel" class={iconClass} />
           </div>
         </Card>
       </div>
       <div class="flex h-[200px] w-full items-center justify-center">
-        <Card
-          cardFooter="notes & ideation 💡"
-          cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]"
-        >
+        <Card cardWidth="w-[150px] sm:w-[240px] xl:w-[480px]">
           <div class="mx-auto grid grid-cols-2 justify-center sm:flex">
-            <Icon
-              name="notion"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
-            />
-            <Icon
+            <IconTooltip name="obsidian" label="Obsidian" class={iconClass} />
+            <IconTooltip name="notion" label="Notion" class={iconClass} />
+            <IconTooltip
               name="excalidraw"
-              class="svgRotate mx-2 my-1 h-10 w-10 sm:mx-4 sm:my-0"
+              label="Excalidraw"
+              class={iconClass}
             />
           </div>
+          <h1
+            class="mt-4 text-center text-lg font-semibold tracking-tight"
+            slot="footer"
+          >
+            notes & ideation{" "}
+            <span
+              class="inline-block"
+              style="filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.8)) drop-shadow(0 0 20px rgba(234, 179, 8, 0.5)); text-shadow: 0 0 8px rgba(234, 179, 8, 0.6)"
+            >
+              💡
+            </span>
+          </h1>
         </Card>
       </div>
     </div>
