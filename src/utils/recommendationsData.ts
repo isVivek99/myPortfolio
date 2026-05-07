@@ -20,48 +20,46 @@ export interface CurrentStatus {
 
 export const currentlyReading: Book[] = [
   {
-    title: "Totapuri Mahraj the vedic teacher of Sri Ramakrishna",
-    author: "",
-    url: "https://example.com",
+    title: "Totapuri - Vedantic Teacher of Sri Ramakrishna",
+    author: "Debashish Chittaranjan Roy",
+    url: "https://www.vedanta.com/store/totapuri-vedantic-teacher-of-sri-ramakrishna-details.html",
   },
   {
-    title: "Yuga Shift",
-    author: "Bibhu Dev Mishra",
-    url: "https://example.com",
+    title: "Yuga Shift: The End of the Kali Yuga & The Impending Planetary Transformation",
+    author: "Bibhu Dev Misra",
+    url: "https://www.amazon.in/Yuga-Shift-Impending-Planetary-Transformation/dp/B0CPJVYQG4",
   },
 ];
 
-export const recommendations: Book[] = [
-  {
-    title: "TODO: Book Title",
-    author: "TODO: Author Name",
-    why: "TODO: One-line reason why you recommend this.",
-    url: "https://example.com",
-  },
-  {
-    title: "TODO: Book Title",
-    author: "TODO: Author Name",
-    why: "TODO: One-line reason why you recommend this.",
-    url: "https://example.com",
-  },
-];
+// export const recommendations: Book[] = [
+//   {
+//     title: "TODO: Book Title",
+//     author: "TODO: Author Name",
+//     why: "TODO: One-line reason why you recommend this.",
+//     url: "https://example.com",
+//   },
+//   {
+//     title: "TODO: Book Title",
+//     author: "TODO: Author Name",
+//     why: "TODO: One-line reason why you recommend this.",
+//     url: "https://example.com",
+//   },
+// ];
 
 export const videoRecommendations: Video[] = [
   {
-    title: "TODO: Video Title",
-    creator: "TODO: Creator/Channel Name",
-    why: "TODO: One-line reason why you recommend this.",
-    url: "https://example.com",
+    title: '"Who Am I?" according to Mandukya Upanishad - Part 1',
+    creator: "Swami Sarvapriyananda at IITK",
+    url: "https://www.youtube.com/watch?v=eGKFTUuJppU",
   },
   {
-    title: "TODO: Video Title",
-    creator: "TODO: Creator/Channel Name",
-    why: "TODO: One-line reason why you recommend this.",
-    url: "https://example.com",
+    title: '"Who Am I?" according to Mandukya Upanishad - Part 2',
+    creator: "Swami Sarvapriyananda at IITK",
+    url: "https://www.youtube.com/watch?v=F0dugc4TrlE",
   },
 ];
 
 export const currentStatus: CurrentStatus = {
-  text: "TODO: short description of what you're working on",
-  href: undefined,
+  text: "talkEncrypted",
+  href: "https://github.com/talkencrypted-maker/talkEncrypted",
 };

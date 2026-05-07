@@ -21,14 +21,7 @@ export const projects: Project[] = [
       "End to end encrypted messaging app, self hosted and open source.",
     tech: ["ruby", "flutter", "postgresql"],
     year: "2025",
-    url: "https://example.com",
-  },
-  {
-    name: "TODO: Project Name",
-    description: "TODO: One-line description of what this project does.",
-    tech: ["TODO", "tech", "stack"],
-    year: "2024",
-    url: "https://example.com",
+    url: "https://github.com/talkencrypted-maker/talkEncrypted",
   },
 ];
 
