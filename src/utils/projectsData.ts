@@ -1,7 +1,12 @@
+export interface TechIcon {
+  icon: string;
+  label: string;
+}
+
 export interface Project {
   name: string;
   description: string;
-  tech: string[];
+  tech: TechIcon[];
   year: string;
   url: string;
 }
@@ -19,7 +24,11 @@ export const projects: Project[] = [
     name: "Talk Encrypted",
     description:
       "End to end encrypted messaging app, self hosted and open source.",
-    tech: ["ruby", "flutter", "postgresql"],
+    tech: [
+      { icon: "ruby", label: "Ruby" },
+      { icon: "flutter", label: "Flutter" },
+      { icon: "postgresql", label: "PostgreSQL" },
+    ],
     year: "2025",
     url: "https://github.com/talkencrypted-maker/talkEncrypted",
   },

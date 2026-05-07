@@ -10,11 +10,15 @@ interface Props {
 const { name, label, class: className = "" } = Astro.props;
 ---
 
-<span class="group relative inline-flex" tabindex="-1" aria-label={label}>
+<span
+  class="group/tip relative inline-flex transition-transform duration-200 ease-out hover:-translate-y-0.5"
+  tabindex="-1"
+  aria-label={label}
+>
   <Icon name={name} class={className} />
   <span
     role="tooltip"
-    class="pointer-events-none absolute -top-9 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-neutral px-2 py-1 text-xs text-white opacity-0 ring-1 ring-neutral-border transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100"
+    class="pointer-events-none absolute -top-9 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-neutral px-2 py-1 text-xs text-white opacity-0 ring-1 ring-neutral-border transition-opacity duration-200 group-hover/tip:opacity-100 group-focus/tip:opacity-100"
   >
     {label}
   </span>

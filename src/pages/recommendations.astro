@@ -59,7 +59,7 @@ import {
       >
         Currently Reading
       </p>
-      <div class="flex flex-col gap-4">
+      <div class="stagger-fade-up flex flex-col gap-4">
         {
           currentlyReading.map((b) => {
             const Wrapper = b.url ? "a" : "div";
@@ -147,7 +147,7 @@ import {
       >
         Video Recommendations
       </p>
-      <div class="flex flex-col gap-4">
+      <div class="stagger-fade-up flex flex-col gap-4">
         {
           videoRecommendations.map((v) => {
             const Wrapper = v.url ? "a" : "div";

@@ -2,6 +2,7 @@
 import "../../base.css";
 import BaseLayout from "../layout/BaseLayout.astro";
 import Pill from "../components/Pill.astro";
+import IconTooltip from "../components/IconTooltip.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
 import { projectsSEO } from "../utils/seoConfigs";
 import { projects, ossPRs } from "../utils/projectsData";
@@ -23,7 +24,7 @@ import { projects, ossPRs } from "../utils/projectsData";
       >
         Projects
       </p>
-      <div class="flex flex-col gap-4">
+      <div class="stagger-fade-up flex flex-col gap-4">
         {
           projects.map((p) => (
             <a
@@ -37,9 +38,13 @@ import { projects, ossPRs } from "../utils/projectsData";
                 <p class="text-neutral-500 mb-2 text-sm leading-relaxed">
                   {p.description}
                 </p>
-                <div class="flex flex-wrap gap-1.5">
+                <div class="flex flex-wrap items-center gap-3">
                   {p.tech.map((item) => (
-                    <Pill>{item}</Pill>
+                    <IconTooltip
+                      name={item.icon}
+                      label={item.label}
+                      class="h-5 w-5 text-neutral-400"
+                    />
                   ))}
                 </div>
               </div>
@@ -61,7 +66,7 @@ import { projects, ossPRs } from "../utils/projectsData";
       >
         OSS Contributions
       </p>
-      <div class="flex flex-col gap-4">
+      <div class="stagger-fade-up flex flex-col gap-4">
         {
           ossPRs.map((pr) => (
             <a
