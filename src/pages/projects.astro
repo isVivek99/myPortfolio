@@ -10,17 +10,19 @@ import { projects, ossPRs } from "../utils/projectsData";
 
 <BaseLayout seo={projectsSEO}>
   <section
-    class="flex flex-col items-center justify-center px-8 pb-12 pt-40 text-center md:pb-8 md:pt-20 2xl:px-32"
+    class="flex flex-col items-center justify-center px-8 pb-8 pt-12 text-center md:pb-8 md:pt-20 2xl:px-32"
   >
-    <h1 class="text-5xl font-semibold leading-tight tracking-tight">Work</h1>
-    <p class="mt-7 max-w-2xl text-lg font-medium leading-relaxed">
+    <h1 class="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+      Work
+    </h1>
+    <p class="mt-7 max-w-2xl text-base font-medium leading-relaxed sm:text-lg">
       Projects I've built and open source contributions.
     </p>
   </section>
   <div class="mx-auto w-full max-w-[860px] px-8 pb-20 2xl:px-32">
     <section>
       <p
-        class="text-neutral-500 mb-3 text-base font-bold uppercase tracking-[0.08em]"
+        class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
         Projects
       </p>
@@ -34,7 +36,7 @@ import { projects, ossPRs } from "../utils/projectsData";
               class="group flex items-start gap-3.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
             >
               <div class="min-w-0 flex-1">
-                <p class="mb-1 text-lg font-semibold text-white">{p.name}</p>
+                <p class="mb-1 text-base font-semibold text-white sm:text-lg">{p.name}</p>
                 <p class="text-neutral-500 mb-2 text-sm leading-relaxed">
                   {p.description}
                 </p>
@@ -49,7 +51,9 @@ import { projects, ossPRs } from "../utils/projectsData";
                 </div>
               </div>
               <div class="flex shrink-0 items-center gap-2.5">
-                <span class="text-neutral-500 text-xs">{p.year}</span>
+                <span class="text-neutral-500 hidden text-xs sm:inline">
+                  {p.year}
+                </span>
                 <ArrowIcon class="mt-0.5 text-color-yellow" />
               </div>
             </a>
@@ -62,7 +66,7 @@ import { projects, ossPRs } from "../utils/projectsData";
 
     <section>
       <p
-        class="text-neutral-500 mb-3 text-base font-bold uppercase tracking-[0.08em]"
+        class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
         OSS Contributions
       </p>
@@ -73,13 +77,15 @@ import { projects, ossPRs } from "../utils/projectsData";
               href={pr.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-start gap-3.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
+              class="group relative flex flex-col gap-2.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4 sm:flex-row sm:items-start sm:gap-3.5"
             >
-              <Pill variant="accent" bold class="mt-0.5 shrink-0">
+              <Pill variant="accent" bold class="w-fit shrink-0 sm:mt-0.5">
                 PR #{pr.number}
               </Pill>
               <div class="min-w-0 flex-1">
-                <p class="mb-1 text-lg font-semibold text-white">{pr.title}</p>
+                <p class="mb-1 pr-7 text-base font-semibold text-white sm:pr-0 sm:text-lg">
+                  {pr.title}
+                </p>
                 <div class="text-neutral-500 flex flex-wrap items-center gap-2.5 text-xs">
                   <Pill variant="success" bold>
                     merged
@@ -88,7 +94,7 @@ import { projects, ossPRs } from "../utils/projectsData";
                   <span class="text-neutral-500 text-xs">{pr.date}</span>
                 </div>
               </div>
-              <ArrowIcon class="mt-1 shrink-0 text-color-yellow" />
+              <ArrowIcon class="absolute right-5 top-5 shrink-0 text-color-yellow sm:static sm:mt-1" />
             </a>
           ))
         }

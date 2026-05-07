@@ -13,12 +13,12 @@ import {
 
 <BaseLayout seo={recommendationsSEO}>
   <section
-    class="flex flex-col items-center justify-center px-8 pb-12 pt-40 text-center md:pb-8 md:pt-20 2xl:px-32"
+    class="flex flex-col items-center justify-center px-8 pb-8 pt-12 text-center md:pb-8 md:pt-20 2xl:px-32"
   >
-    <h1 class="text-5xl font-semibold leading-tight tracking-tight">
+    <h1 class="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
       Recommendations
     </h1>
-    <p class="mt-7 max-w-2xl text-lg font-medium leading-relaxed">
+    <p class="mt-7 max-w-2xl text-base font-medium leading-relaxed sm:text-lg">
       Books I'm working through, ones worth recommending, and ones I've
       finished.
     </p>
@@ -55,7 +55,7 @@ import {
 
     <section>
       <p
-        class="text-neutral-500 mb-3 text-base font-bold uppercase tracking-[0.08em]"
+        class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
         Currently Reading
       </p>
@@ -79,7 +79,7 @@ import {
             return (
               <Wrapper {...wrapperProps}>
                 <div class="min-w-0 flex-1">
-                  <p class="mb-0.5 text-lg font-semibold text-white">
+                  <p class="mb-0.5 text-base font-semibold text-white sm:text-lg">
                     {b.title}
                   </p>
                   <p class="text-neutral-500 text-sm">{b.author}</p>
@@ -97,7 +97,7 @@ import {
 
     <section>
       <p
-        class="text-neutral-500 mb-3 text-base font-bold uppercase tracking-[0.08em]"
+        class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
         Recommendations
       </p>
@@ -120,7 +120,7 @@ import {
             return (
               <Wrapper {...wrapperProps}>
                 <div class="min-w-0 flex-1">
-                  <p class="mb-0.5 text-lg font-semibold text-white">
+                  <p class="mb-0.5 text-base font-semibold text-white sm:text-lg">
                     {b.title}
                   </p>
                   <p class="text-neutral-500 text-sm">{b.author}</p>
@@ -143,7 +143,7 @@ import {
 
     <section>
       <p
-        class="text-neutral-500 mb-3 text-base font-bold uppercase tracking-[0.08em]"
+        class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
         Video Recommendations
       </p>
@@ -166,7 +166,7 @@ import {
             return (
               <Wrapper {...wrapperProps}>
                 <div class="min-w-0 flex-1">
-                  <p class="mb-0.5 text-lg font-semibold text-white">
+                  <p class="mb-0.5 text-base font-semibold text-white sm:text-lg">
                     {v.title}
                   </p>
                   <p class="text-neutral-500 text-sm">{v.creator}</p>

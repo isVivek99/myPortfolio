@@ -1,108 +1,41 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const currentPath = Astro.url.pathname;
+
+const routes = [
+  { href: "/", icon: "nav-home", label: "Home" },
+  { href: "/blogs", icon: "nav-blogs", label: "Blogs" },
+  { href: "/projects", icon: "nav-projects", label: "Projects" },
+  { href: "/recommendations", icon: "nav-recommendations", label: "Recommendations" },
+  { href: "/talks", icon: "nav-talks", label: "Talks" },
+];
 ---
 
-<div
-  class="overlay fixed inset-0 z-40 transition-colors duration-300 md:bg-transparent"
+<nav
+  class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-neutral px-3 py-2 ring-1 ring-neutral-border backdrop-blur-md"
+  aria-label="Mobile navigation"
 >
-  <aside class="">
-    <nav
-      class="menu pointer-events-auto absolute right-2 top-3 cursor-pointer rounded-full border-2 border-solid border-neutral-border bg-neutral px-4 py-2"
-    >
-      <span class="font-semibold"> menu</span>
-
-      <div
-        class="nav-links absolute right-3 top-16 hidden flex-col rounded-md border-2 border-solid border-neutral-border bg-neutral p-1"
-      >
-        <div
-          class="cursor-pointer px-3 py-1 hover:text-color-red focus:text-color-red"
-        >
-          <a class="block w-full" href="/blogs">
-            <span class="font-semibold">Blogs</span>
-          </a>
-        </div>
-        <div
-          class="cursor-pointer px-3 py-1 hover:text-color-yellow focus:text-color-yellow"
-        >
-          <a class="block w-full" href="/talks">
-            <span class="font-semibold">Talks</span>
-          </a>
-        </div>
-        <div
-          class="cursor-pointer px-3 py-1 hover:text-color-blue focus:text-color-blue"
-        >
-          <a class="block w-full" href="/projects">
-            <span class="font-semibold">Projects</span>
-          </a>
-        </div>
-        <div
-          class="cursor-pointer px-3 py-1 hover:text-color-yellow focus:text-color-yellow"
-        >
-          <a class="block w-full" href="/recommendations">
-            <span class="font-semibold">Recommendations</span>
-          </a>
-        </div>
-
-        <div class="flex cursor-pointer px-3 py-2">
-          <a href="https://www.github.com/isVivek99">
-            <Icon
-              name="github-mark-white"
-              class="mr-3 h-4 w-4 transform transition duration-300 hover:text-color-red focus:text-color-red"
-            />
-          </a>
-          <a href="https://twitter.com/VivekLokhande99">
-            <Icon
-              name="twitterx"
-              class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-yellow focus:text-color-yellow"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/vivek-lokhande-737939188/">
-            <Icon
-              name="linkedin"
-              class="mx-3 h-4 w-4 transform transition duration-300 hover:text-color-blue focus:text-color-blue"
-            />
-          </a>
-        </div>
-      </div>
-    </nav>
-  </aside>
-
-  <script>
-    const overlay = document.querySelector(".overlay") as HTMLDivElement;
-    const menu = document.querySelector(".menu") as HTMLDivElement;
-    const navLinks = document.querySelector(".nav-links") as HTMLDivElement;
-    const setupMobileNav = () => {
-      menu.addEventListener("click", (event) => {
-        navLinks.classList.toggle("hidden");
-
-        event.stopPropagation();
-        if (!navLinks.classList.contains("hidden")) {
-          overlay.classList.add("bg-black/60");
-          overlay.classList.add("pointer-events-auto");
-          overlay.classList.add("md:pointer-events-none");
-        } else {
-          overlay.classList.remove("bg-black/60");
-          overlay.classList.remove("pointer-events-auto");
-          overlay.classList.remove("md:pointer-events-none");
-          overlay.classList.add("pointer-events-none");
-        }
-      });
-
-      overlay.addEventListener("click", (event) => {
-        const relatedTarget = event.relatedTarget as HTMLElement;
-
-        if (
-          !navLinks.contains(relatedTarget) ||
-          relatedTarget.classList.contains("overlay")
-        ) {
-          navLinks.classList.add("hidden");
-          overlay.classList.remove("bg-black/60");
-          overlay.classList.remove("pointer-events-auto");
-          overlay.classList.remove("md:pointer-events-none");
-          overlay.classList.add("pointer-events-none");
-        }
-      });
-    };
-    setupMobileNav();
-  </script>
-</div>
+  <ul class="flex items-center gap-1">
+    {
+      routes.map(({ href, icon, label }) => {
+        const isActive = currentPath === href || (href !== "/" && currentPath.startsWith(href));
+        return (
+          <li>
+            <a
+              href={href}
+              aria-label={label}
+              aria-current={isActive ? "page" : undefined}
+              class:list={[
+                "flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200",
+                isActive ? "text-color-yellow" : "text-neutral-400 hover:text-white",
+              ]}
+            >
+              <Icon name={icon} class="h-5 w-5" />
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

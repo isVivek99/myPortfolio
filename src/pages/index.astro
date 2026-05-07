@@ -293,6 +293,8 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
       ".carousel-dot",
     ) as NodeListOf<HTMLButtonElement>;
 
+    if (!track || slides.length === 0) return;
+
     let currentSlide = 0;
     const totalSlides = slides.length;
 
