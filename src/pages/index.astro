@@ -20,15 +20,15 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
   <section
     class="section-1 relative min-h-screen w-full snap-start pt-20 md:min-h-fit md:pt-32"
   >
-    <div class="mb-24 flex flex-col lg:flex-row lg:justify-between">
+    <div
+      class="mb-24 flex flex-col items-center text-center lg:flex-row lg:items-start lg:justify-between lg:text-left"
+    >
       <div class="order-2 max-w-2xl lg:order-1">
         <div>
           <h1
-            class="letters mt-10 cursor-pointer text-header font-bold leading-none tracking-tight xl:mt-0"
+            class="letters mt-10 cursor-pointer text-header font-bold leading-tight tracking-tight sm:leading-none xl:mt-0"
           >
-            Hi there,<br class="block sm:hidden" /> I&apos;m <br
-              class="hidden sm:block"
-            />
+            Hi there, I&apos;m <br class="hidden sm:block" />
             <div class="hidden md:block">
               <span class="letters__one -mr-[12px] hidden md:inline-block"
                 >V</span
@@ -84,7 +84,9 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
             <br class="hidden lg:block" /> people can use.
           </p>
         </div>
-        <div class="mt-20 flex flex-col gap-4 px-4 sm:flex-row md:px-0">
+        <div
+          class="mt-12 flex flex-col items-center gap-3 px-4 sm:flex-row sm:justify-center md:px-0 lg:mt-20 lg:justify-start"
+        >
           <ButtonPrimary value="Read my blogs" href="/blogs" />
           <ButtonSecondary value="Resume" href="/resume" />
         </div>
@@ -92,13 +94,13 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
       <div class="imageCard group relative order-1 w-fit lg:order-2">
         <Icon
           name="circle"
-          class="h-[150px] w-[150px] animate-spin-slow group-hover:animate-spin lg:h-[340px] lg:w-[340px]"
+          class="h-[128px] w-[128px] animate-spin-slow group-hover:animate-spin lg:h-[340px] lg:w-[340px]"
         />
         <Image
           loading={"eager"}
           src={MyImage}
           alt="my picture"
-          class="imageCard__image absolute left-2 top-2.5 h-[132px] w-[132px] cursor-pointer opacity-0 ease-in-out lg:left-5 lg:top-5 lg:h-[300px] lg:w-[300px]"
+          class="imageCard__image absolute left-1.5 top-2 h-[112px] w-[112px] cursor-pointer opacity-0 ease-in-out lg:left-5 lg:top-5 lg:h-[300px] lg:w-[300px]"
         />
       </div>
     </div>

@@ -48,6 +48,21 @@
   }
 }
 
+/* Prevent any media inside an article from overflowing on small viewports */
+article img,
+article video,
+article iframe,
+article pre,
+article table {
+  max-width: 100%;
+  height: auto;
+}
+
+article {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .sticker-glow {
   filter:
     drop-shadow(0 0 12px rgba(234, 179, 8, 0.8))
