@@ -13,11 +13,6 @@ export interface Video {
   url?: string;
 }
 
-export interface CurrentStatus {
-  text: string;
-  href?: string;
-}
-
 export const currentlyReading: Book[] = [
   {
     title: "Totapuri - Vedantic Teacher of Sri Ramakrishna",
@@ -58,8 +53,3 @@ export const videoRecommendations: Video[] = [
     url: "https://www.youtube.com/watch?v=F0dugc4TrlE",
   },
 ];
-
-export const currentStatus: CurrentStatus = {
-  text: "talkEncrypted",
-  href: "https://github.com/talkencrypted-maker/talkEncrypted",
-};

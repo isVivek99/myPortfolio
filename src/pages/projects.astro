@@ -5,7 +5,7 @@ import Pill from "../components/Pill.astro";
 import IconTooltip from "../components/IconTooltip.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
 import { projectsSEO } from "../utils/seoConfigs";
-import { projects, ossPRs } from "../utils/projectsData";
+import { projects, ossPRs, currentStatus } from "../utils/projectsData";
 ---
 
 <BaseLayout seo={projectsSEO}>
@@ -20,6 +20,35 @@ import { projects, ossPRs } from "../utils/projectsData";
     </p>
   </section>
   <div class="mx-auto w-full max-w-[860px] px-8 pb-20 2xl:px-32">
+    <div class="mb-9 flex items-center justify-center gap-2.5">
+      <span class="relative flex h-2 w-2">
+        <span
+          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
+        ></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-green-400"
+        ></span>
+      </span>
+      <span class="text-neutral-400 text-xs">
+        Currently working on:
+        {
+          currentStatus.href ? (
+            <a
+              href={currentStatus.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-color-yellow underline-offset-4 hover:underline"
+            >
+              {currentStatus.text}
+            </a>
+          ) : (
+            <span class="font-semibold text-color-yellow">
+              {currentStatus.text}
+            </span>
+          )
+        }
+      </span>
+    </div>
+
     <section>
       <p
         class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"

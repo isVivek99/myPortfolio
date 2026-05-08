@@ -2,18 +2,14 @@
 import "../../base.css";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import MyImage from "../icons/image-3.png";
+import MyImage from "../icons/image-3.jpg";
 import ButtonPrimary from "../components/ButtonPrimary.astro";
 import ButtonSecondary from "../components/ButtonSecondary.astro";
 import Card from "../components/Card.astro";
 import ListItem from "../components/ListItem.astro";
 import TechStackMain from "../components/TechStackMain.astro";
-import BlogCard from "../components/blogs/BlogCard.astro";
 import BaseLayout from "../layout/BaseLayout.astro";
 import { homeSEO } from "../utils/seoConfigs";
-import { getSortedBlogs } from "../utils/contentCollecion";
-
-const recentPosts = (await getSortedBlogs()).slice(0, 3);
 ---
 
 <BaseLayout seo={homeSEO}>
@@ -100,7 +96,7 @@ const recentPosts = (await getSortedBlogs()).slice(0, 3);
           loading={"eager"}
           src={MyImage}
           alt="my picture"
-          class="imageCard__image absolute left-1.5 top-2 h-[112px] w-[112px] cursor-pointer opacity-0 ease-in-out lg:left-5 lg:top-5 lg:h-[300px] lg:w-[300px]"
+          class="imageCard__image absolute left-1.5 top-2 h-[112px] w-[112px] cursor-pointer rounded-full object-cover lg:left-5 lg:top-5 lg:h-[300px] lg:w-[300px]"
         />
       </div>
     </div>

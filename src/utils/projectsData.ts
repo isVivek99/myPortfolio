@@ -19,6 +19,16 @@ export interface PR {
   url: string;
 }
 
+export interface CurrentStatus {
+  text: string;
+  href?: string;
+}
+
+export const currentStatus: CurrentStatus = {
+  text: "talkEncrypted",
+  href: "https://github.com/talkencrypted-maker/talkEncrypted",
+};
+
 export const projects: Project[] = [
   {
     name: "Talk Encrypted",
