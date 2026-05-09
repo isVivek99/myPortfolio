@@ -5,7 +5,7 @@ import Pill from "../components/Pill.astro";
 import IconTooltip from "../components/IconTooltip.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
 import { workSEO } from "../utils/seoConfigs";
-import { projects, ossPRs, currentStatus } from "../utils/workData";
+import { products, ossPRs, currentStatus } from "../utils/workData";
 ---
 
 <BaseLayout seo={workSEO}>
@@ -16,7 +16,7 @@ import { projects, ossPRs, currentStatus } from "../utils/workData";
       Work
     </h1>
     <p class="mt-7 max-w-2xl text-base font-medium leading-relaxed sm:text-lg">
-      Projects I've built and open source contributions.
+      Products I've built and open source contributions.
     </p>
   </section>
   <div class="mx-auto w-full max-w-[860px] px-8 pb-20 2xl:px-32">
@@ -53,11 +53,11 @@ import { projects, ossPRs, currentStatus } from "../utils/workData";
       <p
         class="text-neutral-500 mb-3 text-sm font-bold uppercase tracking-[0.08em] sm:text-base"
       >
-        Projects
+        Products
       </p>
       <div class="stagger-fade-up flex flex-col gap-4">
         {
-          projects.map((p) => (
+          products.map((p) => (
             <a
               href={p.url}
               target="_blank"
@@ -65,7 +65,9 @@ import { projects, ossPRs, currentStatus } from "../utils/workData";
               class="group flex items-start gap-3.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
             >
               <div class="min-w-0 flex-1">
-                <p class="mb-1 text-base font-semibold text-white sm:text-lg">{p.name}</p>
+                <p class="mb-1 text-base font-semibold text-white sm:text-lg">
+                  {p.name}
+                </p>
                 <p class="text-neutral-500 mb-2 text-sm leading-relaxed">
                   {p.description}
                 </p>
@@ -74,7 +76,7 @@ import { projects, ossPRs, currentStatus } from "../utils/workData";
                     <IconTooltip
                       name={item.icon}
                       label={item.label}
-                      class="h-5 w-5 text-neutral-400"
+                      class="text-neutral-400 h-5 w-5"
                     />
                   ))}
                 </div>

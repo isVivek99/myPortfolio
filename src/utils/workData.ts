@@ -3,7 +3,7 @@ export interface TechIcon {
   label: string;
 }
 
-export interface Project {
+export interface Product {
   name: string;
   description: string;
   tech: TechIcon[];
@@ -29,7 +29,7 @@ export const currentStatus: CurrentStatus = {
   href: "https://github.com/talkencrypted-maker/talkEncrypted",
 };
 
-export const projects: Project[] = [
+export const products: Product[] = [
   {
     name: "Talk Encrypted",
     description:

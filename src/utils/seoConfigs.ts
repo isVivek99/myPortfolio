@@ -18,7 +18,7 @@ export interface SEOConfig {
 export const homeSEO: SEOConfig = {
   title: "Vivek Lokhande - Full Stack Developer & Software Engineer",
   description:
-    "Portfolio of Vivek Lokhande - Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore my projects, blog posts, and technical expertise.",
+    "Portfolio of Vivek Lokhande - Full Stack Developer specializing in React, Node.js, TypeScript, and modern web technologies. Explore my products, blog posts, and technical expertise.",
   image: "/myImage.png",
   imageAlt: "Vivek Lokhande - Full Stack Developer Portfolio",
   type: "website",
@@ -38,7 +38,7 @@ export const blogListSEO: SEOConfig = {
 export const notFoundSEO: SEOConfig = {
   title: "Page Not Found - Vivek Lokhande",
   description:
-    "The page you're looking for doesn't exist. Navigate back to explore my portfolio, blog posts, and projects.",
+    "The page you're looking for doesn't exist. Navigate back to explore my portfolio, blog posts, and products.",
   image: "/myImage.png",
   imageAlt: "404 Page Not Found",
   type: "website",
@@ -49,7 +49,7 @@ export const notFoundSEO: SEOConfig = {
 export const workSEO: SEOConfig = {
   title: "Work - Vivek Lokhande | Software Engineering Work & OSS",
   description:
-    "Products, projects, and open-source contributions by Vivek Lokhande, including PRs to Astro and other web technologies.",
+    "products and open-source contributions by Vivek Lokhande, including PRs to Astro and other web technologies.",
   image: "/myImage.png",
   imageAlt: "Vivek Lokhande - Work & Open Source Contributions",
   type: "website",
