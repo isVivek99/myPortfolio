@@ -45,13 +45,13 @@ export const notFoundSEO: SEOConfig = {
   noindex: true,
 };
 
-// Projects page SEO
-export const projectsSEO: SEOConfig = {
-  title: "Projects - Vivek Lokhande | Software Engineering Work & OSS",
+// Work page SEO
+export const workSEO: SEOConfig = {
+  title: "Work - Vivek Lokhande | Software Engineering Work & OSS",
   description:
-    "Personal projects and open-source contributions by Vivek Lokhande, including PRs to Astro and other web technologies.",
+    "Products, projects, and open-source contributions by Vivek Lokhande, including PRs to Astro and other web technologies.",
   image: "/myImage.png",
-  imageAlt: "Vivek Lokhande - Projects & Open Source Contributions",
+  imageAlt: "Vivek Lokhande - Work & Open Source Contributions",
   type: "website",
 };
 
