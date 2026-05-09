@@ -46,7 +46,12 @@ function rawFonts(extensions) {
 export default defineConfig({
   site: 'https://viveklokhande.com',
   output: "server",
-  
+
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: "hover",
+  },
+
   // Markdown configuration
   markdown: {
     shikiConfig: {
