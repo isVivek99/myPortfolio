@@ -31,6 +31,14 @@ export const currentStatus: CurrentStatus = {
 
 export const products: Product[] = [
   {
+    name: "Supplements reminder bot for Telegram",
+    description:
+      "A Telegram bot that reminds users to take their supplements based on their consultation with their healthcare provider.",
+    tech: [{ icon: "cf_workers", label: "Cloudflare Workers and D1 DB" }],
+    year: "2025",
+    url: "https://www.loom.com/share/d5c3d42d58b84f57b5cae28012cdb25e",
+  },
+  {
     name: "Talk Encrypted",
     description:
       "End to end encrypted messaging app, self hosted and open source.",
