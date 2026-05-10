@@ -1,0 +1,38 @@
+---
+import "../../base.css";
+import BaseLayout from "../layout/BaseLayout.astro";
+import TalkCard from "../components/talks/TalkCard.astro";
+import { talksListSEO } from "../utils/seoConfigs";
+import { talks } from "../utils/talksData";
+
+const sortedTalks = [...talks].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
+---
+
+<BaseLayout seo={talksListSEO}>
+  <section
+    class="flex flex-col items-center justify-center px-8 pb-8 pt-12 text-center md:pb-8 md:pt-20 2xl:px-32"
+  >
+    <h1 class="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+      Talks
+    </h1>
+    <p class="mt-7 max-w-2xl text-base font-medium leading-relaxed sm:text-lg">
+      Tech talks I've given at meetups and conferences.
+    </p>
+  </section>
+  <section class="relative mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {
+      sortedTalks.map((talk) => (
+        <TalkCard
+          title={talk.title}
+          subtitle={talk.subtitle}
+          date={talk.date}
+          cover={talk.cover}
+          slug={talk.slug}
+        />
+      ))
+    }
+  </section>
+  <section class="h-32" aria-hidden="true"></section>
+</BaseLayout>

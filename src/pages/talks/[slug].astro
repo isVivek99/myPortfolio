@@ -1,0 +1,130 @@
+---
+import "../../../base.css";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../../layout/BaseLayout.astro";
+import myGradient from "../../icons/myGradient.jpeg";
+import { formatDate } from "../../utils/UTCDateStringToReadable";
+import { generateTalkSEO } from "../../utils/seoConfigs";
+import { talks } from "../../utils/talksData";
+
+export function getStaticPaths() {
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+    props: { talk },
+  }));
+}
+
+const { slug } = Astro.params;
+const talk = Astro.props.talk ?? talks.find((t) => t.slug === slug);
+
+if (!talk) {
+  return Astro.redirect("/404");
+}
+
+const talkSEO = generateTalkSEO({
+  title: talk.title,
+  subtitle: talk.subtitle,
+  date: talk.date,
+  slug: talk.slug,
+});
+---
+
+<BaseLayout seo={talkSEO}>
+  <section
+    class="relative min-h-screen w-full snap-start overflow-x-clip pt-20 md:min-h-fit md:pt-32"
+  >
+    <a
+      href="/talks"
+      aria-label="Back to talks"
+      class="text-neutral-400 absolute left-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-neutral/80 ring-1 ring-neutral-border backdrop-blur transition-colors duration-200 hover:text-white md:hidden"
+    >
+      <Icon name="nav-back" class="h-5 w-5" />
+    </a>
+
+    <div class="mb-4 h-48 w-auto">
+      <Image
+        src={myGradient}
+        height={100}
+        width={100}
+        alt="background gradient"
+        class="h-full w-full rounded-t-xl mix-blend-soft-light"
+      />
+
+      <Image
+        src={talk.cover}
+        height={talk.cover.height}
+        width={talk.cover.width}
+        alt={talk.title}
+        class="absolute top-20 h-48 w-full rounded-t-xl object-contain"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="container mx-auto max-w-6xl px-4">
+      <div class="mx-auto max-w-4xl">
+        <h1
+          class="mb-6 cursor-pointer text-center text-3xl font-bold leading-tight tracking-tight sm:mb-8 sm:text-5xl sm:leading-none lg:text-header xl:mt-0"
+        >
+          {talk.title}
+        </h1>
+        <h2
+          class="mb-8 cursor-pointer text-center text-lg font-bold leading-snug tracking-tight opacity-60 sm:text-xl sm:leading-tight lg:text-subheader xl:mt-0"
+        >
+          {talk.subtitle}
+        </h2>
+
+        <div
+          class="mb-12 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-bold text-neutral-border sm:text-base"
+        >
+          <span>{formatDate(talk.date)}</span>
+          {
+            talk.githubUrl && (
+              <a
+                href={talk.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline decoration-neutral-border underline-offset-4 transition-colors duration-200 hover:text-color-yellow hover:decoration-color-yellow"
+              >
+                GitHub repo
+              </a>
+            )
+          }
+          {
+            talk.eventUrl && (
+              <a
+                href={talk.eventUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline decoration-neutral-border underline-offset-4 transition-colors duration-200 hover:text-color-yellow hover:decoration-color-yellow"
+              >
+                {talk.eventName ?? "Event page"}
+              </a>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-4xl">
+        {
+          talk.gallery.length > 0 && (
+            <section class="mb-20">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {talk.gallery.map((photo, i) => (
+                  <Image
+                    src={photo}
+                    height={400}
+                    width={600}
+                    alt={`${talk.title} — photo ${i + 1}`}
+                    class="w-full rounded-xl object-cover"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </section>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

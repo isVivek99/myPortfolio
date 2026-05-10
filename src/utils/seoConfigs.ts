@@ -85,6 +85,34 @@ export function generateBlogSEO(data: {
   };
 }
 
+// Talks listing page SEO
+export const talksListSEO: SEOConfig = {
+  title: "Talks - Vivek Lokhande | Tech Talks & Conference Presentations",
+  description:
+    "Tech talks and conference presentations by Vivek Lokhande on web development, software engineering, and open source.",
+  image: "/myImage.png",
+  imageAlt: "Vivek Lokhande - Tech Talks",
+  type: "website",
+};
+
+// Generate talk detail page SEO configuration
+export function generateTalkSEO(data: {
+  title: string;
+  subtitle: string;
+  date: string;
+  slug: string;
+}): SEOConfig {
+  return {
+    title: `${data.title} | Vivek Lokhande Talks`,
+    description: data.subtitle,
+    image: "/myImage.png",
+    imageAlt: data.title,
+    type: "article",
+    publishedTime: new Date(data.date).toISOString(),
+    canonical: `https://viveklokhande.com/talks/${data.slug}`,
+  };
+}
+
 // Generate tag page SEO configuration
 export function generateTagSEO(tag: string, postCount: number): SEOConfig {
   return {
