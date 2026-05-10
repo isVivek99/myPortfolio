@@ -47,7 +47,7 @@ export const products: Product[] = [
       { icon: "flutter", label: "Flutter" },
       { icon: "postgresql", label: "PostgreSQL" },
     ],
-    year: "2025",
+    year: "2026 - ongoing",
     url: "https://github.com/talkencrypted-maker/talkEncrypted",
   },
 ];
