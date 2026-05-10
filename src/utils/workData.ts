@@ -36,7 +36,7 @@ export const products: Product[] = [
       "A Telegram bot that reminds users to take their supplements based on their consultation with their healthcare provider.",
     tech: [{ icon: "cf_workers", label: "Cloudflare Workers and D1 DB" }],
     year: "2025",
-    url: "https://www.loom.com/share/d5c3d42d58b84f57b5cae28012cdb25e",
+    url: "https://drive.google.com/file/d/1TdG_fp7g4JWnZALD1266KmTwbZQBPpjR/view?usp=sharing",
   },
   {
     name: "Talk Encrypted",
