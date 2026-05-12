@@ -72,15 +72,17 @@ export function generateBlogSEO(data: {
   publishedAt: Date;
   tags: string[];
   slug: string;
+  description?: string;
+  keywords?: string[];
 }): SEOConfig {
   return {
     title: `${data.title} | Vivek Lokhande Blog`,
-    description: data.subheading,
-    image: `https://viveklokhande.com/blogs/${data.slug}/og.png`, // Dynamic OG image
+    description: data.description ?? data.subheading,
+    image: `https://viveklokhande.com/blogs/${data.slug}/og.png`,
     imageAlt: data.title,
     type: "article",
     publishedTime: data.publishedAt.toISOString(),
-    tags: data.tags,
+    tags: data.keywords ?? data.tags,
     canonical: `https://viveklokhande.com/blogs/${data.slug}`,
   };
 }

@@ -1,11 +1,14 @@
 ---
-title: "Debunking Classes in JavaScript."
+title: "JavaScript Classes vs Functions: Debunking ES6 Class Syntax Sugar"
 subheading: "In this blog we discuss how instance of a class and a function in JavaScript are very similar"
-slug: "classes-in-js"
-publishedAt: 2021-05-22 # Added date
+slug: "javascript-classes-vs-functions"
+publishedAt: 2021-05-22
 readingTimeInMins: 4
 cover: ../featured_svgs/cover-4.svg
+coverAlt: "JavaScript ES6 class compared to a constructor function"
 tags: ["javaScript"]
+description: "ES6 classes in JavaScript are syntactic sugar over constructor functions. Here's exactly how a class instance and a function instance are the same."
+keywords: ["javascript classes", "ES6 class", "javascript class vs function", "javascript constructor function", "javascript syntactic sugar"]
 ---
 
 **TL;DR** ECMAScript6 introduced _classes_ as a syntactical sugar for creating prototype constructors. It is said to improve code readability. This blog focuses on how everything worked before classes .

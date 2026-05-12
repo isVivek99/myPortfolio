@@ -1,11 +1,14 @@
 ---
-title: "Connecting dots between 'this' keyword , bind() and arrow function in JavaScript class."
+title: "JavaScript 'this', bind(), and Arrow Functions in Classes Explained"
 subheading: "This blog explains the most common problem react developer's face while using class-based components of binding methods to objects."
-slug: "this-bind-arrow-fns-js"
-publishedAt: 2021-05-25 # Added date
+slug: "javascript-this-bind-arrow-functions"
+publishedAt: 2021-05-25
 readingTimeInMins: 4
 cover: ../featured_svgs/cover-3.svg
+coverAlt: "Diagram of 'this' binding in JavaScript class methods"
 tags: ["javaScript"]
+description: "How JavaScript's 'this' keyword, bind(), and arrow functions interact in class methods — the binding bug every React class component dev hits."
+keywords: ["javascript this keyword", "javascript bind", "arrow functions this", "react class this binding", "javascript method binding"]
 ---
 
 If you have ever written classes in react (now people use hooks) . Before React came up with hooks to make things simpler it had class-based components and very few functional components. Even so, the function-based components were looked down upon because their utility was far less. But now the times have changed. Maybe for the good because everywhere I go, I hear praises for functional components because,

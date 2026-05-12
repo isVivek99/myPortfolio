@@ -6,9 +6,13 @@ const blogs = defineCollection({
       title: z.string(),
       subheading: z.string(),
       cover: image(),
+      coverAlt: z.string().optional(),
       publishedAt: z.coerce.date(),
       readingTimeInMins: z.number().int().min(1),
-      tags: z.array(z.string()), // Added tags as an array of strings
+      tags: z.array(z.string()),
+      slug: z.string().optional(),
+      description: z.string().max(160).optional(),
+      keywords: z.array(z.string()).optional(),
     }),
 });
 

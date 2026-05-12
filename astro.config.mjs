@@ -4,11 +4,10 @@ import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import { rehypePrettyCode } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import sitemap from '@astrojs/sitemap';
+import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
-import fs from 'node:fs'
-import path from 'node:path'
-
+import fs from "node:fs";
+import path from "node:path";
 
 /**
  * Vite plugin for handling raw font files without using fs
@@ -16,12 +15,12 @@ import path from 'node:path'
  */
 function rawFonts(extensions) {
   return {
-    name: 'vite-plugin-raw-fonts',
-    enforce: 'pre', // Run before other plugins
+    name: "vite-plugin-raw-fonts",
+    enforce: "pre", // Run before other plugins
     resolveId(id, importer) {
-      if (extensions.some(ext => id.includes(ext))) {
+      if (extensions.some((ext) => id.includes(ext))) {
         // Resolve relative paths properly
-        if (id.startsWith('.')) {
+        if (id.startsWith(".")) {
           const resolvedPath = path.resolve(path.dirname(importer), id);
           return resolvedPath;
         }
@@ -29,23 +28,27 @@ function rawFonts(extensions) {
       }
     },
     load(id) {
-      if (extensions.some(ext => id.includes(ext))) {
+      if (extensions.some((ext) => id.includes(ext))) {
         try {
           const buffer = fs.readFileSync(id);
           // Return as a simple Uint8Array that can be used directly
-          return `export default new Uint8Array([${Array.from(buffer).join(',')}]);`;
+          return `export default new Uint8Array([${Array.from(buffer).join(",")}]);`;
         } catch (error) {
-          console.error('Error loading font:', error.message);
+          console.error("Error loading font:", error.message);
           throw error;
         }
       }
-    }
+    },
   };
 }
 
 export default defineConfig({
-  site: 'https://viveklokhande.com',
+  site: "https://viveklokhande.com",
   output: "server",
+
+  redirects: {
+    "/blogs/astro-og-image-for-seo": "/blogs/astro-og-image-cloudflare-workers",
+  },
 
   prefetch: {
     prefetchAll: false,
@@ -85,20 +88,21 @@ export default defineConfig({
       ],
     }),
     sitemap(),
-
   ],
-  
+
   // Vite configuration
   vite: {
-    plugins: [rawFonts(['.ttf'])],
-    assetsInclude: ['**/*.wasm'], // Treat WASM files as assets (but not TTF files)
+    plugins: [rawFonts([".ttf"])],
+    assetsInclude: ["**/*.wasm"], // Treat WASM files as assets (but not TTF files)
     ssr: {
-      external: ["buffer", "path", "fs", "os", "crypto", "async_hooks"].map((i) => `node:${i}`),
+      external: ["buffer", "path", "fs", "os", "crypto", "async_hooks"].map(
+        (i) => `node:${i}`,
+      ),
     },
     // Ensure TTF files are not treated as assets
-    assetsExclude: ['**/*.ttf'],
+    assetsExclude: ["**/*.ttf"],
   },
-  
+
   // Deployment adapter
   adapter: cloudflare(),
 });

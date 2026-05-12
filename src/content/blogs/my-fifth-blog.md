@@ -1,11 +1,14 @@
 ---
-title: "Prototype's & Prototypical Inheritance in JavaScript."
+title: "JavaScript Prototypes and Prototypal Inheritance Explained Simply"
 subheading: "Understand how inheritance works in JS with very simple examples."
-slug: "prototypical-inheritance-js"
+slug: "javascript-prototypal-inheritance"
 publishedAt: 2021-06-15
 readingTimeInMins: 5
 cover: ../featured_svgs/cover-5.svg
+coverAlt: "JavaScript prototype chain diagram"
 tags: ["javaScript"]
+description: "How JavaScript's prototype chain and prototypal inheritance work — the model behind every object, class, and 'extends' in the language."
+keywords: ["javascript prototypal inheritance", "javascript prototype chain", "javascript prototypes", "__proto__ explained", "javascript inheritance"]
 ---
 
 Hello guys, this is the first time I'm writing a blog. I decided to write this blog a day ago but couldn't find any topic. It's just so difficult to choose just one topic when all of them are interconnected to each other. It really becomes difficult to draw a line. Anyway, I've decided to write on prototypes and prototypical Inheritance in JavaScript. Hope I do justice to this topic. Let's start!! But, first time for a meme.

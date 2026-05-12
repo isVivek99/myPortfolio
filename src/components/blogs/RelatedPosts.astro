@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { formatDate } from "../../utils/UTCDateStringToReadable";
+
+interface Props {
+  currentSlug: string;
+  tags: string[];
+  limit?: number;
+}
+
+const { currentSlug, tags, limit = 3 } = Astro.props;
+
+const allPosts: CollectionEntry<"blogs">[] = await getCollection("blogs");
+
+const related = allPosts
+  .filter(
+    (post: CollectionEntry<"blogs">) =>
+      post.slug !== currentSlug &&
+      post.data.tags.some((tag: string) => tags.includes(tag)),
+  )
+  .sort(
+    (a: CollectionEntry<"blogs">, b: CollectionEntry<"blogs">) =>
+      b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+  )
+  .slice(0, limit);
+---
+
+{
+  related.length > 0 && (
+    <aside class="mx-auto mb-24 max-w-4xl border-t border-neutral-border pt-10">
+      <h2 class="mb-6 text-xl font-bold tracking-tight">Related posts</h2>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((post: CollectionEntry<"blogs">) => (
+          <li>
+            <a
+              href={`/blogs/${post.slug}`}
+              class="block h-full rounded-lg bg-neutral p-4 ring-1 ring-neutral-border transition hover:shadow-glow-yellow hover:ring-color-yellow"
+            >
+              <p class="mb-2 text-base font-semibold leading-snug">
+                {post.data.title}
+              </p>
+              <p class="mb-3 line-clamp-2 text-sm text-neutral-border">
+                {post.data.subheading}
+              </p>
+              <p class="text-xs text-neutral-border">
+                {formatDate(post.data.publishedAt.toLocaleDateString())} —{" "}
+                {post.data.readingTimeInMins} min read
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}

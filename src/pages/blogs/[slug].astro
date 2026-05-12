@@ -6,6 +6,7 @@ import { Icon } from "astro-icon/components";
 import { getEntry } from "astro:content";
 import BaseLayout from "../../layout/BaseLayout.astro";
 import TOC from "../../components/blogs/TOC.astro";
+import RelatedPosts from "../../components/blogs/RelatedPosts.astro";
 import myGradient from "../../icons/myGradient.jpeg";
 import { formatDate } from "../../utils/UTCDateStringToReadable";
 import myImageTwo from "../../icons/myImage-2.jpg";
@@ -26,6 +27,8 @@ const blogSEO = generateBlogSEO({
   publishedAt: post.data.publishedAt,
   tags: post.data.tags,
   slug: post.slug,
+  description: post.data.description,
+  keywords: post.data.keywords,
 });
 ---
 
@@ -46,7 +49,7 @@ const blogSEO = generateBlogSEO({
         src={myGradient}
         height={100}
         width={100}
-        alt="my picture"
+        alt=""
         class="m h-full w-full rounded-t-xl mix-blend-soft-light"
       />
 
@@ -54,7 +57,7 @@ const blogSEO = generateBlogSEO({
         src={post.data.cover}
         height={100}
         width={100}
-        alt="my picture"
+        alt={post.data.coverAlt ?? post.data.title}
         class="absolute top-20 h-48 w-full rounded-t-xl"
         loading={"lazy"}
       />
@@ -81,7 +84,7 @@ const blogSEO = generateBlogSEO({
               src={myImageTwo}
               height={100}
               width={100}
-              alt="my picture"
+              alt="Vivek Lokhande"
               loading={"lazy"}
               class="h-10 w-10 rounded-3xl sm:mr-3"
             />
@@ -99,10 +102,15 @@ const blogSEO = generateBlogSEO({
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
         <div class="lg:col-span-3">
           <article
-            class="prose prose-lg prose-invert mx-auto mb-32 text-white prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-400 prose-a:underline hover:prose-a:text-blue-300 prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white prose-img:rounded-xl"
+            class="prose prose-lg prose-invert mx-auto mb-16 text-white prose-headings:font-bold prose-h2:text-2xl prose-h3:text-xl prose-a:text-blue-400 prose-a:underline hover:prose-a:text-blue-300 prose-code:rounded-md prose-code:bg-gray-800 prose-code:p-1 prose-code:text-white prose-img:rounded-xl"
           >
             <Content />
           </article>
+          <RelatedPosts
+            currentSlug={post.slug}
+            tags={post.data.tags}
+            limit={3}
+          />
         </div>
 
         <!-- Table of Contents Sidebar -->

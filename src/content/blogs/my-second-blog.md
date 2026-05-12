@@ -1,11 +1,14 @@
 ---
-title: "Running React without Create React App"
+title: "Running React Without Create React App (CRA): A Webpack Setup Guide"
 subheading: "This blog details out, how you can run react without Create React App (CRA)"
-slug: "reducing-bundle-size-in-react"
+slug: "react-without-create-react-app"
 publishedAt: 2022-06-20
 readingTimeInMins: 7
 cover: ../featured_svgs/cover-2.svg
+coverAlt: "Webpack config for running React without Create React App"
 tags: ["react"]
+description: "Set up a React project without Create React App — Webpack and Babel from scratch, smaller bundles, and full control over your build."
+keywords: ["react without create react app", "react without CRA", "webpack react setup", "react babel webpack", "custom react build"]
 ---
 
 Recently while working on a client project, we faced the problem of having to analyze and reduce the bundle size, improve SEO metrics like FCP and LCP, and improve the loading time for the build. The project used Webpacks for configuring `npm` packages, Babel for `jsx` and converting es6 javascript to browser-compatible JavaScript. During the run of the project, I was very surprised when I saw the control a developer can have while building a website as it was my first encounter with Webpack and I was blown away by the efficiency with which it happens.

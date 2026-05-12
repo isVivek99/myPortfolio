@@ -1,27 +1,30 @@
 ---
-title: "Astro OG image generation with SSR on Cloudflare workers."
-subheading: "Understand how you can generate OG images, and improve your clickthrough rates"
-slug: "astro-og-image-for-seo"
+title: "Astro OG Image Generation on Cloudflare Workers (No Vercel, with workers-og)"
+subheading: "Generate dynamic Open Graph images for an Astro site deployed on Cloudflare Workers using workers-og — no Vercel lock-in, no extra services."
+slug: "astro-og-image-cloudflare-workers"
 publishedAt: 2025-07-27
 readingTimeInMins: 7
 cover: ../featured_svgs/astro-og-image-generation.svg
+coverAlt: "Astro blog post showing a dynamically generated Open Graph preview image"
 tags: ["astro"]
+description: "Generate dynamic OG images in Astro on Cloudflare Workers with workers-og — no Vercel lock-in. Full setup: Vite font plugin, SSR endpoint, nodejs_compat."
+keywords: ["astro og image", "astro cloudflare workers", "workers-og", "astro open graph image", "astro og image generation", "dynamic og image astro"]
 ---
 
 import Note from "../../components/Note.astro";
 
 ## **Introduction**
 
-Hello folks I am back with another blog, this time we are going to talk about OG image generation with Astro.
+Hello folks, I am back with another blog. This time we're going to talk about **Astro OG image generation on Cloudflare Workers** — without Vercel and without vendor lock-in.
 
-I have been using Astro for my personal Portfolio website since atleast a year now. I was working on SEO for my website and faced some major issues while trying to generate OG images for my blogs.
+I've been using Astro for my personal portfolio for over a year. While working on SEO, I hit a wall trying to generate dynamic Open Graph images for blog posts. Almost every tutorial out there reaches for `vercel-og`, which is great if you're on Vercel — but useless if you've deployed your Astro site to **Cloudflare Workers**.
 
-When searching for solutions, I noticed almost every tutorial used vercel-og for image generation. That's fine if you're on Vercel, but it creates an annoying vendor lock-in situation. I wanted something more flexible, so I put together this guide to help fellow devs avoid the same headaches I went through when deploying your website on **cloudflare**.
+This guide walks through the setup I landed on: using [`workers-og`](https://github.com/kvnang/workers-og) for OG image generation in Astro, with SSR running on Cloudflare Workers. No serverless function detour, no Vercel migration, just an Astro endpoint that returns a PNG.
 
 ## **What are OG Images**
 
 OG images are the images which are generated when we share our posts across on social media channels, like X, instagram, facebook. discord.
-![OG-image-example](../../../src/assets/blogs/astro-og-image-generation/img-2.png)
+![Example of an Astro blog post Open Graph image preview on social media](../../../src/assets/blogs/astro-og-image-generation/img-2.png)
 
 There is research which shows that OG images increase clickthrough rates
 
@@ -111,7 +114,7 @@ compatibility_flags = ["nodejs_compat"]
 
 - If the above guide fails to work, go to your Cloudflare project > Settings > Runtime > Compatibility flags and add the flag (as shown below).
 
-![Cloudflare Compatibility Flags Settings](../../../src/assets/blogs/astro-og-image-generation/img-1.png)
+![Cloudflare Workers dashboard showing nodejs_compat compatibility flag setting for Astro](../../../src/assets/blogs/astro-og-image-generation/img-1.png)
 
 ### **Image generation**
 
