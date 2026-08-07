@@ -9,6 +9,9 @@ export interface Product {
   tech: TechIcon[];
   year: string;
   url: string;
+  status?: "closed";
+  mrr?: string;
+  signups?: string;
 }
 
 export interface PR {
@@ -25,18 +28,20 @@ export interface CurrentStatus {
 }
 
 export const currentStatus: CurrentStatus = {
-  text: "talkEncrypted",
-  href: "https://github.com/talkencrypted-maker/talkEncrypted",
+  text: "getlifeexpectancy.com",
+  href: "https://getlifeexpectancy.com",
 };
 
 export const products: Product[] = [
   {
-    name: "Supplements reminder bot for Telegram",
+    name: "Life Expectancy Calculator",
     description:
-      "A Telegram bot that reminds users to take their supplements based on their consultation with their healthcare provider.",
-    tech: [{ icon: "cf_workers", label: "Cloudflare Workers and D1 DB" }],
-    year: "2025",
-    url: "https://drive.google.com/file/d/1TdG_fp7g4JWnZALD1266KmTwbZQBPpjR/view?usp=sharing",
+      "A science-backed quiz that estimates your life expectancy based on WHO data, lifestyle factors, and medical history.",
+    tech: [{ icon: "cf_workers", label: "Astro on Cloudflare" }],
+    year: "2026 - ongoing",
+    url: "https://getlifeexpectancy.com",
+    mrr: "$0",
+    signups: "23",
   },
   {
     name: "Talk Encrypted",
@@ -47,8 +52,17 @@ export const products: Product[] = [
       { icon: "flutter", label: "Flutter" },
       { icon: "postgresql", label: "PostgreSQL" },
     ],
-    year: "2026 - ongoing",
+    year: "2026",
     url: "https://github.com/talkencrypted-maker/talkEncrypted",
+    status: "closed",
+  },
+  {
+    name: "Supplements reminder bot for Telegram",
+    description:
+      "A Telegram bot that reminds users to take their supplements based on their consultation with their healthcare provider.",
+    tech: [{ icon: "cf_workers", label: "Cloudflare Workers and D1 DB" }],
+    year: "2025",
+    url: "https://drive.google.com/file/d/1TdG_fp7g4JWnZALD1266KmTwbZQBPpjR/view?usp=sharing",
   },
 ];
 

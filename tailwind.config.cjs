@@ -23,6 +23,7 @@ module.exports = {
         "accent-bg": "#1E1E3A",
         "hover-bg": "#1E1E2E",
         "success-bg": "#1A2E1A",
+        "error-bg": "#2E1A1A",
         footer: "#171717",
       },
       height: {

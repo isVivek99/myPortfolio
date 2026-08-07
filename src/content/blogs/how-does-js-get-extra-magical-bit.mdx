@@ -1,0 +1,23 @@
+---
+title: "JavaScript Number Range: Why MAX_SAFE_INTEGER Stops at 2^53 - 1"
+subheading: "Ever wondered why JavaScript has so many quirks, why it's always surrounded by controversies, and why the language seems full of issues?"
+slug: "javascript-number-safe-integer-range"
+publishedAt: 2025-09-20
+readingTimeInMins: 5
+cover: ../featured_svgs/how-js-stores-numbers-in-memory.svg
+coverAlt: "Diagram showing the safe integer range of JavaScript numbers"
+tags: ["javaScript"]
+description: "Why JavaScript's Number.MAX_SAFE_INTEGER is 2^53 - 1, the IEEE 754 implicit bit trick, and when precision quietly breaks."
+keywords: ["javascript safe integer", "Number.MAX_SAFE_INTEGER", "javascript number range", "IEEE 754 implicit bit", "javascript precision loss"]
+---
+
+import Note from "../../components/Note.astro";
+
+## Introduction
+
+Hello folks! I'm back with another blog. This time we're going to talk about why
+
+```javascript
+console.log(9007199254740992 + 1 === 9007199254740992); // false
+console.log(9007199254740992 === 9007199254740993); // true ❌ lost precision
+```

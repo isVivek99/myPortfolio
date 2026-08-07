@@ -20,33 +20,28 @@ import { products, ossPRs, currentStatus } from "../utils/workData";
     </p>
   </section>
   <div class="mx-auto w-full max-w-[860px] px-8 pb-20 2xl:px-32">
-    <div class="mb-9 flex items-center justify-center gap-2.5">
-      <span class="relative flex h-2 w-2">
-        <span
-          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
-        ></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-green-400"
-        ></span>
-      </span>
-      <span class="text-neutral-400 text-xs">
-        Currently working on:
-        {
-          currentStatus.href ? (
-            <a
-              href={currentStatus.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-semibold text-color-yellow underline-offset-4 hover:underline"
-            >
-              {currentStatus.text}
-            </a>
-          ) : (
-            <span class="font-semibold text-color-yellow">
-              {currentStatus.text}
-            </span>
-          )
-        }
-      </span>
+    <div class="mb-10 flex justify-center">
+      <div class="animate-fade-up bg-accent-bg/60 ring-accent-blue/30 inline-flex items-center gap-2.5 rounded-full px-4 py-2 ring-1">
+        <span class="text-neutral-400 text-xs sm:text-sm">
+          Currently working on:
+          {
+            currentStatus.href ? (
+              <a
+                href={currentStatus.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-color-yellow underline-offset-4 hover:underline"
+              >
+                {currentStatus.text}
+              </a>
+            ) : (
+              <span class="font-semibold text-color-yellow">
+                {currentStatus.text}
+              </span>
+            )
+          }
+        </span>
+      </div>
     </div>
 
     <section>
@@ -62,30 +57,60 @@ import { products, ossPRs, currentStatus } from "../utils/workData";
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-start gap-3.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4"
+              class:list={[
+                "group flex items-start gap-3.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4 hover:-translate-y-0.5",
+                p.status === "closed" && "opacity-60 hover:opacity-100",
+              ]}
             >
               <div class="min-w-0 flex-1">
-                <p class="mb-1 text-base font-semibold text-white sm:text-lg">
+                <p class="mb-1.5 flex items-center gap-2 text-base font-semibold text-white sm:text-lg">
                   {p.name}
+                  {p.status === "closed" && (
+                    <Pill variant="error" bold>
+                      closed
+                    </Pill>
+                  )}
                 </p>
-                <p class="text-neutral-500 mb-2 text-sm leading-relaxed">
+                <p class="text-neutral-500 mb-3 text-sm leading-relaxed">
                   {p.description}
                 </p>
-                <div class="flex flex-wrap items-center gap-3">
-                  {p.tech.map((item) => (
-                    <IconTooltip
-                      name={item.icon}
-                      label={item.label}
-                      class="text-neutral-400 h-5 w-5"
-                    />
-                  ))}
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <div class="flex flex-wrap items-center gap-3">
+                    {p.tech.map((item) => (
+                      <IconTooltip
+                        name={item.icon}
+                        label={item.label}
+                        class="text-neutral-400 h-5 w-5"
+                      />
+                    ))}
+                  </div>
+                  {(p.mrr || p.signups) && (
+                    <div class="border-neutral-border flex flex-wrap items-center gap-3 border-l pl-4">
+                      {p.mrr && (
+                        <span class="text-neutral-500 text-xs">
+                          MRR:{" "}
+                          <span class="text-neutral-300 font-semibold">
+                            {p.mrr}
+                          </span>
+                        </span>
+                      )}
+                      {p.signups && (
+                        <span class="text-neutral-500 text-xs">
+                          Signups:{" "}
+                          <span class="text-neutral-300 font-semibold">
+                            {p.signups}
+                          </span>
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               <div class="flex shrink-0 items-center gap-2.5">
                 <span class="text-neutral-500 hidden text-xs sm:inline">
                   {p.year}
                 </span>
-                <ArrowIcon class="mt-0.5 text-color-yellow" />
+                <ArrowIcon class="mt-0.5 text-color-yellow transition-transform duration-300 group-hover:translate-x-0.5" />
               </div>
             </a>
           ))
@@ -108,7 +133,7 @@ import { products, ossPRs, currentStatus } from "../utils/workData";
               href={pr.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group relative flex flex-col gap-2.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4 sm:flex-row sm:items-start sm:gap-3.5"
+              class="group relative flex flex-col gap-2.5 rounded-xl bg-neutral px-5 py-5 ring-1 ring-neutral-border ring-offset-black transition duration-300 hover:-translate-y-0.5 hover:shadow-glow-yellow hover:outline-none hover:ring-2 hover:ring-color-yellow hover:ring-offset-4 sm:flex-row sm:items-start sm:gap-3.5"
             >
               <Pill variant="accent" bold class="w-fit shrink-0 sm:mt-0.5">
                 PR #{pr.number}
@@ -125,7 +150,7 @@ import { products, ossPRs, currentStatus } from "../utils/workData";
                   <span class="text-neutral-500 text-xs">{pr.date}</span>
                 </div>
               </div>
-              <ArrowIcon class="absolute right-5 top-5 shrink-0 text-color-yellow sm:static sm:mt-1" />
+              <ArrowIcon class="absolute right-5 top-5 shrink-0 text-color-yellow transition-transform duration-300 group-hover:translate-x-0.5 sm:static sm:mt-1" />
             </a>
           ))
         }

@@ -43,6 +43,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.6",
+    "page-design-guide-mcp": "^1.0.10",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
     "sharp": "^0.34.1",
