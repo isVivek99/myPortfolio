@@ -34,9 +34,9 @@ export const currentStatus: CurrentStatus = {
 
 export const products: Product[] = [
   {
-    name: "Life Expectancy Calculator",
+    name: "Life Expectancy",
     description:
-      "A science-backed quiz that estimates your life expectancy based on WHO data, lifestyle factors, and medical history.",
+      "A science-backed website that provides personalized estimates across different demographics.",
     tech: [{ icon: "cf_workers", label: "Astro on Cloudflare" }],
     year: "2026 - ongoing",
     url: "https://getlifeexpectancy.com",
