@@ -27,8 +27,7 @@ import { formatDate } from "../../utils/UTCDateStringToReadable";
 
       <Image
         src={imageUrl}
-        height={100}
-        width={100}
+        {...imageUrl.format === "svg" ? { height: 100, width: 100 } : { width: 800 }}
         alt="my picture"
         class="absolute top-0 h-48 w-full transform rounded-t-xl object-cover opacity-80 transition duration-300 group-hover:opacity-100"
         loading={"lazy"}

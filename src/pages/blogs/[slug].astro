@@ -20,6 +20,8 @@ if (!post) {
 }
 
 const { Content, headings } = await post.render();
+// Photo covers (e.g. YouTube thumbnails) show in full under the title; SVG covers keep the gradient banner.
+const isSvgCover = post.data.cover.format === "svg";
 
 const blogSEO = generateBlogSEO({
   title: post.data.title,
@@ -44,35 +46,39 @@ const blogSEO = generateBlogSEO({
       <Icon name="nav-back" class="h-5 w-5" />
     </a>
 
-    <div class="mb-4 h-48 w-auto">
-      <Image
-        src={myGradient}
-        height={100}
-        width={100}
-        alt=""
-        class="m h-full w-full rounded-t-xl mix-blend-soft-light"
-      />
+    {
+      isSvgCover && (
+        <div class="mb-4 h-48 w-auto">
+          <Image
+            src={myGradient}
+            height={100}
+            width={100}
+            alt=""
+            class="m h-full w-full rounded-t-xl mix-blend-soft-light"
+          />
 
-      <Image
-        src={post.data.cover}
-        height={100}
-        width={100}
-        alt={post.data.coverAlt ?? post.data.title}
-        class="absolute top-20 h-48 w-full rounded-t-xl"
-        loading={"lazy"}
-      />
-    </div>
+          <Image
+            src={post.data.cover}
+            height={100}
+            width={100}
+            alt={post.data.coverAlt ?? post.data.title}
+            class="absolute top-20 h-48 w-full rounded-t-xl"
+            loading={"lazy"}
+          />
+        </div>
+      )
+    }
 
     <div class="container mx-auto max-w-6xl px-4">
       <!-- Title block: full container width so it centers relative to page, not column -->
       <div class="mx-auto max-w-4xl">
         <h1
-          class="mb-6 text-center text-3xl font-bold leading-tight tracking-tight sm:mb-8 sm:text-5xl sm:leading-none lg:text-header xl:mt-0"
+          class="mb-6 text-balance text-center text-3xl font-bold leading-tight tracking-tight sm:mb-8 sm:text-5xl sm:leading-none lg:text-header xl:mt-0"
         >
           {post.data.title}
         </h1>
         <h2
-          class="mb-8 text-center text-lg font-bold leading-snug tracking-tight text-opacity-60 opacity-60 sm:text-xl sm:leading-tight lg:text-subheader xl:mt-0"
+          class="mb-8 text-pretty text-center text-lg font-bold leading-snug tracking-tight text-opacity-60 opacity-60 sm:text-xl sm:leading-tight lg:text-subheader xl:mt-0"
         >
           {post.data.subheading}
         </h2>
@@ -96,6 +102,16 @@ const blogSEO = generateBlogSEO({
             } min read
           </p>
         </div>
+        {
+          !isSvgCover && (
+            <Image
+              src={post.data.cover}
+              width={1600}
+              alt={post.data.coverAlt ?? post.data.title}
+              class="mb-12 aspect-video w-full rounded-xl object-cover"
+            />
+          )
+        }
       </div>
 
       <!-- Article body + TOC grid -->
