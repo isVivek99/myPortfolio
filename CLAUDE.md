@@ -2,6 +2,8 @@
 
 Astro site, deployed to Cloudflare automatically when `main` is pushed. Blog posts are in `src/content/blogs/`, and their images in `src/assets/blogs/<slug>/`.
 
+Never delete or rename `public/google46dd0a47d01ac2a1.html`. It's the Google Search Console verification file, and removing it un-verifies the site.
+
 ## Blog posts: always load the skill first
 
 Before writing, editing, reviewing, proofreading or fixing any blog post, including its frontmatter, cover or images, invoke the `skipthesub-blog-post` skill (`.claude/skills/skipthesub-blog-post/SKILL.md`) and follow it. This applies even to small edits and to drafts from the yt-to-blog job. Don't rely on memory of the rules; load the skill each time.
