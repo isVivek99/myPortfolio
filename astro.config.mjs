@@ -42,8 +42,32 @@ function rawFonts(extensions) {
   };
 }
 
+const SITE = "https://viveklokhande.com";
+
+/**
+ * Blog posts and talks are rendered on request (output: "server"), so the sitemap
+ * integration can't discover them. List them here from the source files, with each
+ * post's publishedAt as lastmod, so Google and Bing get every post.
+ */
+function onDemandPages() {
+  const blogDir = path.resolve("src/content/blogs");
+  const posts = fs
+    .readdirSync(blogDir)
+    .filter((f) => /\.mdx?$/.test(f))
+    .map((f) => {
+      const fm = fs.readFileSync(path.join(blogDir, f), "utf8").match(/^---\n([\s\S]*?)\n---/)?.[1] ?? "";
+      const slug = fm.match(/^slug:\s*["']?([^"'\n]+?)["']?\s*$/m)?.[1] ?? f.replace(/\.mdx?$/, "");
+      const date = fm.match(/^publishedAt:\s*["']?([^"'\n]+?)["']?\s*$/m)?.[1];
+      return { url: `${SITE}/blogs/${slug}`, lastmod: date ? new Date(date).toISOString() : undefined };
+    });
+  const talksSrc = fs.readFileSync(path.resolve("src/utils/talksData.ts"), "utf8");
+  const talks = [...talksSrc.matchAll(/^\s*slug:\s*"([^"]+)"/gm)].map((m) => ({ url: `${SITE}/talks/${m[1]}` }));
+  return [...posts, ...talks];
+}
+const extraPages = onDemandPages();
+
 export default defineConfig({
-  site: "https://viveklokhande.com",
+  site: SITE,
   output: "server",
 
   redirects: {
@@ -87,7 +111,14 @@ export default defineConfig({
         ],
       ],
     }),
-    sitemap(),
+    sitemap({
+      customPages: extraPages.map((p) => p.url),
+      serialize(item) {
+        const lastmod = extraPages.find((p) => p.url === item.url)?.lastmod;
+        if (lastmod) item.lastmod = lastmod;
+        return item;
+      },
+    }),
   ],
 
   // Vite configuration

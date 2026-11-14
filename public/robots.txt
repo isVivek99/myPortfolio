@@ -20,7 +20,7 @@ User-agent: Slackbot-LinkExpanding
 Allow: /blogs/*/og.png
 
 # Sitemaps
-Sitemap: https://viveklokhande.com/sitemap.xml
+Sitemap: https://viveklokhande.com/sitemap-index.xml
 
 # Block admin or development paths
 Disallow: /admin/
