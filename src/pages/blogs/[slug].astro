@@ -16,7 +16,8 @@ const { slug } = Astro.params;
 const post = await getEntry("blogs", slug);
 
 if (!post) {
-  throw new Error("Blog post not found for this slug.");
+  // Removed or mistyped posts get the 404 page with a 404 status, not a 500.
+  return Astro.rewrite("/404");
 }
 
 const { Content, headings } = await post.render();
