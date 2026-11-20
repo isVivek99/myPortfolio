@@ -1,14 +1,14 @@
 ---
-title: "How Does the Claude Code Team Verify AI-Written Code?"
-subheading: "About 90 percent of the team's code is written by Claude. Here is the one rule, the five checks and the starter file they point to."
-slug: "claude-code-team-verification-checks"
+title: "How the Claude Code Team Reviews AI Code: 5 Best Practices"
+subheading: "About 90 percent of the Claude Code team's code is written by Claude. Here is how they review and verify it: REVIEW.md, a verify skill, three test types and a commit gate."
+slug: "claude-code-review-best-practices"
 publishedAt: 2026-11-20
 readingTimeInMins: 6
-cover: ../../assets/blogs/claude-code-team-verification-checks/cover.jpg
+cover: ../../assets/blogs/claude-code-review-best-practices/cover.jpg
 coverAlt: "Video thumbnail with the text 'The judge Claude can't edit' next to the Claude logo and a smiling man with curly hair wearing sunglasses that show the Claude symbol"
 tags: ["AI"]
-description: "How the Claude Code team checks AI-written code: a judge Claude can't edit, three test types, a verify skill, REVIEW.md and a commit gate."
-keywords: ["claude code verification", "how to check ai generated code", "claude code verify skill", "REVIEW.md claude code", "claude code commit gate", "addy osmani verification"]
+description: "Claude Code review best practices from the team itself: REVIEW.md read from main, a verify skill, three test types and a commit gate."
+keywords: ["claude code review", "claude code best practices", "REVIEW.md", "claude code skills", "ai code review", "addy osmani"]
 ---
 
 On November 16, 2026, Addy Osmani, from the Claude team, published a post on how the Claude Code team checks the code Claude writes. Here is what it says:
@@ -17,7 +17,7 @@ On November 16, 2026, Addy Osmani, from the Claude team, published a post on how
 - **One rule** sits under everything: whatever checks Claude's work must be something Claude can't change.
 - **Five ideas** follow from it, from the kinds of tests to a commit gate that stops unverified work.
 
-The short answer to how they know the code works: **they judge it with checks Claude can't edit, and they run the changed app itself instead of trusting a test report.** This post goes through the rule, the five ideas and where to start in your own repo.
+The short answer to how they know the code works: **they judge it with checks Claude can't edit, and they run the changed app itself instead of trusting a test report.** This post goes through the rule, their five review and verification practices, and where to start in your own repo.
 
 _Everything here comes from [Addy's post on claude.dev](https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/) and the [Claude Code docs](https://code.claude.com/docs/en/code-review-customize), as of November 19, 2026. I did not run these setups myself._
 
@@ -47,13 +47,13 @@ Addy warns about two kinds of tests. Flaky tests, which pass and fail at random,
 - **Property tests** state something that must always hold, such as an account balance never going negative. A library then throws thousands of inputs at it until it holds or breaks. Addy names fast-check, Hypothesis and proptest, and says they suit rewrites, where the spec has drifted away from what production actually does.
 - **Differential tests** run the old system and the new one on the same inputs and flag every difference. You normalize the boring differences, such as whitespace, and keep a list of approved differences for places where the new system should differ.
 
-## Running the App Matters More Than Tests
+## The Verify Skill: Claude Runs the App Instead of Trusting Tests
 
 For this team, verification means running the change. Claude tests the app the way a QA engineer would: the Chrome extension for web, a mobile MCP (a tool Claude can use) for iOS or Android, computer use for desktop, or running the service locally for a backend. Addy's line is that running the app end to end matters more than tests.
 
 The team writes this down in a skill called **verify**. A skill is a markdown file in your repo that Claude reads before it does a job. This one tells Claude to start the app, use the feature that changed, and report what it saw. It sits in the skills folder, close to the code. Addy says the team tests nearly all changes this way, and that you make the skill fast and reliable by having Claude iterate on it and stress-test it.
 
-## Claude Stops After Three Rounds, and REVIEW.md Comes From Main
+## Claude Code Review Reads REVIEW.md From Main, Not the Change
 
 If a check is still failing after three rounds, Claude stops and brings in a human.
 
@@ -61,7 +61,7 @@ The team also uses **REVIEW.md**, a file at the root of your repo that tells the
 
 This ties back to the rule. Code review reads REVIEW.md from the base branch, which is your main branch, never from the change being reviewed. The Claude Code docs say the same. Otherwise a change could rewrite the rules it is judged by.
 
-![Diagram of code review reading REVIEW.md from the main branch, marked with a check, and ignoring a copy of REVIEW.md edited in the change being reviewed, marked with a cross](../../assets/blogs/claude-code-team-verification-checks/img-1.jpg)
+![Diagram of code review reading REVIEW.md from the main branch, marked with a check, and ignoring a copy of REVIEW.md edited in the change being reviewed, marked with a cross](../../assets/blogs/claude-code-review-best-practices/img-1.jpg)
 
 ## The Commit Gate Blocks Work That Was Never Verified
 
@@ -90,9 +90,9 @@ Flaky tests get a hard rule: Claude can't skip them, add sleeps, or retry until 
 
 The team also prunes. Test suites, verification steps and markdown files only grow if you let them.
 
-![Mock pull request titled Prune old checks showing test suites, verification steps and markdown files all marked Deleted](../../assets/blogs/claude-code-team-verification-checks/img-2.jpg)
+![Mock pull request titled Prune old checks showing test suites, verification steps and markdown files all marked Deleted](../../assets/blogs/claude-code-review-best-practices/img-2.jpg)
 
-## Add a Verify Skill to Your Repo First
+## Start With a Verify Skill in Your Repo
 
 The whole setup comes down to three things: a way for Claude to run the work, a judge it can't edit, and a rule for when to stop. If you add one thing, **add a verify skill to your repo**.
 
